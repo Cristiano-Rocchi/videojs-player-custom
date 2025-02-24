@@ -1,0 +1,26 @@
+.player-container {
+  width: 50%;
+  margin-top: 5%;
+  margin-left: 25%;
+}
+.video-player {
+  display: flex;
+  justify-content: center;
+}
+
+/* barra di controllo */
+.vjs-control-bar {
+  background-color: black !important;
+}
+/* icona play */
+
+.vjs-volume-control {
+  width: 40px !important;
+  bottom: 100px !important;
+  height: 100px !important;
+  border-radius: 30px !important;
+  background-color: black !important;
+}
+.vjs-volume-bar {
+  font-size: 15px !important;
+}
