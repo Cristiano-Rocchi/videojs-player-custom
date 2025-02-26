@@ -16,15 +16,11 @@ const PlayerVideoCustom = () => {
       type: "video/mp4",
       title: "Video di Test",
     },
-    {
-      src: "https://cdn.pixabay.com/video/2024/10/18/236893_large.mp4",
-      type: "video/mp4",
-      title: "💧 Acqua - Onde in movimento",
-    },
+
     {
       src: "https://media.istockphoto.com/id/1697150103/it/video/guidare-sotto-la-pioggia-di-notte.mp4?s=mp4-640x640-is&k=20&c=virq68l1edFMhw55u_f15bdcx56hZQAQQ83RJBFBqzw=",
       type: "video/mp4",
-      title: "🌬️ Vento - Movimento dell'aria",
+      title: "Video di Test",
     },
   ];
 
@@ -34,7 +30,7 @@ const PlayerVideoCustom = () => {
 
   useEffect(() => {
     if (isMounted && videoRef.current && !playerRef.current) {
-      // 📌 Creiamo un nuovo wrapper per i controlli (tranne fullscreen)
+      //wrapper div per le icons in controlBar
       const Component = videojs.getComponent("Component");
 
       class GroupedControls extends Component {
@@ -71,7 +67,7 @@ const PlayerVideoCustom = () => {
               <svg style="position: relative; top: 10px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg><span style="position: relative; top: 2px;">Precedente</span>
-            `, // ❌ Nessun spazio extra tra gli elementi
+            `,
           });
 
           const nextButton = videojs.dom.createEl("button", {
@@ -80,10 +76,10 @@ const PlayerVideoCustom = () => {
               <span style="position: relative; top: 2px;">Successivo</span><svg style="position: relative; top: 10px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
-            `, // ❌ Nessun spazio extra tra gli elementi
+            `,
           });
 
-          // 🔹 Eventi click per cambiare video
+          //Eventi click per cambiare video
           prevButton.addEventListener("click", () => {
             if (window.changeVideo) {
               window.changeVideo(-1); // Vai al video precedente
@@ -113,18 +109,18 @@ const PlayerVideoCustom = () => {
           if (newIndex < 0) newIndex = videoList.length - 1;
           if (newIndex >= videoList.length) newIndex = 0;
 
-          // 🔹 1. Ripristiniamo il player principale
+          // 1. Ripristiniamo il player principale
           if (playerRef.current) {
             playerRef.current.pause();
             playerRef.current.src({
               type: "video/mp4",
               src: videoList[newIndex].src,
             });
-            playerRef.current.load(); // 🔹 2. Forziamo il caricamento
+            playerRef.current.load();
             playerRef.current.play();
           }
 
-          // 🔹 3. Aggiorniamo il mini player con il nuovo video
+          // 2. Aggiorniamo il mini player con il nuovo video
           if (previewRef.current) {
             previewRef.current.src = videoList[newIndex].src;
             previewRef.current.load(); // Ricarichiamo l'anteprima
@@ -141,6 +137,7 @@ const PlayerVideoCustom = () => {
         fluid: true,
         responsive: true,
         aspectRatio: "16:9",
+        doubleClickFullscreen: true,
         controlBar: {
           children: [
             {
@@ -162,7 +159,7 @@ const PlayerVideoCustom = () => {
         },
         sources: [
           {
-            src: videoList[currentVideoIndex].src, // ✅ Ora `src` è una stringa
+            src: videoList[currentVideoIndex].src,
             type: "video/mp4",
           },
         ],
@@ -188,7 +185,6 @@ const PlayerVideoCustom = () => {
 
           const duration = playerRef.current.duration();
           if (!isNaN(duration) && isFinite(duration)) {
-            // ✅ Controlla che il valore sia valido
             const videoTime = percentage * duration;
             previewRef.current.currentTime = videoTime;
           }
