@@ -14,10 +14,10 @@ const PlayerVideoCustom = () => {
     {
       src: "https://www.w3schools.com/html/mov_bbb.mp4",
       type: "video/mp4",
-      title: "🔥 Fuoco - Video di Test",
+      title: "Video di Test",
     },
     {
-      src: "https://cdn.pixabay.com/video/2025/01/03/250395_large.mp4",
+      src: "https://cdn.pixabay.com/video/2024/10/18/236893_large.mp4",
       type: "video/mp4",
       title: "💧 Acqua - Onde in movimento",
     },
@@ -65,16 +65,22 @@ const PlayerVideoCustom = () => {
             className: "vjs-grouped-controls-2",
           });
 
-          // 🔹 Bottone Precedente
           const prevButton = videojs.dom.createEl("button", {
             className: "vjs-prev-button",
-            innerHTML: "&#x25C0; Precedente",
+            innerHTML: `
+              <svg style="position: relative; top: 10px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg><span style="position: relative; top: 2px;">Precedente</span>
+            `, // ❌ Nessun spazio extra tra gli elementi
           });
 
-          // 🔹 Bottone Successivo
           const nextButton = videojs.dom.createEl("button", {
             className: "vjs-next-button",
-            innerHTML: "Successivo &#x25B6;",
+            innerHTML: `
+              <span style="position: relative; top: 2px;">Successivo</span><svg style="position: relative; top: 10px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            `, // ❌ Nessun spazio extra tra gli elementi
           });
 
           // 🔹 Eventi click per cambiare video
