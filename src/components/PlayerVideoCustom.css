@@ -48,3 +48,9 @@
   margin: 0 !important;
   min-width: unset !important;
 }
+
+.vjs-prev-button,
+.vjs-next-button {
+  font-size: 20px;
+  padding: 5px 10px;
+}

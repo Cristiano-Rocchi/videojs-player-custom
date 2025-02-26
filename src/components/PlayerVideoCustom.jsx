@@ -44,13 +44,11 @@ const PlayerVideoCustom = () => {
       const tooltipDiv = document.querySelector(".vjs-mouse-display");
 
       if (tooltipDiv) {
-        // Creiamo il mini player
         const previewVideo = document.createElement("video");
         previewVideo.src = playerRef.current.currentSrc();
         previewVideo.muted = true;
         previewVideo.className = "progress-preview-video";
         tooltipDiv.appendChild(previewVideo);
-
         previewRef.current = previewVideo;
       }
 
@@ -86,19 +84,57 @@ const PlayerVideoCustom = () => {
         const duration = document.querySelector(".vjs-duration");
         const timeDivider = document.querySelector(".vjs-time-divider");
 
-        if (remainingTimeDisplay) {
-          remainingTimeDisplay.style.display = "none"; // Nasconde il tempo rimanente
-        }
-        if (currentTime) {
-          currentTime.style.display = "inline"; // Assicura che sia visibile
-        }
-        if (duration) {
-          duration.style.display = "inline"; // Assicura che sia visibile
-        }
-        if (timeDivider) {
-          timeDivider.style.display = "inline"; // Assicura che il separatore "/" sia visibile
-        }
+        if (remainingTimeDisplay) remainingTimeDisplay.style.display = "none";
+        if (currentTime) currentTime.style.display = "inline";
+        if (duration) duration.style.display = "inline";
+        if (timeDivider) timeDivider.style.display = "inline";
       }, 500);
+
+      // **🔹 3. Creiamo il pulsante "Precedente"**
+      class CustomPrevButton extends videojs.getComponent("Button") {
+        constructor(player, options) {
+          super(player, options);
+          this.addClass("vjs-prev-button");
+          this.controlText("Precedente");
+          this.el().innerHTML = "⏮️";
+        }
+
+        handleClick() {
+          console.log("Vai al video precedente");
+        }
+      }
+
+      // **🔹 4. Creiamo il pulsante "Prossimo"**
+      class CustomNextButton extends videojs.getComponent("Button") {
+        constructor(player, options) {
+          super(player, options);
+          this.addClass("vjs-next-button");
+          this.controlText("Prossimo");
+          this.el().innerHTML = "⏭️";
+        }
+
+        handleClick() {
+          console.log("Vai al video successivo");
+        }
+      }
+
+      // **🔹 5. Registriamo i pulsanti personalizzati**
+      videojs.registerComponent("CustomPrevButton", CustomPrevButton);
+      videojs.registerComponent("CustomNextButton", CustomNextButton);
+
+      // **🔹 6. Aggiungiamo i pulsanti alla fine della control bar**
+      const controlBar = playerRef.current.getChild("controlBar");
+
+      controlBar.addChild(
+        "CustomPrevButton",
+        {},
+        controlBar.children().length - 1
+      );
+      controlBar.addChild(
+        "CustomNextButton",
+        {},
+        controlBar.children().length - 1
+      );
     }
 
     return () => {
