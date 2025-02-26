@@ -12,6 +12,7 @@
 .vjs-control-bar {
   background-color: black !important;
   font-size: 1.5em !important;
+  justify-content: space-between;
 }
 /* icona play */
 
@@ -49,8 +50,12 @@
   min-width: unset !important;
 }
 
-.vjs-prev-button,
-.vjs-next-button {
-  font-size: 20px;
-  padding: 5px 10px;
+.vjs-grouped-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vjs-grouped-controls > .vjs-control {
+  margin: 0 5px;
 }

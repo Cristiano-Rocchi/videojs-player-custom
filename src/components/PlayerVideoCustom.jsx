@@ -15,6 +15,28 @@ const PlayerVideoCustom = () => {
 
   useEffect(() => {
     if (isMounted && videoRef.current && !playerRef.current) {
+      // 📌 Creiamo un nuovo wrapper per i controlli (tranne fullscreen)
+      const Component = videojs.getComponent("Component");
+
+      class GroupedControls extends Component {
+        constructor(player, options) {
+          super(player, options);
+          this.addClass("vjs-grouped-controls");
+        }
+
+        createEl() {
+          const el = videojs.dom.createEl("div", {
+            className: "vjs-grouped-controls",
+          });
+
+          return el;
+        }
+      }
+
+      // 📌 Registriamo il nuovo componente
+      videojs.registerComponent("GroupedControls", GroupedControls);
+
+      // 📌 Inizializziamo il player con il wrapper per i controlli
       playerRef.current = videojs(videoRef.current, {
         controls: true,
         autoplay: false,
@@ -23,13 +45,18 @@ const PlayerVideoCustom = () => {
         responsive: true,
         controlBar: {
           children: [
-            "progressControl",
-            "playToggle",
-            "volumePanel",
-            "currentTimeDisplay",
-            "timeDivider",
-            "durationDisplay",
-            "fullscreenToggle",
+            {
+              name: "GroupedControls", // Questo div conterrà tutti i controlli tranne fullscreen
+              children: [
+                "playToggle",
+                "progressControl",
+                "volumePanel",
+                "currentTimeDisplay",
+                "timeDivider",
+                "durationDisplay",
+              ],
+            },
+            "fullscreenToggle", // Questo resta fuori
           ],
         },
         sources: [
@@ -40,9 +67,8 @@ const PlayerVideoCustom = () => {
         ],
       });
 
-      // **🔹 1. Aggiungiamo il mini player dentro .vjs-mouse-display**
+      // ** Aggiunta del mini player per l'anteprima **
       const tooltipDiv = document.querySelector(".vjs-mouse-display");
-
       if (tooltipDiv) {
         const previewVideo = document.createElement("video");
         previewVideo.src = playerRef.current.currentSrc();
@@ -52,9 +78,8 @@ const PlayerVideoCustom = () => {
         previewRef.current = previewVideo;
       }
 
-      // **🔹 2. Facciamo aggiornare il mini player con il tempo corretto**
+      // ** Aggiornamento dell'anteprima sul progresso **
       const progressBar = document.querySelector(".vjs-progress-control");
-
       progressBar.addEventListener("mousemove", (event) => {
         if (previewRef.current) {
           const rect = progressBar.getBoundingClientRect();
@@ -89,52 +114,6 @@ const PlayerVideoCustom = () => {
         if (duration) duration.style.display = "inline";
         if (timeDivider) timeDivider.style.display = "inline";
       }, 500);
-
-      // **🔹 3. Creiamo il pulsante "Precedente"**
-      class CustomPrevButton extends videojs.getComponent("Button") {
-        constructor(player, options) {
-          super(player, options);
-          this.addClass("vjs-prev-button");
-          this.controlText("Precedente");
-          this.el().innerHTML = "⏮️";
-        }
-
-        handleClick() {
-          console.log("Vai al video precedente");
-        }
-      }
-
-      // **🔹 4. Creiamo il pulsante "Prossimo"**
-      class CustomNextButton extends videojs.getComponent("Button") {
-        constructor(player, options) {
-          super(player, options);
-          this.addClass("vjs-next-button");
-          this.controlText("Prossimo");
-          this.el().innerHTML = "⏭️";
-        }
-
-        handleClick() {
-          console.log("Vai al video successivo");
-        }
-      }
-
-      // **🔹 5. Registriamo i pulsanti personalizzati**
-      videojs.registerComponent("CustomPrevButton", CustomPrevButton);
-      videojs.registerComponent("CustomNextButton", CustomNextButton);
-
-      // **🔹 6. Aggiungiamo i pulsanti alla fine della control bar**
-      const controlBar = playerRef.current.getChild("controlBar");
-
-      controlBar.addChild(
-        "CustomPrevButton",
-        {},
-        controlBar.children().length - 1
-      );
-      controlBar.addChild(
-        "CustomNextButton",
-        {},
-        controlBar.children().length - 1
-      );
     }
 
     return () => {
