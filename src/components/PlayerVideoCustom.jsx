@@ -33,10 +33,42 @@ const PlayerVideoCustom = () => {
         }
       }
 
-      // 📌 Registriamo il nuovo componente
       videojs.registerComponent("GroupedControls", GroupedControls);
 
-      // 📌 Inizializziamo il player con il wrapper per i controlli
+      class GroupedControls2 extends Component {
+        constructor(player, options) {
+          super(player, options);
+          this.addClass("vjs-grouped-controls-2");
+        }
+
+        createEl() {
+          // 🔹 Creiamo il div principale
+          const el = videojs.dom.createEl("div", {
+            className: "vjs-grouped-controls-2",
+          });
+
+          // 🔹 Bottone Precedente
+          const prevButton = videojs.dom.createEl("button", {
+            className: "vjs-prev-button",
+            innerHTML: "&#x25C0; Precedente",
+          });
+
+          // 🔹 Bottone Successivo
+          const nextButton = videojs.dom.createEl("button", {
+            className: "vjs-next-button",
+            innerHTML: "Successivo &#x25B6;",
+          });
+
+          // 🔹 Aggiungiamo i pulsanti dentro il div
+          el.appendChild(prevButton);
+          el.appendChild(nextButton);
+
+          return el;
+        }
+      }
+
+      videojs.registerComponent("GroupedControls2", GroupedControls2);
+
       playerRef.current = videojs(videoRef.current, {
         controls: true,
         autoplay: false,
@@ -46,7 +78,7 @@ const PlayerVideoCustom = () => {
         controlBar: {
           children: [
             {
-              name: "GroupedControls", // Questo div conterrà tutti i controlli tranne fullscreen
+              name: "GroupedControls",
               children: [
                 "playToggle",
                 "progressControl",
@@ -56,7 +88,10 @@ const PlayerVideoCustom = () => {
                 "durationDisplay",
               ],
             },
-            "fullscreenToggle", // Questo resta fuori
+            {
+              name: "GroupedControls2",
+              children: ["fullscreenToggle"],
+            },
           ],
         },
         sources: [
