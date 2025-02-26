@@ -11,6 +11,7 @@
 /* barra di controllo */
 .vjs-control-bar {
   background-color: black !important;
+  font-size: 1.5em !important;
 }
 /* icona play */
 
@@ -39,4 +40,11 @@
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+/*time*/
+.vjs-time-control {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: unset !important;
 }

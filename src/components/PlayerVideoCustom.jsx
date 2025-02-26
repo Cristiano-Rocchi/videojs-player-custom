@@ -29,7 +29,6 @@ const PlayerVideoCustom = () => {
             "currentTimeDisplay",
             "timeDivider",
             "durationDisplay",
-            "remainingTimeDisplay",
             "fullscreenToggle",
           ],
         },
@@ -41,10 +40,11 @@ const PlayerVideoCustom = () => {
         ],
       });
 
+      // **🔹 1. Aggiungiamo il mini player dentro .vjs-mouse-display**
       const tooltipDiv = document.querySelector(".vjs-mouse-display");
 
       if (tooltipDiv) {
-        // Creiamo il mini player e lo aggiungiamo dentro il tooltip
+        // Creiamo il mini player
         const previewVideo = document.createElement("video");
         previewVideo.src = playerRef.current.currentSrc();
         previewVideo.muted = true;
@@ -54,7 +54,7 @@ const PlayerVideoCustom = () => {
         previewRef.current = previewVideo;
       }
 
-      // Aggiorna il tempo della preview quando ci si muove sulla progress bar
+      // **🔹 2. Facciamo aggiornare il mini player con il tempo corretto**
       const progressBar = document.querySelector(".vjs-progress-control");
 
       progressBar.addEventListener("mousemove", (event) => {
@@ -77,6 +77,28 @@ const PlayerVideoCustom = () => {
           previewRef.current.style.display = "block";
         }
       });
+
+      setTimeout(() => {
+        const remainingTimeDisplay = document.querySelector(
+          ".vjs-remaining-time"
+        );
+        const currentTime = document.querySelector(".vjs-current-time");
+        const duration = document.querySelector(".vjs-duration");
+        const timeDivider = document.querySelector(".vjs-time-divider");
+
+        if (remainingTimeDisplay) {
+          remainingTimeDisplay.style.display = "none"; // Nasconde il tempo rimanente
+        }
+        if (currentTime) {
+          currentTime.style.display = "inline"; // Assicura che sia visibile
+        }
+        if (duration) {
+          duration.style.display = "inline"; // Assicura che sia visibile
+        }
+        if (timeDivider) {
+          timeDivider.style.display = "inline"; // Assicura che il separatore "/" sia visibile
+        }
+      }, 500);
     }
 
     return () => {
