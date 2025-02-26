@@ -3,33 +3,24 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "./PlayerVideoCustom.css";
 
-const PlayerVideoCustom = () => {
+const PlayerVideoCustom = ({ videoList = [], onVideoChange }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const previewRef = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-  const videoList = [
-    {
-      src: "https://www.w3schools.com/html/mov_bbb.mp4",
-      type: "video/mp4",
-      title: "Video di Test",
-    },
-
-    {
-      src: "https://media.istockphoto.com/id/1697150103/it/video/guidare-sotto-la-pioggia-di-notte.mp4?s=mp4-640x640-is&k=20&c=virq68l1edFMhw55u_f15bdcx56hZQAQQ83RJBFBqzw=",
-      type: "video/mp4",
-      title: "Video di Test",
-    },
-  ];
-
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (isMounted && videoRef.current && !playerRef.current) {
+    if (
+      isMounted &&
+      videoRef.current &&
+      !playerRef.current &&
+      videoList.length > 0
+    ) {
       //wrapper div per le icons in controlBar
       const Component = videojs.getComponent("Component");
 
@@ -81,14 +72,14 @@ const PlayerVideoCustom = () => {
 
           //Eventi click per cambiare video
           prevButton.addEventListener("click", () => {
-            if (window.changeVideo) {
-              window.changeVideo(-1); // Vai al video precedente
+            if (typeof changeVideo === "function") {
+              changeVideo(-1); // Vai al video precedente
             }
           });
 
           nextButton.addEventListener("click", () => {
-            if (window.changeVideo) {
-              window.changeVideo(1); // Vai al video successivo
+            if (typeof changeVideo === "function") {
+              changeVideo(1); // Vai al video successivo
             }
           });
 
@@ -100,35 +91,6 @@ const PlayerVideoCustom = () => {
       }
 
       videojs.registerComponent("GroupedControls2", GroupedControls2);
-
-      window.changeVideo = (direction) => {
-        setCurrentVideoIndex((prevIndex) => {
-          let newIndex = prevIndex + direction;
-
-          // Controllo per evitare indici fuori limite
-          if (newIndex < 0) newIndex = videoList.length - 1;
-          if (newIndex >= videoList.length) newIndex = 0;
-
-          // 1. Ripristiniamo il player principale
-          if (playerRef.current) {
-            playerRef.current.pause();
-            playerRef.current.src({
-              type: "video/mp4",
-              src: videoList[newIndex].src,
-            });
-            playerRef.current.load();
-            playerRef.current.play();
-          }
-
-          // 2. Aggiorniamo il mini player con il nuovo video
-          if (previewRef.current) {
-            previewRef.current.src = videoList[newIndex].src;
-            previewRef.current.load(); // Ricarichiamo l'anteprima
-          }
-
-          return newIndex;
-        });
-      };
 
       playerRef.current = videojs(videoRef.current, {
         controls: true,
@@ -157,12 +119,20 @@ const PlayerVideoCustom = () => {
             },
           ],
         },
-        sources: [
-          {
-            src: videoList[currentVideoIndex].src,
-            type: "video/mp4",
-          },
-        ],
+        sources:
+          videoList.length > 0
+            ? [
+                {
+                  src: videoList[currentVideoIndex]?.src || "",
+                  type: videoList[currentVideoIndex]?.type || "video/mp4",
+                },
+              ]
+            : [
+                {
+                  src: fallbackVideo.src,
+                  type: fallbackVideo.type,
+                },
+              ],
       });
 
       // ** Aggiunta del mini player per l'anteprima **
@@ -225,16 +195,72 @@ const PlayerVideoCustom = () => {
       }
     };
   }, [isMounted]);
+  const changeVideo = (direction) => {
+    if (videoList.length === 0) return;
+
+    setCurrentVideoIndex((prevIndex) => {
+      let newIndex = prevIndex + direction;
+
+      if (newIndex < 0) newIndex = videoList.length - 1;
+      if (newIndex >= videoList.length) newIndex = 0;
+
+      if (playerRef.current) {
+        playerRef.current.pause();
+        playerRef.current.src({
+          type: videoList[newIndex]?.type || "video/mp4",
+          src: videoList[newIndex]?.src || "",
+        });
+        playerRef.current.load();
+        playerRef.current.play();
+      }
+
+      if (previewRef.current) {
+        previewRef.current.src = videoList[newIndex]?.src || "";
+        previewRef.current.load();
+      }
+
+      if (onVideoChange) {
+        onVideoChange(newIndex); // 🔥 Avvisa il componente padre che il video è cambiato
+      }
+
+      return newIndex;
+    });
+  };
+
+  useEffect(() => {
+    if (playerRef.current && videoList.length > 0) {
+      playerRef.current.src({
+        type: videoList[currentVideoIndex]?.type || "video/mp4",
+        src: videoList[currentVideoIndex]?.src || "",
+      });
+      playerRef.current.load();
+      playerRef.current.play();
+    }
+  }, [videoList, currentVideoIndex]);
+
+  const fallbackVideo = {
+    src: "https://www.w3schools.com/html/mov_bbb.mp4",
+    type: "video/mp4",
+    title: "Video di Default",
+  };
 
   return (
     <div className="player-container">
-      {isMounted && (
-        <div data-vjs-player>
-          <div className="video-player">
-            <video ref={videoRef} className="video-js" />
+      {isMounted &&
+        (videoList.length > 0 ? (
+          <div data-vjs-player>
+            <div className="video-player">
+              <video ref={videoRef} className="video-js" />
+            </div>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="no-videos-message">
+            <p>
+              ⚠️ Nessun video disponibile. Aggiungi una lista di video per
+              iniziare.
+            </p>
+          </div>
+        ))}
     </div>
   );
 };
