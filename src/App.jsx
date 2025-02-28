@@ -1,6 +1,7 @@
+import PlayerVideoKunstom from "player-video-kunstom";
 import "./App.css";
 import React from "react";
-import PlayerVideoKunstom from "./components/PlayerVideoKunstom";
+
 const videoList = [
   {
     src: "https://www.w3schools.com/html/mov_bbb.mp4",
