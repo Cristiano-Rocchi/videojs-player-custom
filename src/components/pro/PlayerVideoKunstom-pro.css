@@ -31,12 +31,34 @@
   justify-content: space-between;
 }
 
+/********Grouped ControlsSTART**********/
+
+.vjs-grouped-controls-start {
+  display: flex;
+}
 /*play*/
 .vjs-play-control {
   border-radius: 10px;
 }
 .vjs-play-control:hover,
-.vjs-volume-control:hover {
+.vjs-volume-control:hover,
+.vjs-next-button:hover,
+.vjs-skip-forward-button:hover {
   transform: scale(1.05);
   background-color: rgba(0, 0, 0, 0.6) !important;
+  cursor: pointer;
+}
+
+/*next Button*/
+.vjs-next-button {
+  order: 1;
+  padding-inline: 20px !important;
+  border-radius: 10px;
+}
+
+/*skip forward*/
+.vjs-skip-forward-button {
+  order: 2;
+  padding-inline: 20px !important;
+  border-radius: 10px;
 }
