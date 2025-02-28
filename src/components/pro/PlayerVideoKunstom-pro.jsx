@@ -45,13 +45,22 @@ const PlayerVideoKunstomPro = ({
         doubleClickFullscreen: doubleClickFullscreen,
         controlBar: {
           children: [
-            "playToggle",
-            "progressControl",
-            "volumePanel",
-            "currentTimeDisplay",
-            "timeDivider",
-            "durationDisplay",
-            "fullscreenToggle",
+            {
+              name: "GroupedControlsStart",
+              children: ["playToggle"],
+            },
+            {
+              name: "GroupedControlsCenter",
+              children: ["volumePanel", "progressControl"],
+            },
+            {
+              name: "GroupedControlsEnd",
+              children: [
+                "fullscreenToggle",
+                "vjs-qlty-button",
+                "vjs-question-button",
+              ],
+            },
           ],
         },
         sources: [
@@ -150,6 +159,74 @@ const PlayerVideoKunstomPro = ({
     type: "video/mp4",
     title: "Video di Default",
   };
+
+  //3componeti groupedControls
+
+  const Component = videojs.getComponent("Component");
+
+  class GroupedControlsStart extends Component {
+    constructor(player, options) {
+      super(player, options);
+      this.addClass("vjs-grouped-controls-start");
+    }
+
+    createEl() {
+      const el = videojs.dom.createEl("div", {
+        className: "vjs-grouped-controls-start",
+      });
+
+      return el;
+    }
+  }
+
+  class GroupedControlsCenter extends Component {
+    constructor(player, options) {
+      super(player, options);
+      this.addClass("vjs-grouped-controls-center");
+    }
+
+    createEl() {
+      const el = videojs.dom.createEl("div", {
+        className: "vjs-grouped-controls-center",
+      });
+
+      return el;
+    }
+  }
+
+  class GroupedControlsEnd extends Component {
+    constructor(player, options) {
+      super(player, options);
+      this.addClass("vjs-grouped-controls-end");
+    }
+
+    createEl() {
+      const el = videojs.dom.createEl("div", {
+        className: "vjs-grouped-controls-end",
+      });
+
+      // Aggiungi il bottone qlty
+      const qltyButton = videojs.dom.createEl("button", {
+        className: "vjs-qlty-button",
+        innerHTML: "Qlt", // Aggiungi l'icona o il testo per qlty
+      });
+
+      // Aggiungi il bottone ?
+      const questionButton = videojs.dom.createEl("button", {
+        className: "vjs-question-button",
+        innerHTML: "?", // Aggiungi l'icona o il testo per ?
+      });
+
+      el.appendChild(qltyButton);
+      el.appendChild(questionButton);
+
+      return el;
+    }
+  }
+
+  videojs.registerComponent("GroupedControlsStart", GroupedControlsStart);
+  videojs.registerComponent("GroupedControlsCenter", GroupedControlsCenter);
+  videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
 
   return (
     <div className="player-container">
