@@ -1,9 +1,19 @@
 import React, { useRef, useEffect, useState } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "./PlayerVideoCustom.css";
+import "./PlayerVideoKunstom.css";
 
-const PlayerVideoCustom = ({ videoList = [], onVideoChange }) => {
+const PlayerVideoKunstom = ({
+  videoList = [],
+  onVideoChange,
+  autoplay = false,
+  loop = false,
+  muted = false,
+  volume = 1,
+  aspectRatio = "16:9",
+  doubleClickFullscreen = true,
+  controls = true,
+}) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const previewRef = useRef(null);
@@ -72,14 +82,14 @@ const PlayerVideoCustom = ({ videoList = [], onVideoChange }) => {
 
           //Eventi click per cambiare video
           prevButton.addEventListener("click", () => {
-            if (typeof changeVideo === "function") {
-              changeVideo(-1); // Vai al video precedente
+            if (window.changeVideo) {
+              window.changeVideo(-1); // Vai al video precedente
             }
           });
 
           nextButton.addEventListener("click", () => {
-            if (typeof changeVideo === "function") {
-              changeVideo(1); // Vai al video successivo
+            if (window.changeVideo) {
+              window.changeVideo(1); // Vai al video successivo
             }
           });
 
@@ -93,13 +103,17 @@ const PlayerVideoCustom = ({ videoList = [], onVideoChange }) => {
       videojs.registerComponent("GroupedControls2", GroupedControls2);
 
       playerRef.current = videojs(videoRef.current, {
-        controls: true,
-        autoplay: false,
+        controls: controls,
+        autoplay: autoplay,
+        loop: loop,
+        muted: muted,
+        volume: volume,
         preload: "auto",
         fluid: true,
         responsive: true,
-        aspectRatio: "16:9",
-        doubleClickFullscreen: true,
+        aspectRatio: aspectRatio,
+        doubleClickFullscreen: doubleClickFullscreen,
+
         controlBar: {
           children: [
             {
@@ -220,12 +234,14 @@ const PlayerVideoCustom = ({ videoList = [], onVideoChange }) => {
       }
 
       if (onVideoChange) {
-        onVideoChange(newIndex); // 🔥 Avvisa il componente padre che il video è cambiato
+        onVideoChange(newIndex);
       }
 
       return newIndex;
     });
   };
+
+  window.changeVideo = changeVideo;
 
   useEffect(() => {
     if (playerRef.current && videoList.length > 0) {
@@ -233,10 +249,16 @@ const PlayerVideoCustom = ({ videoList = [], onVideoChange }) => {
         type: videoList[currentVideoIndex]?.type || "video/mp4",
         src: videoList[currentVideoIndex]?.src || "",
       });
+
       playerRef.current.load();
-      playerRef.current.play();
+
+      if (autoplay) {
+        playerRef.current.play();
+      }
+
+      playerRef.current.volume(volume);
     }
-  }, [videoList, currentVideoIndex]);
+  }, [videoList, currentVideoIndex, autoplay, volume]);
 
   const fallbackVideo = {
     src: "https://www.w3schools.com/html/mov_bbb.mp4",
@@ -265,4 +287,4 @@ const PlayerVideoCustom = ({ videoList = [], onVideoChange }) => {
   );
 };
 
-export default PlayerVideoCustom;
+export default PlayerVideoKunstom;

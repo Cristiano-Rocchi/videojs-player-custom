@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import PlayerVideoCustom from "./components/PlayerVideoCustom";
+import PlayerVideoKunstom from "./components/PlayerVideoKunstom";
 const videoList = [
   {
     src: "https://www.w3schools.com/html/mov_bbb.mp4",
@@ -17,7 +17,7 @@ const videoList = [
 function App() {
   return (
     <div className="App">
-      <PlayerVideoCustom videoList={videoList} />
+      <PlayerVideoKunstom videoList={videoList} />
     </div>
   );
 }
