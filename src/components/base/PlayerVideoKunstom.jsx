@@ -2,11 +2,11 @@ import React, { useRef, useEffect, useState } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "./PlayerVideoKunstom.css";
-
+import "videojs-youtube";
 const PlayerVideoKunstom = ({
   videoList = [],
   onVideoChange,
-  autoplay = false,
+  autoplay = true,
   loop = false,
   muted = false,
   volume = 1,

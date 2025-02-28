@@ -1,4 +1,4 @@
-import PlayerVideoKunstom from "player-video-kunstom";
+import PlayerVideoKunstomPro from "./components/pro/PlayerVideoKunstom-pro";
 import "./App.css";
 import React from "react";
 
@@ -13,12 +13,17 @@ const videoList = [
     type: "video/mp4",
     title: "Video di Test 2",
   },
+  {
+    src: "https://www.youtube.com/watch?v=cc2kFJ3gc4o&ab_channel=NoiBiancocelesti",
+    type: "video/youtube",
+    title: "YouTube Video Test",
+  },
 ];
 
 function App() {
   return (
     <div className="App">
-      <PlayerVideoKunstom videoList={videoList} />
+      <PlayerVideoKunstomPro videoList={videoList} />
     </div>
   );
 }

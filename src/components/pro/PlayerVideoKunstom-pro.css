@@ -1,0 +1,10 @@
+.progress-preview-video {
+  width: 15vw;
+  max-width: 190px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
