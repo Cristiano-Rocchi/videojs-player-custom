@@ -14,12 +14,18 @@ const PlayerVideoKunstomPro = ({
   aspectRatio = "16:9",
   doubleClickFullscreen = true,
   controls = true,
+  darkMode = false,
+  size = null,
+  width = null,
 }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const previewRef = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  const themeClass = darkMode ? "dark-mode" : "light-mode";
+  const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
 
   useEffect(() => {
     setIsMounted(true);
@@ -321,11 +327,18 @@ const PlayerVideoKunstomPro = ({
   };
 
   return (
-    <div className="player-container">
+    <div
+      className={`player-container ${darkMode ? "dark-mode" : "light-mode"}  `}
+    >
       {isMounted &&
         (videoList.length > 0 ? (
           <div data-vjs-player>
-            <div className="video-player">
+            <div
+              className={`video-player ${sizeClass}`}
+              style={{
+                width: width || "100%",
+              }}
+            >
               <video ref={videoRef} className="video-js" />
             </div>
           </div>
