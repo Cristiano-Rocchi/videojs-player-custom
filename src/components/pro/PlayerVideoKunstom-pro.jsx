@@ -172,6 +172,7 @@ const PlayerVideoKunstomPro = ({
         constructor(player, options) {
           super(player, options);
           this.addClass("vjs-grouped-controls-end");
+          this.autoNextEnabled = false; // Stato iniziale (spento)
         }
 
         createEl() {
@@ -179,9 +180,66 @@ const PlayerVideoKunstomPro = ({
             className: "vjs-grouped-controls-end",
           });
 
+          // Creazione del toggle switch per "auto next"
+          const label = videojs.dom.createEl("label", {
+            className: "switch",
+          });
+
+          const checkbox = videojs.dom.createEl("input", {
+            type: "checkbox",
+            className: "autoplay-toggle",
+          });
+
+          const slider = videojs.dom.createEl("span", {
+            className: "slider",
+          });
+
+          // Definiamo l'icona Play in una costante
+          const playSVG = `<svg class="svg-icon" style="width: 1em; height: 1em; vertical-align: middle; fill: currentColor; overflow: hidden;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+            <path d="M852.727563 392.447107C956.997809 458.473635 956.941389 565.559517 852.727563 631.55032L281.888889 993.019655C177.618644 1059.046186 93.090909 1016.054114 93.090909 897.137364L93.090909 126.860063C93.090909 7.879206 177.675064-35.013033 281.888889 30.977769L852.727563 392.447107 852.727563 392.447107Z"></path>
+          </svg>`;
+
+          // Creazione dello span per l'icona (inizialmente vuoto)
+          const icon = videojs.dom.createEl("span", {
+            className: "slider-icon",
+          });
+
+          slider.appendChild(icon); // Aggiunge l'icona nel pallino
+
+          // Evento per attivare/disattivare "auto next" e cambiare icona
+          checkbox.addEventListener("change", () => {
+            this.autoNextEnabled = checkbox.checked;
+            icon.innerHTML = this.autoNextEnabled ? playSVG : ""; // Mostra Play se attivo, altrimenti vuoto
+          });
+
+          label.appendChild(checkbox);
+          label.appendChild(slider);
+          el.appendChild(label);
+
+          // Evento per il cambio video quando finisce
+          this.player_.on("ended", () => {
+            if (this.autoNextEnabled && window.changeVideo) {
+              window.changeVideo(1); // Passa al video successivo
+            }
+          });
+
           return el;
         }
       }
+
+      videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
+
+      videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
+
+      videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
+
+      videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
+
+      videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
+
+      videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
+
+      videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
 
       videojs.registerComponent("GroupedControlsEnd", GroupedControlsEnd);
 

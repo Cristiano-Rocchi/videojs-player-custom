@@ -41,6 +41,39 @@
   display: flex;
 }
 
+/********Volume**********/
+
+.vjs-volume-bar.vjs-slider-horizontal {
+  height: 2em;
+  width: 100%;
+  position: relative;
+  bottom: 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.video-js .vjs-volume-control.vjs-volume-horizontal {
+  width: 7em !important;
+
+  position: absolute;
+  left: 55px;
+  z-index: 10;
+  border-radius: 5px;
+}
+
+/*barra di volume*/
+.vjs-volume-level {
+  height: 0.1em !important;
+}
+/*pallino di volume*/
+.vjs-volume-level::before {
+  font-size: 0.4em !important;
+}
+/*trattino volume verticale*/
+.vjs-mouse-display {
+  background-color: white !important;
+}
+
 /********Grouped ControlsCENTER**********/
 
 .vjs-grouped-controls-center {
@@ -52,7 +85,8 @@
 .vjs-prev-button:hover,
 .vjs-skip-forward-button:hover,
 .vjs-skip-rewind-button:hover,
-.vjs-progress-control:hover {
+.vjs-progress-control:hover,
+.vjs-fullscreen-control:hover {
   transform: scale(1.05);
   background-color: rgba(0, 0, 0, 0.4) !important;
   cursor: pointer;
@@ -96,37 +130,81 @@
   padding-top: 8px;
 }
 
-/********Volume**********/
+/*---------------Grouped ControlsEND---------------*/
 
-.vjs-volume-bar.vjs-slider-horizontal {
-  height: 2em;
-  width: 100%;
+.vjs-grouped-controls-end {
+  display: flex;
+}
+
+/*--AUTOPLAY---*/
+.switch {
   position: relative;
-  bottom: 15px;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0);
+  display: inline-block;
+  width: 30px;
+  height: 8px;
+  background: #777; /* Colorequando è spento */
+  border-radius: 20px;
+  transition: 0.3s;
+  margin-top: 21px;
 }
 
-.video-js .vjs-volume-control.vjs-volume-horizontal {
-  width: 7em !important;
+.switch input {
+  height: 0;
+}
 
+/* Barra */
+.slider {
   position: absolute;
-  left: 55px;
-  z-index: 10;
-  border-radius: 5px;
+  cursor: pointer;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: #777;
+
+  border-radius: 20px;
+  height: 8px;
 }
 
-/*barra di volume*/
-.vjs-volume-level {
-  height: 0.1em !important;
+/* Pallino */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 1px;
+  bottom: -3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
-/*pallino di volume*/
-.vjs-volume-level::before {
-  font-size: 0.4em !important;
+
+/* Icona dentro il pallino */
+.slider-icon {
+  position: absolute;
+  top: 20%;
+  left: 4px;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: #374f43;
+  transition: 0.3s;
+  margin-left: -2px;
 }
-/*trattino volume verticale*/
-.vjs-mouse-display {
-  background-color: white !important;
+
+/* --Stato attivo-- */
+input:checked + .slider {
+  background-color: #99d5b7; /* Verde per ON */
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Quando il toggle è attivo mostra l'icona Play */
+input:checked + .slider .slider-icon {
+  opacity: 1;
+  left: 28px;
 }
 
 /*******PROPS PERSONAIZZATE********/
@@ -138,7 +216,8 @@
 .dark-mode .vjs-prev-button:hover,
 .dark-mode .vjs-skip-forward-button:hover,
 .dark-mode .vjs-skip-rewind-button:hover,
-.dark-mode .vjs-progress-control:hover {
+.dark-mode .vjs-progress-control:hover,
+.dark-mode .vjs-fullscreen-control:hover {
   transform: scale(1.05);
   background-color: rgba(0, 0, 0, 0.9) !important; /* Cambia sfondo */
   cursor: pointer;

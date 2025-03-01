@@ -14,6 +14,11 @@ const videoList = [
     title: "Video di Test 2",
   },
   {
+    src: "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4",
+    type: "video/mp4",
+    title: "Video di Test 3",
+  },
+  {
     src: "https://www.youtube.com/watch?v=cc2kFJ3gc4o&ab_channel=NoiBiancocelesti",
     type: "video/youtube",
     title: "YouTube Video Test",
@@ -23,7 +28,7 @@ const videoList = [
 function App() {
   return (
     <div className="App">
-      <PlayerVideoKunstomPro videoList={videoList} />
+      <PlayerVideoKunstomPro videoList={videoList} autoplay={true} />
     </div>
   );
 }
