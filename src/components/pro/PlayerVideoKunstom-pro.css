@@ -36,29 +36,58 @@
 .vjs-grouped-controls-start {
   display: flex;
 }
-/*play*/
-.vjs-play-control {
-  border-radius: 10px;
+
+/********Grouped ControlsCENTER**********/
+
+.vjs-grouped-controls-center {
+  display: flex;
 }
 .vjs-play-control:hover,
 .vjs-volume-control:hover,
 .vjs-next-button:hover,
-.vjs-skip-forward-button:hover {
+.vjs-prev-button:hover {
   transform: scale(1.05);
   background-color: rgba(0, 0, 0, 0.6) !important;
   cursor: pointer;
 }
+.vjs-skip-forward-button:hover,
+.vjs-skip-rewind-button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+/*play*/
+.vjs-play-control {
+  border-radius: 10px;
+  order: 3 !important;
+}
+
+.vjs-play-control,
+.vjs-next-button,
+.vjs-prev-button {
+  padding-inline: 20px !important;
+}
 
 /*next Button*/
 .vjs-next-button {
-  order: 1;
-  padding-inline: 20px !important;
+  border-radius: 10px;
+  order: 4;
+}
+.vjs-prev-button {
   border-radius: 10px;
 }
 
 /*skip forward*/
 .vjs-skip-forward-button {
-  order: 2;
-
   border-radius: 10px;
+  order: 4;
+  margin-right: 5px;
+}
+/*skip rewind*/
+.vjs-skip-rewind-button {
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.sec10 {
+  padding-top: 8px;
 }
