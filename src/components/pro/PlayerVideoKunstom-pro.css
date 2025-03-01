@@ -59,6 +59,6 @@
 /*skip forward*/
 .vjs-skip-forward-button {
   order: 2;
-  padding-inline: 20px !important;
+
   border-radius: 10px;
 }
