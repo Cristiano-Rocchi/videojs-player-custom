@@ -41,7 +41,11 @@ const videoList = [
 function App() {
   return (
     <div className="App">
-      <PlayerVideoKunstomPro videoList={videoList} autoplay={true} />
+      <PlayerVideoKunstomPro
+        videoList={videoList}
+        autoplay={true}
+        darkMode={true}
+      />
     </div>
   );
 }

@@ -1,3 +1,20 @@
+/*********GENERALI**********/
+.vjs-play-control:hover,
+.vjs-volume-control:hover,
+.vjs-next-button:hover,
+.vjs-prev-button:hover,
+.vjs-skip-forward-button:hover,
+.vjs-skip-rewind-button:hover,
+.vjs-progress-control:hover,
+.vjs-fullscreen-control:hover,
+.vjs-setting-button:hover,
+.vjs-mute-control:hover {
+  transform: scale(1.05);
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+}
+
 .video-player {
   width: 100%;
 }
@@ -15,7 +32,7 @@
   transform: translateX(-50%);
 }
 
-/********barra di progresso**********/
+/*-------barra di progresso video---------*/
 .video-js .vjs-progress-control {
   position: absolute;
   bottom: 51px;
@@ -26,6 +43,13 @@
   padding: 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+.vjs-play-progress {
+  background-color: var(--primary-color) !important;
+}
+/*pallino*/
+.vjs-progress-holder {
+  color: var(--primary-color) !important;
 }
 
 /********barra di controllo**********/
@@ -43,6 +67,11 @@
 
 /********Volume**********/
 
+.vjs-mute-control {
+  color: var(--primary-color) !important;
+  border-radius: 10px;
+}
+
 .vjs-volume-bar.vjs-slider-horizontal {
   height: 2em;
   width: 100%;
@@ -50,6 +79,7 @@
   bottom: 60%;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0);
+  color: var(--primary-color);
 }
 
 .video-js .vjs-volume-control.vjs-volume-horizontal {
@@ -64,6 +94,7 @@
 /*barra di volume*/
 .vjs-volume-level {
   height: 0.1em !important;
+  background-color: var(--primary-color) !important;
 }
 /*pallino di volume*/
 .vjs-volume-level::before {
@@ -75,6 +106,7 @@
   position: absolute;
   top: 12px;
   height: 40px !important;
+  background-color: var(--primary-color) !important;
 }
 
 /********Grouped ControlsCENTER**********/
@@ -82,24 +114,16 @@
 .vjs-grouped-controls-center {
   display: flex;
 }
-.vjs-play-control:hover,
-.vjs-volume-control:hover,
-.vjs-next-button:hover,
-.vjs-prev-button:hover,
-.vjs-skip-forward-button:hover,
-.vjs-skip-rewind-button:hover,
-.vjs-progress-control:hover,
-.vjs-fullscreen-control:hover {
-  transform: scale(1.05);
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  cursor: pointer;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
-}
 
 /*play*/
 .vjs-play-control {
   border-radius: 10px;
   order: 3 !important;
+  color: var(--primary-color) !important;
+}
+
+.vjs-play-control .vjs-icon-placeholder::before {
+  transform: scale(1.5); /* Ingrandisce l'icona PLAY,PAUSE,RETURN*/
 }
 
 .vjs-play-control,
@@ -137,6 +161,12 @@
 
 .vjs-grouped-controls-end {
   display: flex;
+  color: var(--primary-color) !important;
+}
+
+/*---FULLSCREEN---*/
+.vjs-fullscreen-control {
+  border-radius: 10px;
 }
 
 /*--AUTOPLAY---*/
@@ -176,9 +206,9 @@
   content: "";
   height: 16px;
   width: 16px;
-  left: 1px;
+
   bottom: -3px;
-  background-color: white;
+  background-color: var(--primary-color);
   transition: 0.3s;
   border-radius: 50%;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -193,12 +223,12 @@
   font-size: 9px;
   color: #374f43;
   transition: 0.3s;
-  margin-left: -2px;
+  margin-left: -3px;
 }
 
 /* --Stato attivo-- */
 input:checked + .slider {
-  background-color: #99d5b7; /* Verde per ON */
+  background-color: var(--primary-color); /* Verde per ON */
 }
 
 input:checked + .slider:before {
@@ -211,6 +241,38 @@ input:checked + .slider .slider-icon {
   left: 28px;
 }
 
+/**********QUALITY**********/
+
+.vjs-setting-button {
+  border-radius: 10px;
+}
+
+.quality-menu {
+  position: absolute;
+  bottom: 50px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.quality-option {
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.quality-option:hover {
+  background: white;
+  color: black;
+  border-radius: 3px;
+}
+
+.no-quality {
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
 /*******PROPS PERSONAIZZATE********/
 
 /* -------- DARKMODE-------- */
@@ -221,7 +283,10 @@ input:checked + .slider .slider-icon {
 .dark-mode .vjs-skip-forward-button:hover,
 .dark-mode .vjs-skip-rewind-button:hover,
 .dark-mode .vjs-progress-control:hover,
-.dark-mode .vjs-fullscreen-control:hover {
+.dark-mode .vjs-fullscreen-control:hover,
+.dark-mode .vjs-setting-button:hover,
+.dark-mode .vjs-fullscreen-control:hover,
+.dark-mode .vjs-mute-control:hover {
   transform: scale(1.05);
   background-color: rgba(0, 0, 0, 0.9) !important; /* Cambia sfondo */
   cursor: pointer;
@@ -247,37 +312,4 @@ input:checked + .slider .slider-icon {
 /*Size 100% */
 .video-player.size-100 {
   width: 100% !important;
-}
-
-.quality-menu {
-  position: absolute;
-  bottom: 50px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 10px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  z-index: 1000;
-}
-
-.quality-option {
-  background: none;
-  border: 1px solid white;
-  color: white;
-  padding: 5px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.quality-option:hover {
-  background: white;
-  color: black;
-}
-
-.no-quality {
-  color: white;
-  text-align: center;
-  font-size: 14px;
 }
