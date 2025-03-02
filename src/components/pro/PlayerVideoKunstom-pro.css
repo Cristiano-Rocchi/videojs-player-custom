@@ -47,7 +47,7 @@
   height: 2em;
   width: 100%;
   position: relative;
-  bottom: 15px;
+  bottom: 60%;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0);
 }
@@ -70,8 +70,11 @@
   font-size: 0.4em !important;
 }
 /*trattino volume verticale*/
-.vjs-mouse-display {
+.vjs-volume-bar .vjs-mouse-display {
   background-color: white !important;
+  position: absolute;
+  top: 12px;
+  height: 40px !important;
 }
 
 /********Grouped ControlsCENTER**********/
@@ -146,6 +149,7 @@
   border-radius: 20px;
   transition: 0.3s;
   margin-top: 21px;
+  right: 15px;
 }
 
 .switch input {
