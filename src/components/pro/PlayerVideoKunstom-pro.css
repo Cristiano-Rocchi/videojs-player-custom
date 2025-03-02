@@ -244,3 +244,36 @@ input:checked + .slider .slider-icon {
 .video-player.size-100 {
   width: 100% !important;
 }
+
+.quality-menu {
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1000;
+}
+
+.quality-option {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.quality-option:hover {
+  background: white;
+  color: black;
+}
+
+.no-quality {
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}

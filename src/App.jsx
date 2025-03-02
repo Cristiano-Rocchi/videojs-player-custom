@@ -17,6 +17,19 @@ const videoList = [
     src: "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4",
     type: "video/mp4",
     title: "Video di Test 3",
+    qualities: [
+      {
+        label: "720p",
+        src: "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4",
+        type: "video/mp4",
+      },
+
+      {
+        label: "360p",
+        src: "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4",
+        type: "video/mp4",
+      },
+    ],
   },
   {
     src: "https://www.youtube.com/watch?v=cc2kFJ3gc4o&ab_channel=NoiBiancocelesti",
