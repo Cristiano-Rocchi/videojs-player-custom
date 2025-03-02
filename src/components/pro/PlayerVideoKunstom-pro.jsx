@@ -26,10 +26,11 @@ const PlayerVideoKunstomPro = ({
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
   const currentVideoIndexRef = useRef(0);
 
+  /*props*/
   const themeClass = darkMode ? "dark-mode" : "light-mode";
   const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
 
-  const [color, setColor] = useState("gold"); //COLORE PRINCIPALE
+  const [color, setColor] = useState("white"); //COLORE PRINCIPALE
 
   useEffect(() => {
     document.documentElement.style.setProperty("--primary-color", color);
@@ -81,6 +82,7 @@ const PlayerVideoKunstomPro = ({
           const el = videojs.dom.createEl("div", {
             className: "vjs-grouped-controls-center",
           });
+
           // Pulsante Next
           const nextButton = videojs.dom.createEl("button", {
             className: "vjs-next-button",
@@ -289,8 +291,11 @@ const PlayerVideoKunstomPro = ({
             this.qualityMenuVisible = !this.qualityMenuVisible; // Alterna lo stato
           });
 
+          //tempo
+
           el.appendChild(settingButton);
           el.appendChild(qualityMenu);
+
           return el;
         }
       }
@@ -321,7 +326,13 @@ const PlayerVideoKunstomPro = ({
             },
             {
               name: "GroupedControlsEnd",
-              children: ["fullscreenToggle"],
+              children: [
+                "currentTimeDisplay",
+
+                "durationDisplay",
+                "fullscreenToggle",
+                ,
+              ],
             },
           ],
         },
@@ -510,6 +521,18 @@ const PlayerVideoKunstomPro = ({
       playerRef.current.play();
     }
   };
+
+  setTimeout(() => {
+    const remainingTimeDisplay = document.querySelector(".vjs-remaining-time");
+    const currentTime = document.querySelector(".vjs-current-time");
+    const duration = document.querySelector(".vjs-duration");
+    const timeDivider = document.querySelector(".vjs-time-divider");
+
+    if (remainingTimeDisplay) remainingTimeDisplay.style.display = "none";
+    if (currentTime) currentTime.style.display = "inline";
+    if (duration) duration.style.display = "inline";
+    if (timeDivider) timeDivider.style.display = "inline";
+  }, 500);
 
   window.changeVideo = changeVideo;
 

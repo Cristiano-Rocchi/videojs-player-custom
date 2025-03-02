@@ -63,6 +63,7 @@
 
 .vjs-grouped-controls-start {
   display: flex;
+  min-width: 20%;
 }
 
 /********Volume**********/
@@ -158,10 +159,11 @@
 }
 
 /*---------------Grouped ControlsEND---------------*/
-
 .vjs-grouped-controls-end {
   display: flex;
   color: var(--primary-color) !important;
+  justify-content: flex-end;
+  min-width: 20%;
 }
 
 /*---FULLSCREEN---*/
