@@ -18,6 +18,7 @@ const PlayerVideoKunstomPro = ({
   size = null,
   width = null,
   color = "white",
+  title = false,
 }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
@@ -30,9 +31,15 @@ const PlayerVideoKunstomPro = ({
   /*props*/
   const themeClass = darkMode ? "dark-mode" : "light-mode";
   const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
+  const [showTitle, setShowTitle] = useState(title);
 
-  const [selectedColor, setSelectedColor] = useState(color);
+  //title
+  useEffect(() => {
+    setShowTitle(title);
+    updateTitleVisibility(title); // 👈 Chiama la funzione per aggiornare il titolo subito
+  }, [title]);
 
+  //color
   useEffect(() => {
     document.documentElement.style.setProperty("--primary-color", color);
 
@@ -68,12 +75,21 @@ const PlayerVideoKunstomPro = ({
         constructor(player, options) {
           super(player, options);
           this.addClass("vjs-grouped-controls-start");
+          this.titleEnabled = options.title;
         }
 
         createEl() {
           const el = videojs.dom.createEl("div", {
             className: "vjs-grouped-controls-start",
           });
+
+          if (showTitle && videoList.length > 0) {
+            const titleElement = videojs.dom.createEl("p", {
+              className: "vjs-title-video",
+              innerHTML: `&#8226; ${videoList[currentVideoIndex].title}`,
+            });
+            el.appendChild(titleElement);
+          }
 
           return el;
         }
@@ -324,6 +340,7 @@ const PlayerVideoKunstomPro = ({
         aspectRatio: aspectRatio,
         doubleClickFullscreen: doubleClickFullscreen,
         color: color,
+
         controlBar: {
           children: [
             {
@@ -335,6 +352,7 @@ const PlayerVideoKunstomPro = ({
                 "muteToggle",
                 "volumeControl",
               ],
+              title: title,
             },
             {
               name: "GroupedControlsCenter",
@@ -571,6 +589,15 @@ const PlayerVideoKunstomPro = ({
       });
       playerRef.current.load();
       playerRef.current.play();
+    }
+  };
+
+  const updateTitleVisibility = (isVisible) => {
+    if (playerRef.current) {
+      const titleElement = document.querySelector(".vjs-title-video");
+      if (titleElement) {
+        titleElement.style.display = isVisible ? "block" : "none";
+      }
     }
   };
 
