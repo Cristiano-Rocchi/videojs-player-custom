@@ -55,6 +55,7 @@
 .vjs-current-time,
 .vjs-duration {
   margin-bottom: 37px !important;
+  color: var(--primary-color) !important;
 }
 
 /********barra di controllo**********/

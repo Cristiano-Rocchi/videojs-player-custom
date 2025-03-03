@@ -17,6 +17,7 @@ const PlayerVideoKunstomPro = ({
   darkMode = false,
   size = null,
   width = null,
+  color = "white",
 }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
@@ -30,10 +31,18 @@ const PlayerVideoKunstomPro = ({
   const themeClass = darkMode ? "dark-mode" : "light-mode";
   const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
 
-  const [color, setColor] = useState("white"); //COLORE PRINCIPALE
+  const [selectedColor, setSelectedColor] = useState(color);
 
   useEffect(() => {
     document.documentElement.style.setProperty("--primary-color", color);
+
+    // Cambia il colore degli SVG
+    const svgs = document.querySelectorAll(
+      ".vjs-grouped-controls-center svg, .vjs-grouped-controls-end svg"
+    );
+    svgs.forEach((svg) => {
+      svg.setAttribute("fill", color);
+    });
   }, [color]);
 
   useEffect(() => {
@@ -314,6 +323,7 @@ const PlayerVideoKunstomPro = ({
         responsive: true,
         aspectRatio: aspectRatio,
         doubleClickFullscreen: doubleClickFullscreen,
+        color: color,
         controlBar: {
           children: [
             {
@@ -565,15 +575,11 @@ const PlayerVideoKunstomPro = ({
   };
 
   setTimeout(() => {
-    const remainingTimeDisplay = document.querySelector(".vjs-remaining-time");
     const currentTime = document.querySelector(".vjs-current-time");
     const duration = document.querySelector(".vjs-duration");
-    const timeDivider = document.querySelector(".vjs-time-divider");
 
-    if (remainingTimeDisplay) remainingTimeDisplay.style.display = "none";
     if (currentTime) currentTime.style.display = "inline";
     if (duration) duration.style.display = "inline";
-    if (timeDivider) timeDivider.style.display = "inline";
   }, 500);
 
   window.changeVideo = changeVideo;
