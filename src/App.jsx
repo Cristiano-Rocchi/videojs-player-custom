@@ -1,6 +1,6 @@
-import PlayerVideoKunstomPro from "./components/pro/PlayerVideoKunstom-pro";
 import "./App.css";
 import React from "react";
+import PlayerVideoKunstomPro from "./components/pro/PlayerVideoKunstom-pro";
 
 const videoList = [
   {
@@ -41,12 +41,7 @@ const videoList = [
 function App() {
   return (
     <div className="App">
-      <PlayerVideoKunstomPro
-        videoList={videoList}
-        autoplay={true}
-        title={true}
-        tooltips={false} //refresh
-      />
+      <PlayerVideoKunstomPro videoList={videoList} />
     </div>
   );
 }
