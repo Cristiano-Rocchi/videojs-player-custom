@@ -416,4 +416,131 @@ input:checked + .slider .slider-icon {
 
     box-shadow: unset;
   }
+} /* Tooltip generale */
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* Tooltip generale */
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* Tooltip per il pulsante Setting */
+.vjs-setting-button::after {
+  content: "Settings"; /* Testo del tooltip */
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+  display: none;
+}
+
+.vjs-next-button::after {
+  content: "Next";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+  display: none;
+}
+
+.vjs-prev-button::after {
+  content: "Prev";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+  display: none;
+}
+.vjs-skip-forward-button::after,
+.vjs-skip-rewind-button::after {
+  content: "Skip";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+  display: none;
+}
+
+/* Mostra il tooltip quando passi con il mouse */
+.vjs-setting-button:hover::after,
+.vjs-next-button:hover::after,
+.vjs-prev-button:hover::after,
+.vjs-skip-forward-button:hover::after,
+.vjs-skip-rewind-button:hover::after {
+  opacity: 1;
+  display: block;
+}
+
+.vjs-play-control[title]:hover::after,
+.vjs-mute-control[title]:hover::after,
+.vjs-fullscreen-control[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+  display: block;
+}
+
+.vjs-play-control::after,
+.vjs-mute-control::after,
+.vjs-fullscreen-control::after {
+  content: attr(data-title);
 }

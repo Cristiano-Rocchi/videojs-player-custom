@@ -60,15 +60,18 @@ const PlayerVideoKunstomPro = ({
     updateQualityVisibility(quality);
   }, [quality]);
 
+  //currentVideo
   useEffect(() => {
     console.log("CurrentVideoIndex aggiornato:", currentVideoIndex);
     setSelectedVideoIndex(currentVideoIndex);
   }, [currentVideoIndex]);
 
+  //mounted
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  //player
   useEffect(() => {
     if (
       isMounted &&
