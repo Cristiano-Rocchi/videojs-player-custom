@@ -52,6 +52,11 @@
   color: var(--primary-color) !important;
 }
 
+.vjs-current-time,
+.vjs-duration {
+  margin-bottom: 37px !important;
+}
+
 /********barra di controllo**********/
 .vjs-control-bar {
   font-size: 1.7em;

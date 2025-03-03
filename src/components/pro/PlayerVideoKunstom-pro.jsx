@@ -318,7 +318,13 @@ const PlayerVideoKunstomPro = ({
           children: [
             {
               name: "GroupedControlsStart",
-              children: ["progressControl", "muteToggle", "volumeControl"],
+              children: [
+                "progressControl",
+                "currentTimeDisplay",
+                "durationDisplay",
+                "muteToggle",
+                "volumeControl",
+              ],
             },
             {
               name: "GroupedControlsCenter",
@@ -326,13 +332,7 @@ const PlayerVideoKunstomPro = ({
             },
             {
               name: "GroupedControlsEnd",
-              children: [
-                "currentTimeDisplay",
-
-                "durationDisplay",
-                "fullscreenToggle",
-                ,
-              ],
+              children: ["fullscreenToggle"],
             },
           ],
         },
@@ -350,6 +350,25 @@ const PlayerVideoKunstomPro = ({
                   type: fallbackVideo.type,
                 },
               ],
+      });
+
+      playerRef.current.ready(() => {
+        const progressControl = document.querySelector(".vjs-progress-control");
+        const currentTimeDisplay = document.querySelector(".vjs-current-time");
+        const durationDisplay = document.querySelector(".vjs-duration");
+
+        if (progressControl && currentTimeDisplay) {
+          // Sposta .vjs-current-time prima della barra di progresso
+          progressControl.insertBefore(
+            currentTimeDisplay,
+            progressControl.firstChild
+          );
+        }
+
+        if (progressControl && durationDisplay) {
+          // Aggiunge .vjs-duration alla fine della barra di progresso
+          progressControl.appendChild(durationDisplay);
+        }
       });
 
       // Funzionalità per l'anteprima durante la navigazione sulla barra di progresso
