@@ -20,6 +20,7 @@ const PlayerVideoKunstomPro = ({
   color = "white",
   title = false,
   quality = true,
+  tooltips = true,
 }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
@@ -34,6 +35,7 @@ const PlayerVideoKunstomPro = ({
   const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
   const [showTitle, setShowTitle] = useState(title);
   const [showQuality, setShowQuality] = useState(quality);
+  const [showTooltips, setShowTooltips] = useState(tooltips);
 
   //title
   useEffect(() => {
@@ -60,18 +62,30 @@ const PlayerVideoKunstomPro = ({
     updateQualityVisibility(quality);
   }, [quality]);
 
-  //currentVideo
+  //tooltips
+  useEffect(() => {
+    if (!showTooltips) {
+      const style = document.createElement("style");
+      style.innerHTML = `
+        .vjs-play-control[title]::after,
+        .vjs-mute-control[title]::after,
+        .vjs-fullscreen-control[title]::after {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, [showTooltips]);
+
   useEffect(() => {
     console.log("CurrentVideoIndex aggiornato:", currentVideoIndex);
     setSelectedVideoIndex(currentVideoIndex);
   }, [currentVideoIndex]);
 
-  //mounted
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  //player
   useEffect(() => {
     if (
       isMounted &&

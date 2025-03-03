@@ -45,6 +45,7 @@ function App() {
         videoList={videoList}
         autoplay={true}
         title={true}
+        tooltips={false} //refresh
       />
     </div>
   );
