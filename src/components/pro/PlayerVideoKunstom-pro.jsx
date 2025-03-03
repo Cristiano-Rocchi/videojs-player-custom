@@ -373,14 +373,23 @@ const PlayerVideoKunstomPro = ({
 
       // Funzionalità per l'anteprima durante la navigazione sulla barra di progresso
       const progressBar = document.querySelector(".vjs-progress-control");
+
       progressBar.addEventListener("mousemove", (event) => {
         if (previewRef.current && playerRef.current) {
           const rect = progressBar.getBoundingClientRect();
           const percentage = (event.clientX - rect.left) / rect.width;
           const duration = playerRef.current.duration();
+
           if (!isNaN(duration) && isFinite(duration)) {
             const videoTime = percentage * duration;
-            previewRef.current.currentTime = videoTime;
+
+            // Controlla se è un video di YouTube
+            const isYouTube =
+              playerRef.current.currentType() === "video/youtube";
+
+            if (!isYouTube) {
+              previewRef.current.currentTime = videoTime;
+            }
           }
         }
       });
@@ -397,16 +406,30 @@ const PlayerVideoKunstomPro = ({
         }
       });
 
-      // ** Aggiungi il mini player per l'anteprima **
-      const tooltipDiv = document.querySelector(".vjs-mouse-display");
-      if (tooltipDiv) {
-        const previewVideo = document.createElement("video");
-        previewVideo.src = playerRef.current.currentSrc();
-        previewVideo.muted = true;
-        previewVideo.className = "progress-preview-video";
-        tooltipDiv.appendChild(previewVideo);
-        previewRef.current = previewVideo;
-      }
+      // ** Aggiungi il mini player per l'anteprima (solo per video normali) **
+      playerRef.current.on("loadedmetadata", () => {
+        const tooltipDiv = document.querySelector(".vjs-mouse-display");
+        const isYouTube = playerRef.current.currentType() === "video/youtube";
+
+        // Se il video è YouTube, rimuove il miniplayer
+        if (isYouTube) {
+          if (previewRef.current) {
+            previewRef.current.remove();
+            previewRef.current = null;
+          }
+          return;
+        }
+
+        // Se non è YouTube, crea il miniplayer
+        if (tooltipDiv && !previewRef.current) {
+          const previewVideo = document.createElement("video");
+          previewVideo.src = playerRef.current.currentSrc();
+          previewVideo.muted = true;
+          previewVideo.className = "progress-preview-video";
+          tooltipDiv.appendChild(previewVideo);
+          previewRef.current = previewVideo;
+        }
+      });
     }
 
     return () => {
