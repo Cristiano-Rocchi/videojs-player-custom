@@ -331,3 +331,89 @@ input:checked + .slider .slider-icon {
 .video-player.size-100 {
   width: 100% !important;
 }
+
+/*------------MEDIA QUERIES-----------*/
+/* 📌 Per schermi più piccoli (Smartphone) */
+/* 📌 Nasconde i bottoni di skip su schermi più piccoli di un iPad (fino a 768px inclusi) */
+@media (max-width: 768px) {
+  .vjs-skip-forward-button,
+  .vjs-skip-rewind-button,
+  .vjs-title-video {
+    display: none !important;
+  }
+}
+
+/* 📌 Regole per i telefoni (≤ 600px) */
+@media (max-width: 600px) {
+  .vjs-control-bar {
+    font-size: 0.9em;
+  }
+
+  .vjs-title-video {
+    left: 80px;
+  }
+
+  .vjs-prev-button svg,
+  .vjs-next-button svg,
+  .vjs-setting-button svg {
+    width: 17px !important;
+  }
+
+  .switch {
+    bottom: 10px !important;
+  }
+
+  .slider::before {
+    width: 10px !important;
+    height: 10px !important;
+    bottom: 0.5px;
+    border: 1px solid rgb(107, 107, 107);
+  }
+  .slider-icon {
+    display: none;
+  }
+
+  .video-js .vjs-progress-control {
+    bottom: 15px !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    box-shadow: none !important;
+  }
+  .vjs-current-time {
+    margin-top: 10px !important;
+  }
+  .vjs-duration {
+    margin-top: 10px !important;
+  }
+}
+
+/* 📌 Per tablet (iPad incluso) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .vjs-title-video {
+    font-size: 14px;
+  }
+}
+@media (min-width: 769px) and (max-width: 893px) {
+  .vjs-volume-bar,
+  .vjs-volume-horizontal {
+    width: 50px !important;
+  }
+  .vjs-title-video {
+    left: 50px;
+  }
+
+  .vjs-play-control:hover,
+  .vjs-volume-control:hover,
+  .vjs-next-button:hover,
+  .vjs-prev-button:hover,
+  .vjs-skip-forward-button:hover,
+  .vjs-skip-rewind-button:hover,
+  .vjs-progress-control:hover,
+  .vjs-fullscreen-control:hover,
+  .vjs-setting-button:hover,
+  .vjs-mute-control:hover {
+    transform: unset;
+    background-color: unset !important;
+
+    box-shadow: unset;
+  }
+}

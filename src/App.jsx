@@ -44,7 +44,6 @@ function App() {
       <PlayerVideoKunstomPro
         videoList={videoList}
         autoplay={true}
-        color="red"
         title={true}
       />
     </div>
