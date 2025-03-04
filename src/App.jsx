@@ -41,7 +41,12 @@ const videoList = [
 function App() {
   return (
     <div className="App">
-      <PlayerVideoKunstomPro videoList={videoList} />
+      <PlayerVideoKunstomPro
+        videoList={videoList}
+        width={"1500px"}
+        tooltips={false}
+        muted={true}
+      />
     </div>
   );
 }
