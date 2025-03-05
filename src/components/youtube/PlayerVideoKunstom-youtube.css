@@ -1,40 +1,8 @@
-.player-container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-}
 .video-player {
   width: 100%;
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
-/* barra di controllo */
-.vjs-control-bar {
-  background-color: black !important;
-  font-size: 1.5em !important;
-  justify-content: space-between;
-}
-/* icona play */
-
-.vjs-volume-control {
-  align-items: center;
-}
-.vjs-volume-bar {
-  font-size: 15px !important;
-}
-
-/* barra di progresso */
-.video-js .vjs-progress-control {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
-
-/* mini-player */
+/********mini-player**********/
 
 .progress-preview-video {
   width: 15vw;
@@ -47,107 +15,499 @@
   transform: translateX(-50%);
 }
 
-/*time*/
-.vjs-time-control {
-  padding: 0 !important;
-  margin: 0 !important;
-  min-width: unset !important;
+/*-------barra di progresso video---------*/
+.video-js .vjs-progress-control {
+  position: absolute;
+  bottom: 51px;
+
+  right: 20%;
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  padding: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.vjs-play-progress {
+  background-color: var(--primary-color) !important;
+}
+/*pallino*/
+.vjs-progress-holder {
+  color: var(--primary-color) !important;
 }
 
-.vjs-grouped-controls {
+/********barra di controllo**********/
+.vjs-control-bar {
+  font-size: 1.7em;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  justify-content: space-between;
+}
+
+/********Grouped ControlsSTART**********/
+
+.vjs-grouped-controls-start {
+  display: flex;
+  min-width: 20%;
+}
+
+.vjs-title-video {
+  order: 2;
+  position: relative;
+  left: 125px;
+  top: 3px;
+  font-size: 15px;
+
+  color: var(--primary-color);
+}
+
+/********Volume**********/
+.vjs-volume-panel {
+  order: 4;
+}
+.vjs-mute-control {
+  color: var(--primary-color) !important;
+}
+
+.vjs-volume-bar.vjs-slider-horizontal {
+}
+
+.video-js .vjs-volume-control.vjs-volume-horizontal {
+}
+
+/*barra di volume*/
+.vjs-volume-level {
+}
+/*pallino di volume*/
+.vjs-volume-level::before {
+}
+/*trattino volume verticale*/
+.vjs-volume-bar .vjs-mouse-display {
+}
+/*****Time*****/
+.vjs-current-time {
+  order: 5;
+}
+.vjs-time-divider {
+  order: 6;
+}
+.vjs-duration {
+  order: 7;
+}
+
+/********Grouped ControlsCENTER**********/
+
+.vjs-grouped-controls-center {
   display: flex;
 }
 
-.vjs-current-time-display {
-  margin-right: 4px;
-  letter-spacing: 0.6px;
-}
-.vjs-duration-display {
-  margin-left: 4px;
-  letter-spacing: 0.6px;
+/*play*/
+.vjs-play-control {
+  border-radius: 10px;
+  order: 3 !important;
+  color: var(--primary-color) !important;
 }
 
-/* Bottone precedente e successivo */
-.vjs-prev-button,
+.vjs-play-control .vjs-icon-placeholder::before {
+  transform: scale(1.5); /* Ingrandisce l'icona PLAY,PAUSE,RETURN*/
+}
+
+.vjs-play-control,
+.vjs-next-button,
+.vjs-prev-button {
+  padding-inline: 20px !important;
+}
+
+/*next Button*/
 .vjs-next-button {
-  font-size: 14px !important;
+  border-radius: 10px;
+  order: 4;
+}
+.vjs-prev-button {
+  border-radius: 10px;
+}
+
+/*skip forward*/
+.vjs-skip-forward-button {
+  border-radius: 10px;
+  order: 4;
+  margin-right: 5px;
+}
+/*skip rewind*/
+.vjs-skip-rewind-button {
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.sec10 {
+  padding-top: 8px;
+}
+
+/*---------------Grouped ControlsEND---------------*/
+.vjs-grouped-controls-end {
   display: flex;
-  align-items: center;
-  gap: 5px;
+  color: var(--primary-color) !important;
+  justify-content: flex-end;
+  min-width: 20%;
 }
 
-.vjs-prev-button:hover,
-.vjs-next-button:hover {
+/*---FULLSCREEN---*/
+.vjs-fullscreen-control {
+  border-radius: 10px;
+}
+
+/*--AUTOPLAY---*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 8px;
+  background: #777; /* Colorequando è spento */
+  border-radius: 20px;
+  transition: 0.3s;
+  margin-top: 21px;
+  right: 15px;
+}
+
+.switch input {
+  height: 0;
+}
+
+/* Barra */
+.slider {
+  position: absolute;
   cursor: pointer;
-  transform: scale(1.1);
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: #777;
+
+  border-radius: 20px;
+  height: 8px;
 }
 
-.vjs-fullscreen-control:hover {
-  transform: scale(1.1);
+/* Pallino */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+
+  bottom: -3px;
+  background-color: var(--primary-color);
+  transition: 0.3s;
+  border-radius: 50%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/** MEDIA QUERY */
+/* Icona dentro il pallino */
+.slider-icon {
+  position: absolute;
+  top: 20%;
+  left: 4px;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: #374f43;
+  transition: 0.3s;
+  margin-left: -3px;
+}
 
-/** schermi piccoli */
+/* --Stato attivo-- */
+input:checked + .slider {
+  background-color: var(--primary-color); /* Verde per ON */
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Quando il toggle è attivo mostra l'icona Play */
+input:checked + .slider .slider-icon {
+  opacity: 1;
+  left: 28px;
+}
+
+/**********QUALITY**********/
+
+.vjs-setting-button {
+  border-radius: 10px;
+}
+
+.quality-menu {
+  position: absolute;
+  bottom: 50px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.quality-option {
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.quality-option:hover {
+  background: white;
+  color: black;
+  border-radius: 3px;
+}
+
+.no-quality {
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
+/*******PROPS PERSONAIZZATE********/
+
+/* -------- DARKMODE-------- */
+.dark-mode .vjs-play-control:hover,
+.dark-mode .vjs-volume-control:hover,
+.dark-mode .vjs-next-button:hover,
+.dark-mode .vjs-prev-button:hover,
+.dark-mode .vjs-skip-forward-button:hover,
+.dark-mode .vjs-skip-rewind-button:hover,
+.dark-mode .vjs-progress-control:hover,
+.dark-mode .vjs-fullscreen-control:hover,
+.dark-mode .vjs-setting-button:hover,
+.dark-mode .vjs-fullscreen-control:hover,
+.dark-mode .vjs-mute-control:hover {
+  transform: scale(1.05);
+  background-color: rgba(0, 0, 0, 0.9) !important; /* Cambia sfondo */
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+}
+
+/*----------SIZE---------*/
+/*Size 25% */
+.video-player.size-25 {
+  width: 25% !important;
+}
+
+/*Size 50% */
+.video-player.size-50 {
+  width: 50% !important;
+}
+
+/*Size 75% */
+.video-player.size-75 {
+  width: 75% !important;
+}
+
+/*Size 100% */
+.video-player.size-100 {
+  width: 100% !important;
+}
+
+/*------------MEDIA QUERIES-----------*/
+/* 📌 Per schermi più piccoli (Smartphone) */
+/* 📌 Nasconde i bottoni di skip su schermi più piccoli di un iPad (fino a 768px inclusi) */
 @media (max-width: 768px) {
-  .player-container {
-    width: 100%;
-    height: 100vh;
-  }
-
-  .vjs-control-bar {
-    font-size: 1em !important;
-  }
-
-  .progress-preview-video {
-    width: 20vw;
-    max-width: 120px;
-  }
-
-  .vjs-prev-button,
-  .vjs-next-button {
-    font-size: 12px !important;
-  }
-
-  .vjs-prev-button span,
-  .vjs-next-button span {
-    display: none;
-  }
-
-  .vjs-prev-button svg,
-  .vjs-next-button svg {
-    top: 0px !important;
-  }
-  .vjs-fullscreen-control {
-    font-size: 1.1em !important;
+  .vjs-skip-forward-button,
+  .vjs-skip-rewind-button,
+  .vjs-title-video {
+    display: none !important;
   }
 }
 
-/* schermi molto piccoli */
-@media (max-width: 480px) {
+/* 📌 Regole per i telefoni (≤ 600px) */
+@media (max-width: 600px) {
   .vjs-control-bar {
-    font-size: 0.9em !important;
+    font-size: 0.9em;
   }
 
-  .progress-preview-video {
-    width: 25vw;
-    max-width: 100px;
+  .vjs-title-video {
+    left: 80px;
   }
 
-  .vjs-prev-button,
-  .vjs-next-button {
-    font-size: 10px !important;
+  .vjs-prev-button svg,
+  .vjs-next-button svg,
+  .vjs-setting-button svg {
+    width: 17px !important;
+  }
+
+  .switch {
+    bottom: 10px !important;
+  }
+
+  .slider::before {
+    width: 10px !important;
+    height: 10px !important;
+    bottom: 0.5px;
+    border: 1px solid rgb(107, 107, 107);
+  }
+  .slider-icon {
+    display: none;
+  }
+
+  .video-js .vjs-progress-control {
+    bottom: 15px !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    box-shadow: none !important;
+  }
+  .vjs-current-time {
+    margin-top: 10px !important;
+  }
+  .vjs-duration {
+    margin-top: 10px !important;
   }
 }
 
-/* schermi orizzontali */
-@media (max-width: 1024px) and (orientation: landscape) {
-  .vjs-prev-button span,
-  .vjs-next-button span {
-    display: none;
+/* 📌 Per tablet (iPad incluso) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .vjs-title-video {
+    font-size: 14px;
   }
-  .vjs-prev-button svg,
-  .vjs-next-button svg {
-    top: -9px !important;
+}
+@media (min-width: 769px) and (max-width: 893px) {
+  .vjs-volume-bar,
+  .vjs-volume-horizontal {
+    width: 50px !important;
   }
+  .vjs-title-video {
+    left: 50px;
+  }
+
+  .vjs-play-control:hover,
+  .vjs-volume-control:hover,
+  .vjs-next-button:hover,
+  .vjs-prev-button:hover,
+  .vjs-skip-forward-button:hover,
+  .vjs-skip-rewind-button:hover,
+  .vjs-progress-control:hover,
+  .vjs-fullscreen-control:hover,
+  .vjs-setting-button:hover,
+  .vjs-mute-control:hover {
+    transform: unset;
+    background-color: unset !important;
+
+    box-shadow: unset;
+  }
+} /* Tooltip generale */
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* Tooltip generale */
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* Tooltip per il pulsante Setting */
+.vjs-setting-button::after {
+  content: "Settings"; /* Testo del tooltip */
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+  display: none;
+}
+
+.vjs-next-button::after {
+  content: "Next";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+  display: none;
+}
+
+.vjs-prev-button::after {
+  content: "Prev";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+  display: none;
+}
+.vjs-skip-forward-button::after,
+.vjs-skip-rewind-button::after {
+  content: "Skip";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: opacity 0.1s ease-in-out;
+  display: none;
+}
+
+/* Mostra il tooltip quando passi con il mouse */
+.vjs-setting-button:hover::after,
+.vjs-next-button:hover::after,
+.vjs-prev-button:hover::after,
+.vjs-skip-forward-button:hover::after,
+.vjs-skip-rewind-button:hover::after {
+  opacity: 1;
+  display: block;
+}
+
+.vjs-play-control[title]:hover::after,
+.vjs-mute-control[title]:hover::after,
+.vjs-fullscreen-control[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+  display: block;
+}
+
+.vjs-play-control::after,
+.vjs-mute-control::after,
+.vjs-fullscreen-control::after {
+  content: attr(data-title);
 }
