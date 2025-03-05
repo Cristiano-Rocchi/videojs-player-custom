@@ -1,0 +1,153 @@
+.player-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+.video-player {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* barra di controllo */
+.vjs-control-bar {
+  background-color: black !important;
+  font-size: 1.5em !important;
+  justify-content: space-between;
+}
+/* icona play */
+
+.vjs-volume-control {
+  align-items: center;
+}
+.vjs-volume-bar {
+  font-size: 15px !important;
+}
+
+/* barra di progresso */
+.video-js .vjs-progress-control {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+/* mini-player */
+
+.progress-preview-video {
+  width: 15vw;
+  max-width: 190px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*time*/
+.vjs-time-control {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: unset !important;
+}
+
+.vjs-grouped-controls {
+  display: flex;
+}
+
+.vjs-current-time-display {
+  margin-right: 4px;
+  letter-spacing: 0.6px;
+}
+.vjs-duration-display {
+  margin-left: 4px;
+  letter-spacing: 0.6px;
+}
+
+/* Bottone precedente e successivo */
+.vjs-prev-button,
+.vjs-next-button {
+  font-size: 14px !important;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vjs-prev-button:hover,
+.vjs-next-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.vjs-fullscreen-control:hover {
+  transform: scale(1.1);
+}
+
+/** MEDIA QUERY */
+
+/** schermi piccoli */
+@media (max-width: 768px) {
+  .player-container {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .vjs-control-bar {
+    font-size: 1em !important;
+  }
+
+  .progress-preview-video {
+    width: 20vw;
+    max-width: 120px;
+  }
+
+  .vjs-prev-button,
+  .vjs-next-button {
+    font-size: 12px !important;
+  }
+
+  .vjs-prev-button span,
+  .vjs-next-button span {
+    display: none;
+  }
+
+  .vjs-prev-button svg,
+  .vjs-next-button svg {
+    top: 0px !important;
+  }
+  .vjs-fullscreen-control {
+    font-size: 1.1em !important;
+  }
+}
+
+/* schermi molto piccoli */
+@media (max-width: 480px) {
+  .vjs-control-bar {
+    font-size: 0.9em !important;
+  }
+
+  .progress-preview-video {
+    width: 25vw;
+    max-width: 100px;
+  }
+
+  .vjs-prev-button,
+  .vjs-next-button {
+    font-size: 10px !important;
+  }
+}
+
+/* schermi orizzontali */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .vjs-prev-button span,
+  .vjs-next-button span {
+    display: none;
+  }
+  .vjs-prev-button svg,
+  .vjs-next-button svg {
+    top: -9px !important;
+  }
+}

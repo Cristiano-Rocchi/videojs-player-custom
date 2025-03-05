@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
 import PlayerVideoKunstomPro from "./components/pro/PlayerVideoKunstom-pro";
+import PlayerVideoKunstomYoutube from "./components/youtube/PlayerVideoKunstom-youtube";
 
 const videoList = [
   {
@@ -41,7 +42,7 @@ const videoList = [
 function App() {
   return (
     <div className="App">
-      <PlayerVideoKunstomPro
+      <PlayerVideoKunstomYoutube
         videoList={videoList}
         width={"1500px"}
         tooltips={false}
