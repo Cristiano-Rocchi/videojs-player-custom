@@ -250,10 +250,19 @@ const PlayerVideoKunstomYoutube = ({
           }
 
           const cinemaMode = videojs.dom.createEl("div", {
-            className: "",
+            className: "vjs-cinema-btn",
             innerHTML: `<svg height="100%" version="1.1" viewBox="0 0 36 36"><use class="ytp-svg-shadow" xlink:href="#ytp-id-53"></use><path d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z" fill="#fff" fill-rule="evenodd" id="ytp-id-53"></path></svg>
 
 `,
+          });
+          cinemaMode.addEventListener("click", function () {
+            const videoContainer = document.querySelector(".video-player"); // Seleziona il container del player
+
+            if (videoContainer.classList.contains("cinema-mode")) {
+              videoContainer.classList.remove("cinema-mode"); // Ritorna alla dimensione originale
+            } else {
+              videoContainer.classList.add("cinema-mode"); // Applica la modalità cinema
+            }
           });
 
           const theatreMode = videojs.dom.createEl("div", {
