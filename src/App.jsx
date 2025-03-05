@@ -45,7 +45,6 @@ function App() {
       <PlayerVideoKunstomYoutube
         videoList={videoList}
         width={"1500px"}
-        tooltips={false}
         muted={true}
       />
     </div>
