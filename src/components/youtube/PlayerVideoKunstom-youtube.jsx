@@ -265,9 +265,57 @@ const PlayerVideoKunstomYoutube = ({
             }
           });
 
-          const theatreMode = videojs.dom.createEl("div", {
-            className: "",
+          const miniVideoMode = videojs.dom.createEl("div", {
+            className: "mini-video-mode",
             innerHTML: `<svg height="100%" version="1.1" viewBox="0 0 36 36" ><use class="ytp-svg-shadow" xlink:href="#ytp-id-43"></use><path d="M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z" fill="#fff" id="ytp-id-43"></path></svg>`,
+          });
+
+          miniVideoMode.addEventListener("click", () => {
+            const videoPlayer = document.querySelector(".video-player");
+            const controlsEnd = document.querySelector(
+              ".vjs-grouped-controls-end"
+            );
+            const controlsStart = document.querySelector(
+              ".vjs-grouped-controls-start"
+            );
+            const iconNext = document.querySelector(".vjs-next-button svg");
+            const timeDivider = document.querySelector(".vjs-time-divider");
+            const allIcons = document.querySelectorAll(
+              ".vjs-play-control,  .vjs-current-time, .vjs-duration"
+            );
+            const volumePanel = document.querySelector("vjs-volume-panel");
+            const progressControl = document.querySelector(
+              ".vjs-progress-control"
+            );
+
+            if (progressControl) {
+              progressControl.style.width = "118%";
+              progressControl.style.bottom = "25px";
+            }
+
+            if (volumePanel) {
+              volumePanel.style.display = "none";
+            }
+
+            if (videoPlayer) {
+              videoPlayer.style.width = "400px";
+            }
+
+            if (controlsEnd) {
+              controlsEnd.style.display = "none";
+            }
+            if (controlsStart) {
+              controlsStart.style.position = "relative";
+              controlsStart.style.top = "10px";
+            }
+            if (iconNext) {
+              iconNext.style.position = "relative";
+              iconNext.style.top = "3px";
+            }
+            if (timeDivider) {
+              timeDivider.style.display = "none";
+            }
+            allIcons.forEach((control) => {});
           });
 
           const settingsButton = videojs.dom.createEl("div", {
@@ -283,7 +331,7 @@ const PlayerVideoKunstomYoutube = ({
           el.appendChild(qualityMenu);
           el.appendChild(subtitlesButton);
           el.appendChild(settingsButton);
-          el.appendChild(theatreMode);
+          el.appendChild(miniVideoMode);
           el.appendChild(cinemaMode);
 
           return el;

@@ -15,6 +15,10 @@
   transform: translateX(-50%);
 }
 
+.video-js video {
+  object-fit: cover;
+}
+
 /*-------barra di progresso video---------*/
 .video-js .vjs-progress-control {
   position: absolute;
@@ -22,7 +26,7 @@
 
   width: 100%;
   background-color: rgba(0, 0, 0, 0.1) !important;
-  padding: 20px;
+
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
