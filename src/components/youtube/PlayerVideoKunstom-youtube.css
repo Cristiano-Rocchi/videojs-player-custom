@@ -172,26 +172,41 @@
   top: 14% !important;
 }
 
+/*MINIVIDEO*/
+
 .mini-video-mode {
-  width: 600px !important;
+  width: 35% !important;
+  bottom: 15px;
+  position: absolute;
+  right: 11px;
 }
 .mini-video-mode .vjs-grouped-controls-end,
 .mini-video-mode .vjs-time-divider {
   display: none !important;
 }
+.mini-video-mode .vjs-progress-control {
+  bottom: 24px !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
 
-/* Mostra l'icona solo in modalità mini-video */
-/* Nascondi sempre l'icona */
-/* Modifica il CSS */
 .mini-video-icon {
   display: none;
   position: absolute;
   right: 20px;
-  bottom: 20px;
-  z-index: 10000; /* Aggiungi questo */
-  /* Aggiungi dimensioni se necessario */
+  bottom: 10px;
   width: 24px;
   height: 24px;
+}
+.mini-video-mode .vjs-next-button,
+.mini-video-mode .vjs-mute-control,
+.mini-video-mode .vjs-current-time,
+.mini-video-mode .vjs-duration {
+  top: 5px;
+  position: relative;
+}
+.mini-video-mode .vjs-play-control {
+  position: relative;
+  top: 3px;
 }
 
 .video-player.mini-video-mode .mini-video-icon {

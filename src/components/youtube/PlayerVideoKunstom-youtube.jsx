@@ -256,7 +256,7 @@ const PlayerVideoKunstomYoutube = ({
 `,
           });
           cinemaMode.addEventListener("click", function () {
-            const videoContainer = document.querySelector(".video-player"); // Seleziona il container del player
+            const videoContainer = document.querySelector(".video-player");
 
             if (videoContainer.classList.contains("cinema-mode")) {
               videoContainer.classList.remove("cinema-mode");
@@ -266,13 +266,13 @@ const PlayerVideoKunstomYoutube = ({
           });
 
           const miniVideoMode = videojs.dom.createEl("div", {
-            className: "mini-video-mode",
+            className: "mini-video-btn",
             innerHTML: `<svg height="100%" version="1.1" viewBox="0 0 36 36" ><use class="ytp-svg-shadow" xlink:href="#ytp-id-43"></use><path d="M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z" fill="#fff" id="ytp-id-43"></path></svg>`,
           });
 
           const newIcon = videojs.dom.createEl("div", {
             className: "mini-video-icon",
-            innerHTML: `<div style="width:100%;height:100%;background:red;"></div>`,
+            innerHTML: `<svg height="24px" version="1.1" viewBox="0 0 24 24" width="24px"><g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) "><path d="M19,19 L5,19 L5,5 L12,5 L12,3 L5,3 C3.89,3 3,3.9 3,5 L3,19 C3,20.1 3.89,21 5,21 L19,21 C20.1,21 21,20.1 21,19 L21,12 L19,12 L19,19 Z M14,3 L14,5 L17.59,5 L7.76,14.83 L9.17,16.24 L19,6.41 L19,10 L21,10 L21,3 L14,3 Z" fill="#fff" fill-rule="nonzero"></path></g></g></svg>`,
           });
 
           const videoContainer = document.querySelector(".video-player");
@@ -280,7 +280,11 @@ const PlayerVideoKunstomYoutube = ({
           miniVideoMode.addEventListener("click", () => {
             const abc = document.querySelector(".vjs-grouped-controls-start");
             abc.appendChild(newIcon);
+
             videoContainer.classList.toggle("mini-video-mode");
+            newIcon.addEventListener("click", () => {
+              videoContainer.classList.remove("mini-video-mode");
+            });
           });
 
           const settingsButton = videojs.dom.createEl("div", {
