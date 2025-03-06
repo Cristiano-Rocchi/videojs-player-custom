@@ -172,6 +172,31 @@
   top: 14% !important;
 }
 
+.mini-video-mode {
+  width: 600px !important;
+}
+.mini-video-mode .vjs-grouped-controls-end,
+.mini-video-mode .vjs-time-divider {
+  display: none !important;
+}
+
+/* Mostra l'icona solo in modalità mini-video */
+/* Nascondi sempre l'icona */
+/* Modifica il CSS */
+.mini-video-icon {
+  display: none;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10000; /* Aggiungi questo */
+  /* Aggiungi dimensioni se necessario */
+  width: 24px;
+  height: 24px;
+}
+
+.video-player.mini-video-mode .mini-video-icon {
+  display: block !important;
+}
 /*---FULLSCREEN---*/
 .vjs-fullscreen-control {
   border-radius: 10px;
