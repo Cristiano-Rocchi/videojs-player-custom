@@ -180,6 +180,10 @@
   position: absolute;
   right: 11px;
 }
+.mini-video-mode .vjs-tech,
+.mini-video-mode .video-js {
+  border-radius: 10px !important;
+}
 .mini-video-mode .vjs-grouped-controls-end,
 .mini-video-mode .vjs-time-divider {
   display: none !important;
