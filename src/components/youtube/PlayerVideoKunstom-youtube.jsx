@@ -578,51 +578,63 @@ const PlayerVideoKunstomYoutube = ({
   };
 
   const showSettingsMenu = (event) => {
+    event.stopPropagation(); // Previene la propagazione del click
+
     let settingsMenu = document.querySelector(".settings-menu");
 
     if (settingsMenu) {
-      // Se il menu esiste già, basterà mostrare/nascondere
-      if (settingsMenu.style.display === "none") {
-        settingsMenu.style.display = "flex";
-      } else {
-        settingsMenu.style.display = "none";
-      }
+      // Toggle diretto della visibilità
+      settingsMenu.style.display =
+        settingsMenu.style.display === "none" ? "flex" : "none";
       return;
     }
 
-    // Se il menu non esiste, lo creiamo
+    // Creazione del menu se non esiste
     settingsMenu = document.createElement("div");
     settingsMenu.className = "settings-menu";
+    settingsMenu.style.display = "flex"; // Impostazione cruciale per il primo click
 
     const menuContent = document.createElement("div");
     menuContent.className = "menu-content";
 
-    const speedButton = document.createElement("div");
-    speedButton.className = "settings-option";
-    speedButton.innerText = "Velocità";
+    // Aggiunta elementi del menu
+    ["Velocità", "Qualità"].forEach((text) => {
+      const option = document.createElement("div");
+      option.className = "settings-option";
+      option.innerText = text;
+      menuContent.appendChild(option);
+    });
 
-    const qualityButton = document.createElement("div");
-    qualityButton.className = "settings-option";
-    qualityButton.innerText = "Qualità";
-
-    menuContent.appendChild(speedButton);
-    menuContent.appendChild(qualityButton);
     settingsMenu.appendChild(menuContent);
     document.body.appendChild(settingsMenu);
 
-    // Posizioniamo il menu accanto al pulsante
+    // Posizionamento dinamico
     const buttonRect = event.target.getBoundingClientRect();
-    settingsMenu.style.left = `${buttonRect.left + buttonRect.width / 2}px`;
-    settingsMenu.style.top = `${buttonRect.top + window.scrollY - 60}px`;
-    settingsMenu.style.transform = "translateX(-50%)";
-
-    // Chiude il menu cliccando fuori
-    document.addEventListener("click", (e) => {
-      if (!settingsMenu.contains(e.target) && e.target !== event.target) {
-        settingsMenu.style.display = "none"; // Nascondi invece di rimuovere
-      }
+    Object.assign(settingsMenu.style, {
+      left: `${buttonRect.left + buttonRect.width / 2}px`,
+      top: `${buttonRect.top + window.scrollY - 60}px`,
+      transform: "translateX(-50%)",
+      position: "absolute",
     });
+
+    // Gestione chiusura esterna
+    const clickHandler = (e) => {
+      if (!settingsMenu.contains(e.target) && e.target !== event.target) {
+        settingsMenu.style.display = "none";
+      }
+    };
+
+    document.addEventListener("click", clickHandler);
+
+    // Pulizia event listener
+    settingsMenu._clickHandler = clickHandler;
   };
+
+  const settingsButton = document.createElement("button");
+  settingsButton.className = "vjs-settings-button";
+
+  settingsButton.addEventListener("click", showSettingsMenu);
+  document.body.appendChild(settingsButton);
 
   setTimeout(() => {
     const remainingTimeDisplay = document.querySelector(".vjs-remaining-time");
