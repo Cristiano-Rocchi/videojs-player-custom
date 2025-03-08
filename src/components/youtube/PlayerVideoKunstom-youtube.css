@@ -578,3 +578,27 @@ input:checked + .slider .slider-icon {
 .vjs-fullscreen-control::after {
   content: attr(data-title);
 }
+
+.settings-menu {
+  position: absolute;
+
+  padding: 8px;
+  border-radius: 5px;
+  display: none;
+  z-index: 9999 !important;
+  transform: translateX(-50%);
+}
+
+.settings-option {
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+}
+
+.menu-content {
+  background: black;
+
+  border-radius: 10px;
+  text-align: center;
+}
