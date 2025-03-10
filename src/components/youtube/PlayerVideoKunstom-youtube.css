@@ -293,6 +293,14 @@ input:checked + .slider .slider-icon {
   left: 28px;
 }
 
+/******SETTINGS**********/
+.settings-menu {
+  right: 20px;
+  bottom: 150px;
+  transform: translateX(-50%);
+  position: absolute;
+}
+
 /**********QUALITY**********/
 
 .vjs-setting-button {
@@ -301,28 +309,19 @@ input:checked + .slider .slider-icon {
 
 .quality-menu {
   position: absolute;
-  bottom: 50px;
+  height: 50px;
   background: rgba(0, 0, 0, 0.7);
   padding: 2px;
   border-radius: 5px;
+  right: 10px;
+  bottom: 250px;
+  transform: translateX(-50%);
 }
 
 .quality-option {
   padding: 5px;
   cursor: pointer;
   text-align: center;
-}
-
-.quality-option:hover {
-  background: white;
-  color: black;
-  border-radius: 3px;
-}
-
-.no-quality {
-  color: white;
-  text-align: center;
-  font-size: 14px;
 }
 
 /*******PROPS PERSONAIZZATE********/

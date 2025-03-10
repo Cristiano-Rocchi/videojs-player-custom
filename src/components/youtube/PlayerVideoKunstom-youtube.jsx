@@ -321,13 +321,15 @@ const PlayerVideoKunstomYoutube = ({
     </svg>`;
 
           // Aggiunge l'evento di click per mostrare il menu
-          settingsButton.addEventListener("click", showSettingsMenu);
 
           // Trova il player e aggiunge il bottone dentro di esso (non nel body)
           const player = document.querySelector(".video-js"); // Assumendo che il player abbia questa classe
           if (player) {
             player.appendChild(settingsButton);
           }
+
+          // Aggiunge l'evento di click per mostrare il menu delle impostazioni
+          settingsButton.addEventListener("click", showSettingsMenu);
 
           document.body.appendChild(settingsButton);
 
@@ -534,6 +536,12 @@ const PlayerVideoKunstomYoutube = ({
       return;
     }
 
+    // 🔥 Rimuove eventuali menu di qualità già aperti per evitare duplicati
+    const existingMenu = document.querySelector(".quality-menu");
+    if (existingMenu) {
+      existingMenu.remove();
+    }
+
     // Creiamo il menu per selezionare la qualità
     const qualityMenu = document.createElement("div");
     qualityMenu.className = "quality-menu";
@@ -554,8 +562,34 @@ const PlayerVideoKunstomYoutube = ({
       qualityMenu.appendChild(qualityOption);
     });
 
-    // Aggiungiamo il menu al corpo del documento
+    // Se non ci sono qualità disponibili, mostriamo un messaggio
+    if (currentVideo.qualities.length === 0) {
+      const noQualityMessage = document.createElement("div");
+      noQualityMessage.className = "no-quality";
+      noQualityMessage.innerText = "Nessuna qualità disponibile";
+      qualityMenu.appendChild(noQualityMessage);
+    }
+
+    // 🔥 Posizioniamo il menu vicino al bottone "Qualità" nel menu impostazioni
+    const qualityButton = document.querySelector(".vjs-quality-button");
+    if (qualityButton) {
+      const buttonRect = qualityButton.getBoundingClientRect();
+    }
+
+    // Aggiungiamo il menu al documento
     document.body.appendChild(qualityMenu);
+
+    // 🔥 Chiude il menu se si clicca fuori
+    const closeMenu = (event) => {
+      if (!qualityMenu.contains(event.target)) {
+        qualityMenu.remove();
+        document.removeEventListener("click", closeMenu);
+      }
+    };
+
+    setTimeout(() => {
+      document.addEventListener("click", closeMenu);
+    }, 100); // Ritardo per evitare la chiusura immediata
   };
 
   const changeQlty = (quality) => {
@@ -616,7 +650,6 @@ const PlayerVideoKunstomYoutube = ({
     let settingsMenu = document.querySelector(".settings-menu");
 
     if (settingsMenu) {
-      // Toggle diretto della visibilità
       settingsMenu.style.display =
         settingsMenu.style.display === "none" ? "flex" : "none";
       return;
@@ -625,7 +658,7 @@ const PlayerVideoKunstomYoutube = ({
     // Creazione del menu se non esiste
     settingsMenu = document.createElement("div");
     settingsMenu.className = "settings-menu";
-    settingsMenu.style.display = "flex"; // Impostazione cruciale per il primo click
+    settingsMenu.style.display = "flex";
 
     const menuContent = document.createElement("div");
     menuContent.className = "menu-content";
@@ -635,6 +668,16 @@ const PlayerVideoKunstomYoutube = ({
       const option = document.createElement("div");
       option.className = "settings-option";
       option.innerText = text;
+
+      if (text === "Qualità") {
+        option.classList.add("vjs-quality-button");
+        // 🔥 Aggiungiamo l'evento per mostrare il menu delle qualità
+        option.addEventListener("click", (e) => {
+          e.stopPropagation(); // Evita la chiusura del menu
+          showQualities(); // Mostra il menu delle qualità
+        });
+      }
+
       menuContent.appendChild(option);
     });
 
@@ -643,12 +686,6 @@ const PlayerVideoKunstomYoutube = ({
 
     // Posizionamento dinamico
     const buttonRect = event.target.getBoundingClientRect();
-    Object.assign(settingsMenu.style, {
-      left: `${buttonRect.left + buttonRect.width / 2}px`,
-      top: `${buttonRect.top + window.scrollY - 60}px`,
-      transform: "translateX(-50%)",
-      position: "absolute",
-    });
 
     // Gestione chiusura esterna
     const clickHandler = (e) => {
@@ -658,16 +695,8 @@ const PlayerVideoKunstomYoutube = ({
     };
 
     document.addEventListener("click", clickHandler);
-
-    // Pulizia event listener
     settingsMenu._clickHandler = clickHandler;
   };
-
-  const settingsButton = document.createElement("button");
-  settingsButton.className = "vjs-settings-button";
-
-  settingsButton.addEventListener("click", showSettingsMenu);
-  document.body.appendChild(settingsButton);
 
   setTimeout(() => {
     const remainingTimeDisplay = document.querySelector(".vjs-remaining-time");
