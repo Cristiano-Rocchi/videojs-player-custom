@@ -25,7 +25,6 @@
   bottom: 30px;
 
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.1) !important;
 
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -308,6 +307,9 @@ input:checked + .slider .slider-icon {
   text-align: center;
   color: white;
   padding-left: 17px;
+}
+.settings-option svg {
+  margin-right: 10px;
 }
 
 .menu-content {

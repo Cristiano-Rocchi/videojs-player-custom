@@ -456,10 +456,9 @@ const PlayerVideoKunstomYoutube = ({
 
   const showQualities = () => {
     const latestVideoIndex = currentVideoIndexRef.current;
-    console.log("CurrentVideoIndex al momento del click:", latestVideoIndex);
 
     if (
-      videoList.length === 0 ||
+      !videoList.length ||
       latestVideoIndex === undefined ||
       latestVideoIndex < 0
     ) {
@@ -468,8 +467,6 @@ const PlayerVideoKunstomYoutube = ({
     }
 
     const currentVideo = videoList[latestVideoIndex];
-
-    console.log("CurrentVideo:", currentVideo);
 
     if (
       !currentVideo ||
@@ -480,25 +477,30 @@ const PlayerVideoKunstomYoutube = ({
       return;
     }
 
-    //Rimuove eventuali menu di qualità già aperti per evitare duplicati
-    const existingMenu = document.querySelector(".quality-menu");
-    if (existingMenu) {
-      existingMenu.remove();
-    }
+    // Rimuove eventuali menu di qualità già aperti
+    document.querySelector(".quality-menu")?.remove();
 
-    // Creiamo il menu per selezionare la qualità
+    // Creazione del menu qualità
     const qualityMenu = document.createElement("div");
     qualityMenu.className = "quality-menu";
 
-    // Aggiungiamo ogni qualità come un'opzione cliccabile
+    // ✅ Aggiunge l'icona in alto
+    const iconContainer = document.createElement("div");
+    iconContainer.innerHTML = `
+        <svg width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
+    `;
+    iconContainer.style.textAlign = "center";
+    iconContainer.style.marginBottom = "10px";
+
+    qualityMenu.appendChild(iconContainer); // Aggiunge l'icona al menu
+
+    // Aggiunge le opzioni di qualità
     currentVideo.qualities.forEach((quality) => {
       const qualityOption = document.createElement("button");
       qualityOption.className = "quality-option";
       qualityOption.innerText = quality.label;
 
-      // Quando clicco, cambio qualità
       qualityOption.addEventListener("click", () => {
-        console.log(`Selezionata qualità: ${quality.label}`);
         changeQlty(quality.label);
         qualityMenu.remove();
       });
@@ -506,15 +508,7 @@ const PlayerVideoKunstomYoutube = ({
       qualityMenu.appendChild(qualityOption);
     });
 
-    // Se non ci sono qualità disponibili, mostra un messaggio
-    if (currentVideo.qualities.length === 0) {
-      const noQualityMessage = document.createElement("div");
-      noQualityMessage.className = "no-quality";
-      noQualityMessage.innerText = "Nessuna qualità disponibile";
-      qualityMenu.appendChild(noQualityMessage);
-    }
-
-    // Posizionamento il menu
+    // Posizionamento
     const qualityButton = document.querySelector(".vjs-quality-button");
     if (qualityButton) {
       const buttonRect = qualityButton.getBoundingClientRect();
@@ -528,7 +522,7 @@ const PlayerVideoKunstomYoutube = ({
 
     document.body.appendChild(qualityMenu);
 
-    //Chiude il menu
+    // Chiude il menu al click esterno
     const closeMenu = (event) => {
       if (!qualityMenu.contains(event.target)) {
         qualityMenu.remove();
@@ -538,7 +532,7 @@ const PlayerVideoKunstomYoutube = ({
 
     setTimeout(() => {
       document.addEventListener("click", closeMenu);
-    }, 100); // Ritardo
+    }, 100);
   };
 
   const changeQlty = (quality) => {
@@ -634,6 +628,7 @@ const PlayerVideoKunstomYoutube = ({
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
+
           showQualities();
         });
       }
@@ -654,6 +649,7 @@ const PlayerVideoKunstomYoutube = ({
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
+
           showSpeedMenu(option);
         });
       }
@@ -667,6 +663,7 @@ const PlayerVideoKunstomYoutube = ({
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
+
           showTimerMenu(option);
         });
       }
@@ -698,22 +695,27 @@ const PlayerVideoKunstomYoutube = ({
   };
 
   const showTimerMenu = (parentOption) => {
-    // Rimuove un menu precedente se esiste
-    let timerMenu = document.querySelector(".timer-menu");
-    if (timerMenu) {
-      timerMenu.remove();
-    }
+    document.querySelector(".timer-menu")?.remove();
 
-    // Creazione del menu timer
-    timerMenu = document.createElement("div");
+    const timerMenu = document.createElement("div");
     timerMenu.className = "timer-menu";
     timerMenu.style.position = "absolute";
-    timerMenu.style.left = "100%"; // Posizionamento accanto al menu principale
+    timerMenu.style.left = "100%";
     timerMenu.style.top = "0";
     timerMenu.style.background = "rgba(0, 0, 0, 0.8)";
     timerMenu.style.padding = "10px";
     timerMenu.style.borderRadius = "5px";
     timerMenu.style.zIndex = "1000";
+
+    // ✅ Aggiunge l'icona in alto
+    const iconContainer = document.createElement("div");
+    iconContainer.innerHTML = `
+        <svg width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
+    `;
+    iconContainer.style.textAlign = "center";
+    iconContainer.style.marginBottom = "10px";
+
+    timerMenu.appendChild(iconContainer);
 
     const times = [
       { label: "5 min", value: 5 },
@@ -730,35 +732,39 @@ const PlayerVideoKunstomYoutube = ({
 
       timeOption.addEventListener("click", (e) => {
         e.stopPropagation();
-        setVideoTimer(time.value); // Imposta il timer per il blocco del video
-        document.querySelector(".timer-menu")?.remove(); // Chiude il menu timer
-        document.querySelector(".settings-menu")?.remove(); // Chiude il menu impostazioni
+        setVideoTimer(time.value);
+        timerMenu.remove();
+        document.querySelector(".settings-menu")?.remove();
       });
 
       timerMenu.appendChild(timeOption);
     });
 
-    // Aggiunge il menu del timer accanto all'opzione "Timer"
     parentOption.appendChild(timerMenu);
   };
 
   const showSpeedMenu = (parentOption) => {
-    // Rimuove un menu della velocità precedente se esiste
-    let speedMenu = document.querySelector(".speed-menu");
-    if (speedMenu) {
-      speedMenu.remove();
-    }
+    document.querySelector(".speed-menu")?.remove();
 
-    // Creazione del menu della velocità
-    speedMenu = document.createElement("div");
+    const speedMenu = document.createElement("div");
     speedMenu.className = "speed-menu";
     speedMenu.style.position = "absolute";
-    speedMenu.style.left = "100%"; // Posizionamento a lato dell'opzione "Velocità"
+    speedMenu.style.left = "100%";
     speedMenu.style.top = "0";
     speedMenu.style.background = "rgba(0, 0, 0, 0.8)";
     speedMenu.style.padding = "10px";
     speedMenu.style.borderRadius = "5px";
     speedMenu.style.zIndex = "1000";
+
+    // ✅ Aggiunge l'icona in alto
+    const iconContainer = document.createElement("div");
+    iconContainer.innerHTML = `
+        <svg width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
+    `;
+    iconContainer.style.textAlign = "center";
+    iconContainer.style.marginBottom = "10px";
+
+    speedMenu.appendChild(iconContainer);
 
     const speeds = [
       { label: "0.5x", value: 0.5 },
@@ -775,15 +781,14 @@ const PlayerVideoKunstomYoutube = ({
 
       speedOption.addEventListener("click", (e) => {
         e.stopPropagation();
-        changeVelocity(speed.value); // Imposta la velocità del video
-        document.querySelector(".speed-menu")?.remove(); // Chiude il menu velocità
-        document.querySelector(".settings-menu")?.remove(); // Chiude il menu impostazioni
+        changeVelocity(speed.value);
+        speedMenu.remove();
+        document.querySelector(".settings-menu")?.remove();
       });
 
       speedMenu.appendChild(speedOption);
     });
 
-    // Aggiunge il menu della velocità accanto a "Velocità"
     parentOption.appendChild(speedMenu);
   };
 
