@@ -22,7 +22,7 @@
 /*-------barra di progresso video---------*/
 .video-js .vjs-progress-control {
   position: absolute;
-  bottom: 51px;
+  bottom: 30px;
 
   width: 100%;
   background-color: rgba(0, 0, 0, 0.1) !important;
