@@ -295,6 +295,28 @@ input:checked + .slider .slider-icon {
 
 /******SETTINGS**********/
 
+.settings-menu {
+  border-radius: 5px;
+  display: none;
+  z-index: 9999 !important;
+}
+
+.settings-option {
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  padding-left: 17px;
+}
+
+.menu-content {
+  background: rgba(0, 0, 0, 0.7);
+
+  border-radius: 10px;
+  text-align: center;
+}
+
 /**********QUALITY**********/
 
 .vjs-setting-button {
@@ -575,28 +597,4 @@ input:checked + .slider .slider-icon {
 .vjs-mute-control::after,
 .vjs-fullscreen-control::after {
   content: attr(data-title);
-}
-
-.settings-menu {
-  position: absolute;
-
-  padding: 8px;
-  border-radius: 5px;
-  display: none;
-  z-index: 9999 !important;
-  transform: translateX(-50%);
-}
-
-.settings-option {
-  padding: 5px;
-  cursor: pointer;
-  text-align: center;
-  color: white;
-}
-
-.menu-content {
-  background: black;
-
-  border-radius: 10px;
-  text-align: center;
 }
