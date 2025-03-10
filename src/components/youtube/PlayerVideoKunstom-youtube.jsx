@@ -30,6 +30,22 @@ const PlayerVideoKunstomYoutube = ({
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
   const currentVideoIndexRef = useRef(0);
 
+  let timerTimeout; // Variabile globale per memorizzare il timeout attivo
+
+  const setVideoTimer = (minutes) => {
+    clearTimeout(timerTimeout); // Annulla eventuali timer attivi
+
+    const video = document.querySelector("video");
+    if (video) {
+      timerTimeout = setTimeout(() => {
+        video.pause(); // Pausa il video dopo il tempo selezionato
+        alert(`Il video è stato bloccato dopo ${minutes} minuti.
+
+        Premere OK per continuare.`);
+      }, minutes * 60 * 1000);
+    }
+  };
+
   /*props*/
   const themeClass = darkMode ? "dark-mode" : "light-mode";
   const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
@@ -242,8 +258,6 @@ const PlayerVideoKunstomYoutube = ({
           document
             .querySelectorAll(".vjs-settings-button")
             .forEach((btn) => btn.remove());
-
-          // Crea il menu delle impostazioni (inizialmente nascosto)
 
           // Crea il bottone impostazioni
           const settingsButton = document.createElement("button");
@@ -623,7 +637,7 @@ const PlayerVideoKunstomYoutube = ({
     menuContent.className = "menu-content";
 
     // Aggiunta elementi del menu
-    ["Velocità", "Qualità"].forEach((text) => {
+    ["Velocità", "Qualità", "Timer"].forEach((text) => {
       const option = document.createElement("div");
       option.className = "settings-option";
       option.innerText = text;
@@ -631,8 +645,8 @@ const PlayerVideoKunstomYoutube = ({
       if (text === "Qualità") {
         option.classList.add("vjs-quality-button");
         option.addEventListener("click", (e) => {
-          e.stopPropagation(); // Evita la chiusura del menu
-          showQualities(); // Mostra il menu delle qualità
+          e.stopPropagation();
+          showQualities();
         });
       }
 
@@ -640,7 +654,15 @@ const PlayerVideoKunstomYoutube = ({
         option.classList.add("vjs-speed-button");
         option.addEventListener("click", (e) => {
           e.stopPropagation();
-          showSpeedMenu(option); // Mostra il menu della velocità
+          showSpeedMenu(option);
+        });
+      }
+
+      if (text === "Timer") {
+        option.classList.add("vjs-timer-button");
+        option.addEventListener("click", (e) => {
+          e.stopPropagation();
+          showTimerMenu(option);
         });
       }
 
@@ -668,6 +690,51 @@ const PlayerVideoKunstomYoutube = ({
 
     document.addEventListener("click", clickHandler);
     settingsMenu._clickHandler = clickHandler;
+  };
+
+  const showTimerMenu = (parentOption) => {
+    // Rimuove un menu precedente se esiste
+    let timerMenu = document.querySelector(".timer-menu");
+    if (timerMenu) {
+      timerMenu.remove();
+    }
+
+    // Creazione del menu timer
+    timerMenu = document.createElement("div");
+    timerMenu.className = "timer-menu";
+    timerMenu.style.position = "absolute";
+    timerMenu.style.left = "100%"; // Posizionamento accanto al menu principale
+    timerMenu.style.top = "0";
+    timerMenu.style.background = "rgba(0, 0, 0, 0.8)";
+    timerMenu.style.padding = "10px";
+    timerMenu.style.borderRadius = "5px";
+    timerMenu.style.zIndex = "1000";
+
+    const times = [
+      { label: "5 min", value: 5 },
+      { label: "15 min", value: 15 },
+      { label: "30 min", value: 30 },
+    ];
+
+    times.forEach((time) => {
+      const timeOption = document.createElement("div");
+      timeOption.className = "timer-option";
+      timeOption.innerText = time.label;
+      timeOption.style.cursor = "pointer";
+      timeOption.style.padding = "5px";
+
+      timeOption.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setVideoTimer(time.value); // Imposta il timer per il blocco del video
+        document.querySelector(".timer-menu")?.remove(); // Chiude il menu timer
+        document.querySelector(".settings-menu")?.remove(); // Chiude il menu impostazioni
+      });
+
+      timerMenu.appendChild(timeOption);
+    });
+
+    // Aggiunge il menu del timer accanto all'opzione "Timer"
+    parentOption.appendChild(timerMenu);
   };
 
   const showSpeedMenu = (parentOption) => {
