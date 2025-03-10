@@ -574,6 +574,12 @@ const PlayerVideoKunstomYoutube = ({
     const qualityButton = document.querySelector(".vjs-quality-button");
     if (qualityButton) {
       const buttonRect = qualityButton.getBoundingClientRect();
+      Object.assign(qualityMenu.style, {
+        left: `${buttonRect.left + buttonRect.width / 2}px`,
+        top: `${buttonRect.top + window.scrollY - 120}px`,
+        transform: "translateX(-50%)",
+        position: "absolute",
+      });
     }
 
     // Aggiungiamo il menu al documento
@@ -686,6 +692,12 @@ const PlayerVideoKunstomYoutube = ({
 
     // Posizionamento dinamico
     const buttonRect = event.target.getBoundingClientRect();
+    Object.assign(settingsMenu.style, {
+      left: `${buttonRect.left + buttonRect.width / 2}px`,
+      top: `${buttonRect.top + window.scrollY - 60}px`,
+      transform: "translateX(-50%)",
+      position: "absolute",
+    });
 
     // Gestione chiusura esterna
     const clickHandler = (e) => {
