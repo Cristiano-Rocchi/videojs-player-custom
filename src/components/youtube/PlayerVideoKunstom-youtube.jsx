@@ -502,6 +502,32 @@ const PlayerVideoKunstomYoutube = ({
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
 
+    //ripristina il settings menu
+    iconContainer.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      const settingsMenu = document.querySelector(".settings-menu");
+      if (settingsMenu) {
+        const menuContent = settingsMenu.querySelector(".menu-content");
+
+        // Ripristina colore opzioni
+        const allOptions = menuContent.querySelectorAll(".settings-option");
+        allOptions.forEach((opt) => {
+          opt.style.color = "white"; // Colore originale
+        });
+
+        // Ripristina SVG
+        const allSvgs = menuContent.querySelectorAll("svg");
+        allSvgs.forEach((svg) => {
+          svg.style.display = ""; // Reset display
+        });
+
+        // Ripristina background
+        menuContent.style.background = "";
+      }
+      qualityMenu.remove(); // Chiude direttamente il timer-menu
+    });
+
     qualityMenu.appendChild(iconContainer); // Aggiunge l'icona al menu
 
     // Aggiunge le opzioni di qualità
@@ -643,7 +669,26 @@ const PlayerVideoKunstomYoutube = ({
           e.stopPropagation();
           closeAllSubMenus();
 
-          showQualities();
+          const menuContent = settingsMenu.querySelector(".menu-content");
+          menuContent.style.background = "none";
+
+          // Nascondi tutte le SVG dentro le opzioni principali
+          const allSvgs = menuContent.querySelectorAll(".settings-option svg");
+          allSvgs.forEach((svg) => {
+            svg.style.display = "none";
+          });
+
+          // Seleziona TUTTE le opzioni del menu
+          const allOptions = menuContent.querySelectorAll(".settings-option");
+
+          // Applica lo stile a tutte le opzioni
+          allOptions.forEach((opt) => {
+            opt.style.color = "transparent";
+
+            opt.style.cursor = "default"; // Rimuove la "manina"
+          });
+
+          showQualities(option);
         });
       }
 
@@ -664,6 +709,25 @@ const PlayerVideoKunstomYoutube = ({
         option.addEventListener("click", (e) => {
           e.stopPropagation();
           closeAllSubMenus();
+
+          const menuContent = settingsMenu.querySelector(".menu-content");
+          menuContent.style.background = "none";
+
+          // Nascondi tutte le SVG dentro le opzioni principali
+          const allSvgs = menuContent.querySelectorAll(".settings-option svg");
+          allSvgs.forEach((svg) => {
+            svg.style.display = "none";
+          });
+
+          // Seleziona TUTTE le opzioni del menu
+          const allOptions = menuContent.querySelectorAll(".settings-option");
+
+          // Applica lo stile a tutte le opzioni
+          allOptions.forEach((opt) => {
+            opt.style.color = "transparent";
+
+            opt.style.cursor = "default"; // Rimuove la "manina"
+          });
 
           showSpeedMenu(option);
         });
@@ -832,6 +896,32 @@ const PlayerVideoKunstomYoutube = ({
     `;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
+
+    //ripristina il settings menu
+    iconContainer.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      const settingsMenu = document.querySelector(".settings-menu");
+      if (settingsMenu) {
+        const menuContent = settingsMenu.querySelector(".menu-content");
+
+        // Ripristina colore opzioni
+        const allOptions = menuContent.querySelectorAll(".settings-option");
+        allOptions.forEach((opt) => {
+          opt.style.color = "white"; // Colore originale
+        });
+
+        // Ripristina SVG
+        const allSvgs = menuContent.querySelectorAll("svg");
+        allSvgs.forEach((svg) => {
+          svg.style.display = ""; // Reset display
+        });
+
+        // Ripristina background
+        menuContent.style.background = "";
+      }
+      speedMenu.remove(); // Chiude direttamente il timer-menu
+    });
 
     speedMenu.appendChild(iconContainer);
 

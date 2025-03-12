@@ -605,6 +605,9 @@ input:checked + .slider .slider-icon {
 .timer-menu .timer-option {
   color: white !important; /* Mantieni il colore originale */
 }
+.speed-menu .speed-option {
+  color: white !important;
+}
 
 .timer-menu {
   left: 30% !important;
