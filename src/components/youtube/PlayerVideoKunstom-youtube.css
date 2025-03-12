@@ -600,3 +600,14 @@ input:checked + .slider .slider-icon {
 .vjs-fullscreen-control::after {
   content: attr(data-title);
 }
+
+/* Resetta il colore per le opzioni dei sottomenu */
+.timer-menu .timer-option {
+  color: white !important; /* Mantieni il colore originale */
+}
+
+.timer-menu {
+  left: 30% !important;
+  top: -52px !important;
+  width: 5em !important;
+}

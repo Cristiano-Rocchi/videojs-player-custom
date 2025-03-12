@@ -676,9 +676,36 @@ const PlayerVideoKunstomYoutube = ({
         <svg height="24" viewBox="0 0 24 24" width="24"><path d="M16.67,4.31C19.3,5.92,21,8.83,21,12c0,4.96-4.04,9-9,9c-2.61,0-5.04-1.12-6.72-3.02C5.52,17.99,5.76,18,6,18 c6.07,0,11-4.93,11-11C17,6.08,16.89,5.18,16.67,4.31 M14.89,2.43C15.59,3.8,16,5.35,16,7c0,5.52-4.48,10-10,10 c-1,0-1.97-0.15-2.89-0.43C4.77,19.79,8.13,22,12,22c5.52,0,10-4.48,10-10C22,7.48,19,3.67,14.89,2.43L14.89,2.43z M12,6H6v1h4.5 L6,10.99v0.05V12h6v-1H7.5L12,7.01V6.98V6L12,6z" fill="#fff"></path></svg>  Timer di sospensione
       `;
 
+        //chiusura stili menu settings
         option.addEventListener("click", (e) => {
           e.stopPropagation();
           closeAllSubMenus();
+
+          // Seleziona TUTTE le opzioni del menu
+          const allOptions = menuContent.querySelectorAll(".settings-option");
+
+          // Applica lo stile a tutte le opzioni
+          allOptions.forEach((opt) => {
+            opt.style.color = "transparent";
+
+            opt.style.cursor = "default"; // Rimuove la "manina"
+          });
+
+          showTimerMenu(option);
+        });
+
+        option.addEventListener("click", (e) => {
+          e.stopPropagation();
+          closeAllSubMenus();
+
+          const menuContent = settingsMenu.querySelector(".menu-content");
+          menuContent.style.background = "none";
+
+          // Nascondi tutte le SVG dentro le opzioni principali
+          const allSvgs = menuContent.querySelectorAll(".settings-option svg");
+          allSvgs.forEach((svg) => {
+            svg.style.display = "none";
+          });
 
           showTimerMenu(option);
         });
@@ -723,13 +750,39 @@ const PlayerVideoKunstomYoutube = ({
     timerMenu.style.borderRadius = "5px";
     timerMenu.style.zIndex = "1000";
 
-    // ✅ Aggiunge l'icona in alto
+    //Aggiunge l'icona in alto
     const iconContainer = document.createElement("div");
     iconContainer.innerHTML = `
         <svg width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
     `;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
+
+    //ripristina il settings.menu
+    iconContainer.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      const settingsMenu = document.querySelector(".settings-menu");
+      if (settingsMenu) {
+        const menuContent = settingsMenu.querySelector(".menu-content");
+
+        // Ripristina colore opzioni
+        const allOptions = menuContent.querySelectorAll(".settings-option");
+        allOptions.forEach((opt) => {
+          opt.style.color = "white"; // Colore originale
+        });
+
+        // Ripristina SVG
+        const allSvgs = menuContent.querySelectorAll("svg");
+        allSvgs.forEach((svg) => {
+          svg.style.display = ""; // Reset display
+        });
+
+        // Ripristina background
+        menuContent.style.background = "";
+      }
+      timerMenu.remove(); // Chiude direttamente il timer-menu
+    });
 
     timerMenu.appendChild(iconContainer);
 
