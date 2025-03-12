@@ -319,6 +319,44 @@ input:checked + .slider .slider-icon {
   text-align: center;
 }
 
+/*timer*/
+
+.timer-menu .timer-option {
+  color: white !important;
+}
+.timer-menu .timer-option:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.timer-menu {
+  left: -30px !important;
+  top: -160px !important;
+  width: 13em !important;
+  background-color: rgba(21, 21, 21, 0.7);
+}
+.timer-option {
+  padding: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.1em;
+}
+.icon-backward {
+  color: white !important;
+  border-bottom: 1px solid white !important;
+  padding-bottom: 15px !important;
+  font-size: 15px;
+  padding-top: 5px;
+}
+.icon-backward:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+/*speed*/
+.speed-menu .speed-option {
+  color: white !important;
+}
+
 /**********QUALITY**********/
 
 .vjs-setting-button {
@@ -599,18 +637,4 @@ input:checked + .slider .slider-icon {
 .vjs-mute-control::after,
 .vjs-fullscreen-control::after {
   content: attr(data-title);
-}
-
-/* Resetta il colore per le opzioni dei sottomenu */
-.timer-menu .timer-option {
-  color: white !important; /* Mantieni il colore originale */
-}
-.speed-menu .speed-option {
-  color: white !important;
-}
-
-.timer-menu {
-  left: 30% !important;
-  top: -52px !important;
-  width: 5em !important;
 }

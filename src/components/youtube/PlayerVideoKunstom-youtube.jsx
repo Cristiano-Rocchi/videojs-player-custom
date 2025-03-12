@@ -786,7 +786,7 @@ const PlayerVideoKunstomYoutube = ({
     Object.assign(settingsMenu.style, {
       left: `${buttonRect.left + buttonRect.width / 2}px`,
       top: `${buttonRect.top + window.scrollY - 120}px`,
-      transform: "translateX(-50%)",
+      transform: "translateX(-10%)",
       position: "absolute",
     });
 
@@ -816,9 +816,11 @@ const PlayerVideoKunstomYoutube = ({
 
     //Aggiunge l'icona in alto
     const iconContainer = document.createElement("div");
+    iconContainer.className = "icon-backward";
+
     iconContainer.innerHTML = `
-        <svg width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
-    `;
+        <svg width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
+    Time di sospensione`;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
 
@@ -851,17 +853,18 @@ const PlayerVideoKunstomYoutube = ({
     timerMenu.appendChild(iconContainer);
 
     const times = [
-      { label: "5 min", value: 5 },
-      { label: "15 min", value: 15 },
-      { label: "30 min", value: 30 },
+      { label: "5 minuti", value: 5 },
+      { label: "15 minuti", value: 15 },
+      { label: "30 minuti", value: 30 },
+      { label: "60 minuti", value: 60 },
+      { label: "90 minuti", value: 90 },
+      { label: "120 minuti", value: 120 },
     ];
 
     times.forEach((time) => {
       const timeOption = document.createElement("div");
       timeOption.className = "timer-option";
       timeOption.innerText = time.label;
-      timeOption.style.cursor = "pointer";
-      timeOption.style.padding = "5px";
 
       timeOption.addEventListener("click", (e) => {
         e.stopPropagation();
