@@ -482,7 +482,7 @@ const PlayerVideoKunstomYoutube = ({
 
     // Creazione del menu qualità
     const qualityMenu = document.createElement("div");
-    qualityMenu.className = "quality-menu";
+    qualityMenu.className = "quality-menu sub-menu";
 
     // ✅ Aggiunge l'icona in alto
     const iconContainer = document.createElement("div");
@@ -594,6 +594,9 @@ const PlayerVideoKunstomYoutube = ({
     }
   };
 
+  const closeAllSubMenus = () => {
+    document.querySelectorAll(".sub-menu").forEach((menu) => menu.remove());
+  };
   const showSettingsMenu = (event) => {
     event.stopPropagation(); // Previene la propagazione del click
 
@@ -628,6 +631,7 @@ const PlayerVideoKunstomYoutube = ({
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
+          closeAllSubMenus();
 
           showQualities();
         });
@@ -649,6 +653,7 @@ const PlayerVideoKunstomYoutube = ({
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
+          closeAllSubMenus();
 
           showSpeedMenu(option);
         });
@@ -663,6 +668,7 @@ const PlayerVideoKunstomYoutube = ({
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
+          closeAllSubMenus();
 
           showTimerMenu(option);
         });
@@ -698,7 +704,7 @@ const PlayerVideoKunstomYoutube = ({
     document.querySelector(".timer-menu")?.remove();
 
     const timerMenu = document.createElement("div");
-    timerMenu.className = "timer-menu";
+    timerMenu.className = "timer-menu sub-menu";
     timerMenu.style.position = "absolute";
     timerMenu.style.left = "100%";
     timerMenu.style.top = "0";
@@ -747,7 +753,7 @@ const PlayerVideoKunstomYoutube = ({
     document.querySelector(".speed-menu")?.remove();
 
     const speedMenu = document.createElement("div");
-    speedMenu.className = "speed-menu";
+    speedMenu.className = "speed-menu sub-menu";
     speedMenu.style.position = "absolute";
     speedMenu.style.left = "100%";
     speedMenu.style.top = "0";
@@ -783,6 +789,7 @@ const PlayerVideoKunstomYoutube = ({
         e.stopPropagation();
         changeVelocity(speed.value);
         speedMenu.remove();
+
         document.querySelector(".settings-menu")?.remove();
       });
 
