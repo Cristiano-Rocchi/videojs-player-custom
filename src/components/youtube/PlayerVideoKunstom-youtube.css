@@ -319,6 +319,15 @@ input:checked + .slider .slider-icon {
   text-align: center;
 }
 
+/*comuni x timer, velocity, quality*/
+.icon-backward {
+  color: white !important;
+  border-bottom: 1px solid white !important;
+  padding-bottom: 15px !important;
+  font-size: 15px;
+  padding-top: 5px;
+}
+
 /*timer*/
 
 .timer-menu .timer-option {
@@ -340,13 +349,7 @@ input:checked + .slider .slider-icon {
   width: 100%;
   font-size: 1.1em;
 }
-.icon-backward {
-  color: white !important;
-  border-bottom: 1px solid white !important;
-  padding-bottom: 15px !important;
-  font-size: 15px;
-  padding-top: 5px;
-}
+
 .icon-backward:hover {
   cursor: pointer;
   transform: scale(1.1);
@@ -356,6 +359,15 @@ input:checked + .slider .slider-icon {
 .speed-menu .speed-option {
   color: white !important;
 }
+.speed-menu {
+  left: -30px !important;
+  top: -210px !important;
+  width: 13em !important;
+  background-color: c;
+}
+.speed-menu .speed-option:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
 
 /**********QUALITY**********/
 
@@ -364,6 +376,7 @@ input:checked + .slider .slider-icon {
 }
 
 .quality-menu {
+  width: 13em;
   background: rgba(0, 0, 0, 0.7);
 
   transform: translateX(-50%);
@@ -378,8 +391,7 @@ input:checked + .slider .slider-icon {
   background: none;
   border: none;
   color: white;
-  padding-left: 20px !important;
-  padding-right: 50px !important;
+  font-size: 1.1em;
 }
 .quality-option:hover {
   background-color: #797166;

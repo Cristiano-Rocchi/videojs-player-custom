@@ -495,40 +495,6 @@ const PlayerVideoKunstomYoutube = ({
     qualityMenu.className = "quality-menu sub-menu";
 
     // ✅ Aggiunge l'icona in alto
-    const iconContainer = document.createElement("div");
-    iconContainer.innerHTML = `
-        <svg width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
-    `;
-    iconContainer.style.textAlign = "center";
-    iconContainer.style.marginBottom = "10px";
-
-    //ripristina il settings menu
-    iconContainer.addEventListener("click", (e) => {
-      e.stopPropagation();
-
-      const settingsMenu = document.querySelector(".settings-menu");
-      if (settingsMenu) {
-        const menuContent = settingsMenu.querySelector(".menu-content");
-
-        // Ripristina colore opzioni
-        const allOptions = menuContent.querySelectorAll(".settings-option");
-        allOptions.forEach((opt) => {
-          opt.style.color = "white"; // Colore originale
-        });
-
-        // Ripristina SVG
-        const allSvgs = menuContent.querySelectorAll("svg");
-        allSvgs.forEach((svg) => {
-          svg.style.display = ""; // Reset display
-        });
-
-        // Ripristina background
-        menuContent.style.background = "";
-      }
-      qualityMenu.remove(); // Chiude direttamente il timer-menu
-    });
-
-    qualityMenu.appendChild(iconContainer); // Aggiunge l'icona al menu
 
     // Aggiunge le opzioni di qualità
     currentVideo.qualities.forEach((quality) => {
@@ -550,7 +516,7 @@ const PlayerVideoKunstomYoutube = ({
       const buttonRect = qualityButton.getBoundingClientRect();
       Object.assign(qualityMenu.style, {
         left: `${buttonRect.left + buttonRect.width / 2}px`,
-        top: `${buttonRect.top + window.scrollY - 120}px`,
+        top: `${buttonRect.top + window.scrollY - 105}px`,
         transform: "translateX(-50%)",
         position: "absolute",
       });
@@ -668,25 +634,6 @@ const PlayerVideoKunstomYoutube = ({
         option.addEventListener("click", (e) => {
           e.stopPropagation();
           closeAllSubMenus();
-
-          const menuContent = settingsMenu.querySelector(".menu-content");
-          menuContent.style.background = "none";
-
-          // Nascondi tutte le SVG dentro le opzioni principali
-          const allSvgs = menuContent.querySelectorAll(".settings-option svg");
-          allSvgs.forEach((svg) => {
-            svg.style.display = "none";
-          });
-
-          // Seleziona TUTTE le opzioni del menu
-          const allOptions = menuContent.querySelectorAll(".settings-option");
-
-          // Applica lo stile a tutte le opzioni
-          allOptions.forEach((opt) => {
-            opt.style.color = "transparent";
-
-            opt.style.cursor = "default"; // Rimuove la "manina"
-          });
 
           showQualities(option);
         });
@@ -820,7 +767,7 @@ const PlayerVideoKunstomYoutube = ({
 
     iconContainer.innerHTML = `
         <svg width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
-    Time di sospensione`;
+    Timer di sospensione`;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
 
@@ -894,9 +841,12 @@ const PlayerVideoKunstomYoutube = ({
 
     // ✅ Aggiunge l'icona in alto
     const iconContainer = document.createElement("div");
+
+    iconContainer.className = "icon-backward";
+
     iconContainer.innerHTML = `
-        <svg width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
-    `;
+        <svg width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
+    Velocita di riproduzione`;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
 
@@ -929,9 +879,14 @@ const PlayerVideoKunstomYoutube = ({
     speedMenu.appendChild(iconContainer);
 
     const speeds = [
-      { label: "0.5x", value: 0.5 },
+      { label: "0.25", value: 0.25 },
+      { label: "0.5", value: 0.5 },
+      { label: "0.75", value: 0.75 },
       { label: "Normale", value: 1 },
-      { label: "2x", value: 2 },
+      { label: "1.25", value: 1.25 },
+      { label: "1.5", value: 1.5 },
+      { label: "1.75", value: 1.75 },
+      { label: "2", value: 2 },
     ];
 
     speeds.forEach((speed) => {
