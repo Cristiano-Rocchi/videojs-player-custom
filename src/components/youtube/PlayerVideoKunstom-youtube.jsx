@@ -132,6 +132,20 @@ const PlayerVideoKunstomYoutube = ({
             }
           });
 
+          setTimeout(() => {
+            const settingsMenu = document.querySelector(".settings-menu");
+            if (settingsMenu) {
+              nextButton.addEventListener("click", () => {
+                if (window.changeVideo) {
+                  window.changeVideo(1);
+                  settingsMenu.style.display = "none";
+                }
+              });
+            } else {
+              console.error("Elemento .settings-menu non trovato nel DOM.");
+            }
+          }, 1000);
+
           el.appendChild(nextButton);
 
           return el;
@@ -236,10 +250,6 @@ const PlayerVideoKunstomYoutube = ({
             });
           });
 
-          const settingsMenu = videojs.dom.createEl("div", {
-            className: "settings-menu",
-            style: "display: none;",
-          });
           // Rimuove eventuali bottoni esistenti per evitare duplicati
           document
             .querySelectorAll(".vjs-settings-button")
