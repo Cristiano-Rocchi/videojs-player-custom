@@ -14,7 +14,7 @@ const PlayerVideoKunstomYoutube = ({
   aspectRatio = "16:9",
   doubleClickFullscreen = false,
   controls = true,
-  darkMode = false,
+
   size = null,
   width = null,
   color = "white",
@@ -33,7 +33,7 @@ const PlayerVideoKunstomYoutube = ({
   let timerTimeout; // Variabile globale per memorizzare il timeout attivo
 
   /*props*/
-  const themeClass = darkMode ? "dark-mode" : "light-mode";
+
   const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
   const [showTitle, setShowTitle] = useState(title);
   const [showQuality, setShowQuality] = useState(quality);
@@ -71,7 +71,8 @@ const PlayerVideoKunstomYoutube = ({
       style.innerHTML = `
         .vjs-play-control[title]::after,
         .vjs-mute-control[title]::after,
-        .vjs-fullscreen-control[title]::after {
+        .vjs-fullscreen-control[title]::after,
+         {
           display: none !important;
         }
       `;
@@ -600,25 +601,28 @@ const PlayerVideoKunstomYoutube = ({
     document.querySelectorAll(".sub-menu").forEach((menu) => menu.remove());
   };
   const showSettingsMenu = (event) => {
-    event.stopPropagation(); // Previene la propagazione del click
+    event.stopPropagation();
 
     let settingsMenu = document.querySelector(".settings-menu");
 
     if (settingsMenu) {
-      settingsMenu.style.display =
-        settingsMenu.style.display === "none" ? "flex" : "none";
+      settingsMenu.remove(); // Rimuovi completamente invece di nascondere
       return;
     }
 
-    // Creazione del menu se non esiste
+    // 1. Ottieni il container del player Video.js
+    const player = playerRef.current;
+    const playerContainer = player.el();
+
+    // 2. Crea il menu
     settingsMenu = document.createElement("div");
     settingsMenu.className = "settings-menu";
-    settingsMenu.style.display = "flex";
-
     const menuContent = document.createElement("div");
     menuContent.className = "menu-content";
 
-    // Aggiunta elementi del menu
+    // 3. Aggiungi il menu AL CONTAINER DEL PLAYER
+    playerContainer.appendChild(settingsMenu);
+
     ["Velocità", "Qualità", "Timer"].forEach((text) => {
       const option = document.createElement("div");
       option.className = "settings-option";
@@ -659,6 +663,24 @@ const PlayerVideoKunstomYoutube = ({
 
           const menuContent = settingsMenu.querySelector(".menu-content");
           menuContent.style.background = "none";
+
+          // Aggiungi menuContent al settingsMenu
+          settingsMenu.appendChild(menuContent);
+
+          // Poi procedi con il posizionamento
+          const buttonRect = event.target.getBoundingClientRect();
+          const containerRect = playerContainer.getBoundingClientRect();
+
+          Object.assign(settingsMenu.style, {
+            left: `${
+              buttonRect.left - containerRect.left + buttonRect.width / 2
+            }px`,
+            top: `${buttonRect.top - containerRect.top - 100}px`,
+            transform: "translateX(-50%)",
+            position: "absolute",
+            zIndex: "99999",
+            display: "flex",
+          });
 
           // Nascondi tutte le SVG dentro le opzioni principali
           const allSvgs = menuContent.querySelectorAll(".settings-option svg");
@@ -725,29 +747,47 @@ const PlayerVideoKunstomYoutube = ({
       menuContent.appendChild(option);
     });
 
-    settingsMenu.appendChild(menuContent);
-    document.body.appendChild(settingsMenu);
-
-    // Posizionamento dinamico sopra il pulsante delle impostazioni
+    settingsMenu.appendChild(menuContent); // <-- QUESTA RIGA ERA MANCANTE
+    // 4. Posizionamento CORRETTO rispetto al container del player
     const buttonRect = event.target.getBoundingClientRect();
+    const containerRect = playerContainer.getBoundingClientRect();
+
     Object.assign(settingsMenu.style, {
-      left: `${buttonRect.left + buttonRect.width / 2}px`,
-      top: `${buttonRect.top + window.scrollY - 120}px`,
-      transform: "translateX(-10%)",
+      left: `${buttonRect.left - containerRect.left + buttonRect.width / 2}px`,
+      top: `${buttonRect.top - containerRect.top - 100}px`, // Regola questo valore per l'allineamento verticale
+      transform: "translateX(-50%)",
       position: "absolute",
+      zIndex: "99999", // Deve essere più alto dello z-index del player in fullscreen (di default è 3000)
+      display: "flex",
     });
 
-    // Gestione chiusura esterna
+    // 5. Gestione speciale per la modalità fullscreen
+    if (player.isFullscreen()) {
+      const fullscreenWrapper = document.querySelector(".vjs-fullscreen");
+      if (fullscreenWrapper) {
+        // Ricalcola le coordinate per il contesto fullscreen
+        const fsRect = fullscreenWrapper.getBoundingClientRect();
+        settingsMenu.style.left = `${
+          buttonRect.left - fsRect.left + buttonRect.width / 2
+        }px`;
+        settingsMenu.style.top = `${buttonRect.top - fsRect.top - 100}px`;
+        settingsMenu.style.position = "fixed";
+      }
+    }
+
+    // 6. Modifica il gestore dei click esterni
     const clickHandler = (e) => {
-      if (!settingsMenu.contains(e.target) && e.target !== event.target) {
-        settingsMenu.style.display = "none";
+      if (!settingsMenu.contains(e.target)) {
+        settingsMenu.remove();
+        document.removeEventListener("click", clickHandler);
       }
     };
 
-    document.addEventListener("click", clickHandler);
-    settingsMenu._clickHandler = clickHandler;
+    // Timeout per evitare la chiusura immediata
+    setTimeout(() => {
+      document.addEventListener("click", clickHandler);
+    }, 10);
   };
-
   const showTimerMenu = (parentOption) => {
     document.querySelector(".timer-menu")?.remove();
 
@@ -956,9 +996,7 @@ const PlayerVideoKunstomYoutube = ({
   };
 
   return (
-    <div
-      className={`player-container ${darkMode ? "dark-mode" : "light-mode"}  `}
-    >
+    <div className={`player-container `}>
       {isMounted &&
         (videoList.length > 0 ? (
           <div data-vjs-player>
