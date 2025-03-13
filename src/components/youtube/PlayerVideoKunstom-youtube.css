@@ -3,6 +3,11 @@
   cursor: pointer !important;
 }
 
+.video-js,
+.vjs-tech {
+  border-radius: 15px;
+}
+
 /********mini-player**********/
 .progress-preview-video {
   width: 15vw;
@@ -30,11 +35,11 @@
   border-top-right-radius: 10px;
 }
 .vjs-play-progress {
-  background-color: var(--primary-color) !important;
+  background-color: red !important;
 }
 /*pallino*/
 .vjs-progress-holder {
-  color: var(--primary-color) !important;
+  color: red !important;
 }
 
 /********barra di controllo**********/
@@ -87,12 +92,21 @@
 /*****Time*****/
 .vjs-current-time {
   order: 5;
+  color: var(--primary-color) !important;
 }
 .vjs-time-divider {
   order: 6;
+  color: var(--primary-color) !important;
 }
 .vjs-duration {
   order: 7;
+  color: var(--primary-color) !important;
+}
+
+.vjs-time-control {
+  padding: 0 !important;
+  padding-right: 5px !important;
+  min-width: unset !important;
 }
 
 /********Grouped ControlsCENTER**********/
@@ -305,8 +319,9 @@ input:checked + .slider .slider-icon {
   padding: 5px;
   cursor: pointer;
   text-align: center;
-  color: white;
+  color: var(--primary-color) !important;
   padding-left: 17px;
+  font-size: 1.5em;
 }
 .settings-option svg {
   margin-right: 10px;
@@ -321,18 +336,16 @@ input:checked + .slider .slider-icon {
 
 /*comuni x timer, velocity, quality*/
 .icon-backward {
-  color: white !important;
-  border-bottom: 1px solid white !important;
+  color: var(--primary-color) !important;
+  border-bottom: 1px solid var(--primary-color) !important;
   padding-bottom: 15px !important;
   font-size: 15px;
   padding-top: 5px;
+  display: flex;
 }
 
 /*timer*/
 
-.timer-menu .timer-option {
-  color: white !important;
-}
 .timer-menu .timer-option:hover {
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
@@ -348,6 +361,7 @@ input:checked + .slider .slider-icon {
   cursor: pointer;
   width: 100%;
   font-size: 1.1em;
+  color: var(--primary-color) !important;
 }
 
 .icon-backward:hover {
@@ -357,8 +371,8 @@ input:checked + .slider .slider-icon {
 
 /*speed*/
 .speed-menu .speed-option {
-  color: white !important;
-  font-size: 1.5em;
+  color: var(--primary-color) !important;
+  font-size: 1.2em;
 }
 .speed-menu {
   left: -30px !important;
@@ -371,10 +385,6 @@ input:checked + .slider .slider-icon {
 }
 
 /**********QUALITY**********/
-
-.vjs-setting-button {
-  border-radius: 10px;
-}
 
 .quality-menu {
   width: 13em;
@@ -391,7 +401,7 @@ input:checked + .slider .slider-icon {
   text-align: center;
   background: none;
   border: none;
-  color: white;
+  color: var(--primary-color) !important;
   font-size: 1.1em;
 }
 .quality-option:hover {

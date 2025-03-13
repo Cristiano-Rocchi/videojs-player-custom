@@ -18,7 +18,7 @@ const PlayerVideoKunstomYoutube = ({
   size = null,
   width = null,
   color = "white",
-  title = false,
+
   quality = true,
   tooltips = true,
 }) => {
@@ -35,15 +35,9 @@ const PlayerVideoKunstomYoutube = ({
   /*props*/
 
   const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
-  const [showTitle, setShowTitle] = useState(title);
+
   const [showQuality, setShowQuality] = useState(quality);
   const [showTooltips, setShowTooltips] = useState(tooltips);
-
-  //title
-  useEffect(() => {
-    setShowTitle(title);
-    updateTitleVisibility(title);
-  }, [title]);
 
   //color
   useEffect(() => {
@@ -103,21 +97,12 @@ const PlayerVideoKunstomYoutube = ({
         constructor(player, options) {
           super(player, options);
           this.addClass("vjs-grouped-controls-start");
-          this.titleEnabled = options.title;
         }
 
         createEl() {
           const el = videojs.dom.createEl("div", {
             className: "vjs-grouped-controls-start",
           });
-
-          if (showTitle && videoList.length > 0) {
-            const titleElement = videojs.dom.createEl("p", {
-              className: "vjs-title-video",
-              innerHTML: `&#8226; ${videoList[currentVideoIndex].title}`,
-            });
-            el.appendChild(titleElement);
-          }
 
           // Pulsante Next
           const nextButton = videojs.dom.createEl("button", {
@@ -215,7 +200,7 @@ const PlayerVideoKunstomYoutube = ({
 
           const cinemaMode = videojs.dom.createEl("div", {
             className: "vjs-cinema-btn",
-            innerHTML: `<svg height="100%" version="1.1" viewBox="0 0 36 36"><use class="ytp-svg-shadow" xlink:href="#ytp-id-53"></use><path d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z" fill="#fff" fill-rule="evenodd" id="ytp-id-53"></path></svg>
+            innerHTML: `<svg fill="${color}"  height="100%" version="1.1" viewBox="0 0 36 36"><use class="ytp-svg-shadow" xlink:href="#ytp-id-53"></use><path d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z"  fill-rule="evenodd" id="ytp-id-53"></path></svg>
 
 `,
           });
@@ -231,12 +216,12 @@ const PlayerVideoKunstomYoutube = ({
 
           const miniVideoMode = videojs.dom.createEl("div", {
             className: "mini-video-btn",
-            innerHTML: `<svg height="100%" version="1.1" viewBox="0 0 36 36" ><use class="ytp-svg-shadow" xlink:href="#ytp-id-43"></use><path d="M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z" fill="#fff" id="ytp-id-43"></path></svg>`,
+            innerHTML: `<svg fill="${color}" height="100%" version="1.1" viewBox="0 0 36 36" ><use class="ytp-svg-shadow" xlink:href="#ytp-id-43"></use><path d="M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z"  id="ytp-id-43"></path></svg>`,
           });
 
           const newIcon = videojs.dom.createEl("div", {
             className: "mini-video-icon",
-            innerHTML: `<svg height="24px" version="1.1" viewBox="0 0 24 24" width="24px"><g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) "><path d="M19,19 L5,19 L5,5 L12,5 L12,3 L5,3 C3.89,3 3,3.9 3,5 L3,19 C3,20.1 3.89,21 5,21 L19,21 C20.1,21 21,20.1 21,19 L21,12 L19,12 L19,19 Z M14,3 L14,5 L17.59,5 L7.76,14.83 L9.17,16.24 L19,6.41 L19,10 L21,10 L21,3 L14,3 Z" fill="#fff" fill-rule="nonzero"></path></g></g></svg>`,
+            innerHTML: `<svg fill="${color}" height="24px" version="1.1" viewBox="0 0 24 24" width="24px"><g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) "><path d="M19,19 L5,19 L5,5 L12,5 L12,3 L5,3 C3.89,3 3,3.9 3,5 L3,19 C3,20.1 3.89,21 5,21 L19,21 C20.1,21 21,20.1 21,19 L21,12 L19,12 L19,19 Z M14,3 L14,5 L17.59,5 L7.76,14.83 L9.17,16.24 L19,6.41 L19,10 L21,10 L21,3 L14,3 Z"  fill-rule="nonzero"></path></g></g></svg>`,
           });
 
           const videoContainer = document.querySelector(".video-player");
@@ -274,7 +259,7 @@ const PlayerVideoKunstomYoutube = ({
             l .30,-2.12 c .48,-0.2 .93,-0.47 1.35,-0.78 l 1.99,.8 c .18,.07 .39,0 .48,-0.17 
             l 1.6,-2.76 c .09,-0.17 .05,-0.39 -0.09,-0.51 l -1.68,-1.32 0,0 z 
             m -5.94,2.01 c -1.54,0 -2.8,-1.25 -2.8,-2.8 0,-1.54 1.25,-2.8 2.8,-2.8 
-            1.54,0 2.8,1.25 2.8,2.8 0,1.54 -1.25,2.8 -2.8,2.8 l 0,0 z" fill="#fff" id="ytp-id-42">
+            1.54,0 2.8,1.25 2.8,2.8 0,1.54 -1.25,2.8 -2.8,2.8 l 0,0 z" id="ytp-id-42">
         </path>
     </svg>`;
 
@@ -291,7 +276,7 @@ const PlayerVideoKunstomYoutube = ({
 
           const subtitlesButton = videojs.dom.createEl("div", {
             className: ".vjs-subtitles-btn",
-            innerHTML: `<svg class="ytp-subtitles-button-icon" height="100%" version="1.1" viewBox="0 0 36 36" fill-opacity="1"><use class="ytp-svg-shadow" xlink:href="#ytp-id-40"></use><path d="M11,11 C9.9,11 9,11.9 9,13 L9,23 C9,24.1 9.9,25 11,25 L25,25 C26.1,25 27,24.1 27,23 L27,13 C27,11.9 26.1,11 25,11 L11,11 Z M11,17 L14,17 L14,19 L11,19 L11,17 L11,17 Z M20,23 L11,23 L11,21 L20,21 L20,23 L20,23 Z M25,23 L22,23 L22,21 L25,21 L25,23 L25,23 Z M25,19 L16,19 L16,17 L25,17 L25,19 L25,19 Z" fill="#fff" id="ytp-id-40"></path></svg>`,
+            innerHTML: `<svg fill="${color}" class="ytp-subtitles-button-icon" height="100%" version="1.1" viewBox="0 0 36 36" fill-opacity="1"><use class="ytp-svg-shadow" xlink:href="#ytp-id-40"></use><path d="M11,11 C9.9,11 9,11.9 9,13 L9,23 C9,24.1 9.9,25 11,25 L25,25 C26.1,25 27,24.1 27,23 L27,13 C27,11.9 26.1,11 25,11 L11,11 Z M11,17 L14,17 L14,19 L11,19 L11,17 L11,17 Z M20,23 L11,23 L11,21 L20,21 L20,23 L20,23 Z M25,23 L22,23 L22,21 L25,21 L25,23 L25,23 Z M25,19 L16,19 L16,17 L25,17 L25,19 L25,19 Z" id="ytp-id-40"></path></svg>`,
           });
 
           el.appendChild(subtitlesButton);
@@ -332,7 +317,6 @@ const PlayerVideoKunstomYoutube = ({
                 "timeDivider",
                 "durationDisplay",
               ],
-              title: title,
             },
             {
               name: "GroupedControlsEnd",
@@ -572,15 +556,6 @@ const PlayerVideoKunstomYoutube = ({
     }
   };
 
-  const updateTitleVisibility = (isVisible) => {
-    if (playerRef.current) {
-      const titleElement = document.querySelector(".vjs-title-video");
-      if (titleElement) {
-        titleElement.style.display = isVisible ? "block" : "none";
-      }
-    }
-  };
-
   const updateQualityVisibility = (isVisible) => {
     if (playerRef.current) {
       const settingQltyButton = document.querySelector(".vjs-setting-button");
@@ -632,7 +607,7 @@ const PlayerVideoKunstomYoutube = ({
         option.classList.add("vjs-quality-button");
 
         option.innerHTML = `
-         <svg height="24" viewBox="0 0 24 24" width="24"><path d="M15,17h6v1h-6V17z M11,17H3v1h8v2h1v-2v-1v-2h-1V17z M14,8h1V6V5V3h-1v2H3v1h11V8z            M18,5v1h3V5H18z M6,14h1v-2v-1V9H6v2H3v1 h3V14z M10,12h11v-1H10V12z" fill="white"></path></svg>  Qualità
+         <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24"><path d="M15,17h6v1h-6V17z M11,17H3v1h8v2h1v-2v-1v-2h-1V17z M14,8h1V6V5V3h-1v2H3v1h11V8z            M18,5v1h3V5H18z M6,14h1v-2v-1V9H6v2H3v1 h3V14z M10,12h11v-1H10V12z"></path></svg>  Qualità
         `;
 
         option.addEventListener("click", (e) => {
@@ -647,13 +622,13 @@ const PlayerVideoKunstomYoutube = ({
         option.classList.add("vjs-speed-button");
 
         option.innerHTML = `
-          <svg height="24" viewBox="0 0 24 24" width="24">
+          <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24">
             <path d="M10,8v8l6-4L10,8L10,8z M6.3,5L5.7,4.2C7.2,3,9,2.2,11,2l0.1,1C9.3,3.2,7.7,3.9,6.3,5z  
                      M5,6.3L4.2,5.7C3,7.2,2.2,9,2,11 l1,.1C3.2,9.3,3.9,7.7,5,6.3z  
                      M5,17.7c-1.1-1.4-1.8-3.1-2-4.8L2,13c0.2,2,1,3.8,2.2,5.4L5,17.7z  
                      M11.1,21c-1.8-0.2-3.4-0.9-4.8-2 l-0.6,.8C7.2,21,9,21.8,11,22L11.1,21z  
                      M22,12c0-5.2-3.9-9.4-9-10l-0.1,1c4.6,.5,8.1,4.3,8.1,9s-3.5,8.5-8.1,9l0.1,1C18.2,21.5,22,17.2,22,12z" 
-              fill="white"></path>
+              ></path>
           </svg>Velocità
         `;
 
@@ -706,7 +681,7 @@ const PlayerVideoKunstomYoutube = ({
         option.classList.add("vjs-timer-button");
 
         option.innerHTML = `
-        <svg height="24" viewBox="0 0 24 24" width="24"><path d="M16.67,4.31C19.3,5.92,21,8.83,21,12c0,4.96-4.04,9-9,9c-2.61,0-5.04-1.12-6.72-3.02C5.52,17.99,5.76,18,6,18 c6.07,0,11-4.93,11-11C17,6.08,16.89,5.18,16.67,4.31 M14.89,2.43C15.59,3.8,16,5.35,16,7c0,5.52-4.48,10-10,10 c-1,0-1.97-0.15-2.89-0.43C4.77,19.79,8.13,22,12,22c5.52,0,10-4.48,10-10C22,7.48,19,3.67,14.89,2.43L14.89,2.43z M12,6H6v1h4.5 L6,10.99v0.05V12h6v-1H7.5L12,7.01V6.98V6L12,6z" fill="#fff"></path></svg>  Timer di sospensione
+        <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24"><path d="M16.67,4.31C19.3,5.92,21,8.83,21,12c0,4.96-4.04,9-9,9c-2.61,0-5.04-1.12-6.72-3.02C5.52,17.99,5.76,18,6,18 c6.07,0,11-4.93,11-11C17,6.08,16.89,5.18,16.67,4.31 M14.89,2.43C15.59,3.8,16,5.35,16,7c0,5.52-4.48,10-10,10 c-1,0-1.97-0.15-2.89-0.43C4.77,19.79,8.13,22,12,22c5.52,0,10-4.48,10-10C22,7.48,19,3.67,14.89,2.43L14.89,2.43z M12,6H6v1h4.5 L6,10.99v0.05V12h6v-1H7.5L12,7.01V6.98V6L12,6z"></path></svg>  Timer di sospensione
       `;
 
         //chiusura stili menu settings
@@ -747,17 +722,17 @@ const PlayerVideoKunstomYoutube = ({
       menuContent.appendChild(option);
     });
 
-    settingsMenu.appendChild(menuContent); // <-- QUESTA RIGA ERA MANCANTE
+    settingsMenu.appendChild(menuContent);
     // 4. Posizionamento CORRETTO rispetto al container del player
     const buttonRect = event.target.getBoundingClientRect();
     const containerRect = playerContainer.getBoundingClientRect();
 
     Object.assign(settingsMenu.style, {
-      left: `${buttonRect.left - containerRect.left + buttonRect.width / 2}px`,
-      top: `${buttonRect.top - containerRect.top - 100}px`, // Regola questo valore per l'allineamento verticale
+      left: `${buttonRect.left - containerRect.left + buttonRect.width / 2}px`, // allineamento orizzontale
+      top: `${buttonRect.top - containerRect.top - 130}px`, // allineamento verticale
       transform: "translateX(-50%)",
       position: "absolute",
-      zIndex: "99999", // Deve essere più alto dello z-index del player in fullscreen (di default è 3000)
+      zIndex: "99999",
       display: "flex",
     });
 
@@ -770,7 +745,7 @@ const PlayerVideoKunstomYoutube = ({
         settingsMenu.style.left = `${
           buttonRect.left - fsRect.left + buttonRect.width / 2
         }px`;
-        settingsMenu.style.top = `${buttonRect.top - fsRect.top - 100}px`;
+        settingsMenu.style.top = `${buttonRect.top - fsRect.top - 130}px`;
         settingsMenu.style.position = "fixed";
       }
     }
@@ -806,7 +781,7 @@ const PlayerVideoKunstomYoutube = ({
     iconContainer.className = "icon-backward";
 
     iconContainer.innerHTML = `
-        <svg width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
+        <svg fill="${color}" width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve"  stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
     Timer di sospensione`;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
@@ -885,7 +860,7 @@ const PlayerVideoKunstomYoutube = ({
     iconContainer.className = "icon-backward";
 
     iconContainer.innerHTML = `
-        <svg width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
+        <svg fill="${color}" width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
     Velocita di riproduzione`;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
