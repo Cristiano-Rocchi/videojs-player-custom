@@ -252,3 +252,6 @@ export default App;
 
 - [Documentazione di Video.js](https://videojs.com/)
 - [Esempio di implementazione in React](https://github.com/your-repo-link)
+
+| ![Image 1](https://res.cloudinary.com/tuo-account/image/upload/v1234567890/immagine1.jpg) | ![Image 2](https://res.cloudinary.com/tuo-account/image/upload/v1234567890/immagine2.jpg) | ![Image 3](https://res.cloudinary.com/tuo-account/image/upload/v1234567890/immagine3.jpg) |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
