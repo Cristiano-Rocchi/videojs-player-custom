@@ -358,7 +358,7 @@ input:checked + .slider .slider-icon {
 
 .timer-menu {
   left: -30px !important;
-  top: -160px !important;
+  top: -120px !important;
   width: 13em !important;
   background-color: rgba(21, 21, 21, 0.7);
 }
@@ -536,7 +536,7 @@ input:checked + .slider .slider-icon {
 
 /* Tooltip per il pulsante Setting */
 .vjs-settings-button::after {
-  content: "Settings"; /* Testo del tooltip */
+  content: var(--tooltip-settings); /* Testo del tooltip */
   position: absolute;
   top: -30px;
   right: 9%;
@@ -551,7 +551,7 @@ input:checked + .slider .slider-icon {
   display: none;
 }
 .mini-video-btn::after {
-  content: "Mini Video"; /* Testo del tooltip */
+  content: var(--tooltip-mini-video); /* Testo del tooltip */
 
   position: absolute;
   top: -30px;
@@ -567,7 +567,7 @@ input:checked + .slider .slider-icon {
   display: none;
 }
 .vjs-cinema-btn::after {
-  content: "Cinema"; /* Testo del tooltip */
+  content: var(--tooltip-cinema); /* Testo del tooltip */
 
   position: absolute;
   top: -30px;
@@ -584,7 +584,7 @@ input:checked + .slider .slider-icon {
 }
 
 .switch::after {
-  content: "Autoplay"; /* Testo del tooltip */
+  content: var(--tooltip-autoplay); /* Testo del tooltip */
 
   position: absolute;
   top: -50px;
@@ -601,7 +601,7 @@ input:checked + .slider .slider-icon {
 }
 
 .vjs-next-button::after {
-  content: "Next";
+  content: var(--tooltip-next);
   position: absolute;
   top: -30px;
   left: 7%;

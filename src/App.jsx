@@ -42,12 +42,7 @@ const videoList = [
 function App() {
   return (
     <div className="App">
-      <PlayerVideoKunstomYoutube
-        videoList={videoList}
-        width={"1600px"}
-        color="red"
-        language="ita"
-      />
+      <PlayerVideoKunstomYoutube videoList={videoList} color="red" />
     </div>
   );
 }

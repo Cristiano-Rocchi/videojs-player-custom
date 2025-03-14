@@ -46,6 +46,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Qualità",
       timer: "Timer di sospensione",
       normal: "Normale",
+      settings: "Impostazioni",
+      miniVideo: "Mini Video",
+      cinema: "Modalità Cinema",
+      autoplay: "Autoplay",
+      next: "Prossimo",
       minutes: (min) => `${min} minuti`,
       noQualityAlert: "Questo video non ha qualità da scegliere.",
       timerAlert: (min) =>
@@ -56,6 +61,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Quality",
       timer: "Sleep Timer",
       normal: "Normal",
+      settings: "Settings",
+      miniVideo: "Mini Video",
+      cinema: "Cinema Mode",
+      autoplay: "Autoplay",
+      next: "Next",
       minutes: (min) => `${min} minutes`,
       noQualityAlert: "This video has no available qualities.",
       timerAlert: (min) =>
@@ -66,6 +76,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Calidad",
       timer: "Temporizador de apagado",
       normal: "Normal",
+      settings: "Configuración",
+      miniVideo: "Mini Video",
+      cinema: "Modo Cine",
+      autoplay: "Reproducción Automática",
+      next: "Siguiente",
       minutes: (min) => `${min} minutos`,
       noQualityAlert: "Este video no tiene calidades disponibles.",
       timerAlert: (min) =>
@@ -76,6 +91,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Qualität",
       timer: "Sleep-Timer",
       normal: "Normal",
+      settings: "Einstellungen",
+      miniVideo: "Mini-Video",
+      cinema: "Kino-Modus",
+      autoplay: "Autoplay",
+      next: "Nächste",
       minutes: (min) => `${min} Minuten`,
       noQualityAlert: "Dieses Video hat keine Qualitätsoptionen.",
       timerAlert: (min) =>
@@ -86,6 +106,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Qualité",
       timer: "Minuterie de veille",
       normal: "Normal",
+      settings: "Paramètres",
+      miniVideo: "Mini Vidéo",
+      cinema: "Mode Cinéma",
+      autoplay: "Lecture automatique",
+      next: "Suivant",
       minutes: (min) => `${min} minutes`,
       noQualityAlert: "Cette vidéo n'a pas de qualités disponibles.",
       timerAlert: (min) =>
@@ -96,6 +121,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Qualidade",
       timer: "Temporizador de suspensão",
       normal: "Normal",
+      settings: "Configurações",
+      miniVideo: "Mini Vídeo",
+      cinema: "Modo Cinema",
+      autoplay: "Reprodução Automática",
+      next: "Próximo",
       minutes: (min) => `${min} minutos`,
       noQualityAlert: "Este vídeo não tem qualidades disponíveis.",
       timerAlert: (min) =>
@@ -106,6 +136,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Kwaliteit",
       timer: "Slaap Timer",
       normal: "Normaal",
+      settings: "Instellingen",
+      miniVideo: "Mini Video",
+      cinema: "Bioscoopmodus",
+      autoplay: "Automatisch afspelen",
+      next: "Volgende",
       minutes: (min) => `${min} minuten`,
       noQualityAlert: "Deze video heeft geen beschikbare kwaliteiten.",
       timerAlert: (min) =>
@@ -116,6 +151,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Jakość",
       timer: "Timer usypiania",
       normal: "Normalna",
+      settings: "Ustawienia",
+      miniVideo: "Mini Wideo",
+      cinema: "Tryb kinowy",
+      autoplay: "Autoodtwarzanie",
+      next: "Następny",
       minutes: (min) => `${min} minut`,
       noQualityAlert: "Ten film nie ma dostępnych jakości.",
       timerAlert: (min) =>
@@ -126,6 +166,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Kalite",
       timer: "Uyku Zamanlayıcısı",
       normal: "Normal",
+      settings: "Ayarlar",
+      miniVideo: "Mini Video",
+      cinema: "Sinema Modu",
+      autoplay: "Otomatik Oynatma",
+      next: "Sonraki",
       minutes: (min) => `${min} dakika`,
       noQualityAlert: "Bu videoda seçilebilecek kalite yok.",
       timerAlert: (min) =>
@@ -136,6 +181,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "الجودة",
       timer: "مؤقت النوم",
       normal: "عادي",
+      settings: "الإعدادات",
+      miniVideo: "فيديو صغير",
+      cinema: "وضع السينما",
+      autoplay: "تشغيل تلقائي",
+      next: "التالي",
       minutes: (min) => `${min} دقيقة`,
       noQualityAlert: "لا تتوفر أي جودات لهذا الفيديو.",
       timerAlert: (min) =>
@@ -146,6 +196,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "画質",
       timer: "スリープタイマー",
       normal: "標準",
+      settings: "設定",
+      miniVideo: "ミニビデオ",
+      cinema: "シネマモード",
+      autoplay: "自動再生",
+      next: "次へ",
       minutes: (min) => `${min} 分`,
       noQualityAlert: "このビデオには選択可能な画質がありません。",
       timerAlert: (min) =>
@@ -156,6 +211,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "画质",
       timer: "睡眠定时器",
       normal: "正常",
+      settings: "设置",
+      miniVideo: "迷你视频",
+      cinema: "影院模式",
+      autoplay: "自动播放",
+      next: "下一个",
       minutes: (min) => `${min} 分钟`,
       noQualityAlert: "此视频没有可选画质。",
       timerAlert: (min) => `视频在 ${min} 分钟后暂停。\n\n按OK继续。`,
@@ -165,6 +225,11 @@ const PlayerVideoKunstomYoutube = ({
       quality: "Качество",
       timer: "Таймер сна",
       normal: "Обычная",
+      settings: "Настройки",
+      miniVideo: "Мини-видео",
+      cinema: "Кино-режим",
+      autoplay: "Автовоспроизведение",
+      next: "Следующий",
       minutes: (min) => `${min} минут`,
       noQualityAlert: "У этого видео нет доступных качеств.",
       timerAlert: (min) =>
@@ -196,16 +261,50 @@ const PlayerVideoKunstomYoutube = ({
     if (!showTooltips) {
       const style = document.createElement("style");
       style.innerHTML = `
+        /* Disabilita TUTTI i tooltip */
         .vjs-play-control[title]::after,
         .vjs-mute-control[title]::after,
         .vjs-fullscreen-control[title]::after,
-         {
+        .vjs-settings-button:hover::after,
+        .vjs-next-button:hover::after,
+        .mini-video-btn:hover::after,
+        .vjs-cinema-btn:hover::after,
+        .switch:hover::after,
+        .vjs-play-control:hover::after,
+        .vjs-mute-control:hover::after,
+        .vjs-fullscreen-control:hover::after {
           display: none !important;
         }
       `;
       document.head.appendChild(style);
     }
   }, [showTooltips]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    // Imposta le variabili CSS in base alla lingua
+    root.style.setProperty(
+      "--tooltip-settings",
+      `"${translations[language].settings}"`
+    );
+    root.style.setProperty(
+      "--tooltip-mini-video",
+      `"${translations[language].miniVideo}"`
+    );
+    root.style.setProperty(
+      "--tooltip-cinema",
+      `"${translations[language].cinema}"`
+    );
+    root.style.setProperty(
+      "--tooltip-autoplay",
+      `"${translations[language].autoplay}"`
+    );
+    root.style.setProperty(
+      "--tooltip-next",
+      `"${translations[language].next}"`
+    );
+  }, [language]); // Si aggiorna al cambio lingua
 
   useEffect(() => {
     console.log("CurrentVideoIndex aggiornato:", currentVideoIndex);
@@ -904,11 +1003,12 @@ const PlayerVideoKunstomYoutube = ({
       const settingsMenu = document.querySelector(".settings-menu");
       if (settingsMenu) {
         const menuContent = settingsMenu.querySelector(".menu-content");
+        menuContent.style.position = "relative";
 
         // Ripristina colore opzioni
         const allOptions = menuContent.querySelectorAll(".settings-option");
         allOptions.forEach((opt) => {
-          opt.style.color = "white"; // Colore originale
+          opt.style.color = color; // Colore originale
         });
 
         // Ripristina SVG
@@ -979,11 +1079,13 @@ const PlayerVideoKunstomYoutube = ({
       const settingsMenu = document.querySelector(".settings-menu");
       if (settingsMenu) {
         const menuContent = settingsMenu.querySelector(".menu-content");
+        menuContent.style.position = "relative";
+        menuContent.style.bottom = "20px";
 
         // Ripristina colore opzioni
         const allOptions = menuContent.querySelectorAll(".settings-option");
         allOptions.forEach((opt) => {
-          opt.style.color = "white"; // Colore originale
+          opt.style.color = color; // Colore originale
         });
 
         // Ripristina SVG
