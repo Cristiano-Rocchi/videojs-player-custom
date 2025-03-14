@@ -46,6 +46,7 @@ function App() {
         videoList={videoList}
         width={"1600px"}
         color="red"
+        language="ita"
       />
     </div>
   );

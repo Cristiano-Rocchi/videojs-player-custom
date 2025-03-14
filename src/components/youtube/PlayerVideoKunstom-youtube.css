@@ -82,12 +82,16 @@
 
 /*barra di volume*/
 .vjs-volume-level {
+  background-color: var(--primary-color) !important;
 }
 /*pallino di volume*/
 .vjs-volume-level::before {
 }
 /*trattino volume verticale*/
 .vjs-volume-bar .vjs-mouse-display {
+}
+.vjs-volume-control {
+  color: var(--primary-color) !important;
 }
 /*****Time*****/
 .vjs-current-time {
@@ -319,7 +323,7 @@ input:checked + .slider .slider-icon {
   padding: 5px;
   cursor: pointer;
   text-align: center;
-  color: var(--primary-color) !important;
+  color: var(--primary-color);
   padding-left: 17px;
   font-size: 1.5em;
 }
@@ -341,7 +345,9 @@ input:checked + .slider .slider-icon {
   padding-bottom: 15px !important;
   font-size: 15px;
   padding-top: 5px;
-  display: flex;
+  display: flex !important;
+
+  justify-content: center !important;
 }
 
 /*timer*/

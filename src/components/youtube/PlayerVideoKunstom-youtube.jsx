@@ -14,10 +14,10 @@ const PlayerVideoKunstomYoutube = ({
   aspectRatio = "16:9",
   doubleClickFullscreen = false,
   controls = true,
-
   size = null,
   width = null,
   color = "white",
+  language = "eng",
 
   quality = true,
   tooltips = true,
@@ -38,6 +38,139 @@ const PlayerVideoKunstomYoutube = ({
 
   const [showQuality, setShowQuality] = useState(quality);
   const [showTooltips, setShowTooltips] = useState(tooltips);
+
+  //traduttore
+  const translations = {
+    ita: {
+      speed: "Velocità",
+      quality: "Qualità",
+      timer: "Timer di sospensione",
+      normal: "Normale",
+      minutes: (min) => `${min} minuti`,
+      noQualityAlert: "Questo video non ha qualità da scegliere.",
+      timerAlert: (min) =>
+        `Il video è stato bloccato dopo ${min} minuti.\n\nPremere OK per continuare.`,
+    },
+    eng: {
+      speed: "Playback Speed",
+      quality: "Quality",
+      timer: "Sleep Timer",
+      normal: "Normal",
+      minutes: (min) => `${min} minutes`,
+      noQualityAlert: "This video has no available qualities.",
+      timerAlert: (min) =>
+        `Video paused after ${min} minutes.\n\nPress OK to continue.`,
+    },
+    esp: {
+      speed: "Velocidad de reproducción",
+      quality: "Calidad",
+      timer: "Temporizador de apagado",
+      normal: "Normal",
+      minutes: (min) => `${min} minutos`,
+      noQualityAlert: "Este video no tiene calidades disponibles.",
+      timerAlert: (min) =>
+        `El video se pausará después de ${min} minutos.\n\nPresiona OK para continuar.`,
+    },
+    deu: {
+      speed: "Geschwindigkeit",
+      quality: "Qualität",
+      timer: "Sleep-Timer",
+      normal: "Normal",
+      minutes: (min) => `${min} Minuten`,
+      noQualityAlert: "Dieses Video hat keine Qualitätsoptionen.",
+      timerAlert: (min) =>
+        `Das Video wurde nach ${min} Minuten pausiert.\n\nDrücken Sie OK, um fortzufahren.`,
+    },
+    fra: {
+      speed: "Vitesse de lecture",
+      quality: "Qualité",
+      timer: "Minuterie de veille",
+      normal: "Normal",
+      minutes: (min) => `${min} minutes`,
+      noQualityAlert: "Cette vidéo n'a pas de qualités disponibles.",
+      timerAlert: (min) =>
+        `Vidéo mise en pause après ${min} minutes.\n\nAppuyez sur OK pour continuer.`,
+    },
+    por: {
+      speed: "Velocidade de reprodução",
+      quality: "Qualidade",
+      timer: "Temporizador de suspensão",
+      normal: "Normal",
+      minutes: (min) => `${min} minutos`,
+      noQualityAlert: "Este vídeo não tem qualidades disponíveis.",
+      timerAlert: (min) =>
+        `O vídeo foi pausado após ${min} minutos.\n\nPressione OK para continuar.`,
+    },
+    nld: {
+      speed: "Afspeelsnelheid",
+      quality: "Kwaliteit",
+      timer: "Slaap Timer",
+      normal: "Normaal",
+      minutes: (min) => `${min} minuten`,
+      noQualityAlert: "Deze video heeft geen beschikbare kwaliteiten.",
+      timerAlert: (min) =>
+        `Video gepauzeerd na ${min} minuten.\n\nDruk op OK om door te gaan.`,
+    },
+    pol: {
+      speed: "Prędkość odtwarzania",
+      quality: "Jakość",
+      timer: "Timer usypiania",
+      normal: "Normalna",
+      minutes: (min) => `${min} minut`,
+      noQualityAlert: "Ten film nie ma dostępnych jakości.",
+      timerAlert: (min) =>
+        `Film został wstrzymany po ${min} minutach.\n\nNaciśnij OK, aby kontynuować.`,
+    },
+    tur: {
+      speed: "Oynatma Hızı",
+      quality: "Kalite",
+      timer: "Uyku Zamanlayıcısı",
+      normal: "Normal",
+      minutes: (min) => `${min} dakika`,
+      noQualityAlert: "Bu videoda seçilebilecek kalite yok.",
+      timerAlert: (min) =>
+        `Video ${min} dakika sonra duraklatıldı.\n\nDevam etmek için OK tuşuna basın.`,
+    },
+    ara: {
+      speed: "سرعة التشغيل",
+      quality: "الجودة",
+      timer: "مؤقت النوم",
+      normal: "عادي",
+      minutes: (min) => `${min} دقيقة`,
+      noQualityAlert: "لا تتوفر أي جودات لهذا الفيديو.",
+      timerAlert: (min) =>
+        `تم إيقاف الفيديو بعد ${min} دقيقة.\n\nاضغط على موافق للمتابعة.`,
+    },
+    jpn: {
+      speed: "再生速度",
+      quality: "画質",
+      timer: "スリープタイマー",
+      normal: "標準",
+      minutes: (min) => `${min} 分`,
+      noQualityAlert: "このビデオには選択可能な画質がありません。",
+      timerAlert: (min) =>
+        `${min} 分後にビデオが一時停止されました。\n\nOKを押して続行してください。`,
+    },
+    zho: {
+      speed: "播放速度",
+      quality: "画质",
+      timer: "睡眠定时器",
+      normal: "正常",
+      minutes: (min) => `${min} 分钟`,
+      noQualityAlert: "此视频没有可选画质。",
+      timerAlert: (min) => `视频在 ${min} 分钟后暂停。\n\n按OK继续。`,
+    },
+    rus: {
+      speed: "Скорость воспроизведения",
+      quality: "Качество",
+      timer: "Таймер сна",
+      normal: "Обычная",
+      minutes: (min) => `${min} минут`,
+      noQualityAlert: "У этого видео нет доступных качеств.",
+      timerAlert: (min) =>
+        `Видео было приостановлено через ${min} минут.\n\nНажмите OK, чтобы продолжить.`,
+    },
+  };
 
   //color
   useEffect(() => {
@@ -221,7 +354,7 @@ const PlayerVideoKunstomYoutube = ({
 
           const newIcon = videojs.dom.createEl("div", {
             className: "mini-video-icon",
-            innerHTML: `<svg fill="${color}" height="24px" version="1.1" viewBox="0 0 24 24" width="24px"><g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) "><path d="M19,19 L5,19 L5,5 L12,5 L12,3 L5,3 C3.89,3 3,3.9 3,5 L3,19 C3,20.1 3.89,21 5,21 L19,21 C20.1,21 21,20.1 21,19 L21,12 L19,12 L19,19 Z M14,3 L14,5 L17.59,5 L7.76,14.83 L9.17,16.24 L19,6.41 L19,10 L21,10 L21,3 L14,3 Z"  fill-rule="nonzero"></path></g></g></svg>`,
+            innerHTML: `<svg fill="${color}" height="24px" version="1.1" viewBox="0 0 24 24" width="24px"><g  fill-rule="evenodd" stroke="none" stroke-width="1"><g transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) "><path d="M19,19 L5,19 L5,5 L12,5 L12,3 L5,3 C3.89,3 3,3.9 3,5 L3,19 C3,20.1 3.89,21 5,21 L19,21 C20.1,21 21,20.1 21,19 L21,12 L19,12 L19,19 Z M14,3 L14,5 L17.59,5 L7.76,14.83 L9.17,16.24 L19,6.41 L19,10 L21,10 L21,3 L14,3 Z"  fill-rule="nonzero"></path></g></g></svg>`,
           });
 
           const videoContainer = document.querySelector(".video-player");
@@ -449,79 +582,6 @@ const PlayerVideoKunstomYoutube = ({
     });
   };
 
-  const showQualities = () => {
-    const latestVideoIndex = currentVideoIndexRef.current;
-
-    if (
-      !videoList.length ||
-      latestVideoIndex === undefined ||
-      latestVideoIndex < 0
-    ) {
-      alert("Errore: Nessun video selezionato.");
-      return;
-    }
-
-    const currentVideo = videoList[latestVideoIndex];
-
-    if (
-      !currentVideo ||
-      !currentVideo.qualities ||
-      currentVideo.qualities.length === 0
-    ) {
-      alert("Questo video non ha qualità da scegliere.");
-      return;
-    }
-
-    // Rimuove eventuali menu di qualità già aperti
-    document.querySelector(".quality-menu")?.remove();
-
-    // Creazione del menu qualità
-    const qualityMenu = document.createElement("div");
-    qualityMenu.className = "quality-menu sub-menu";
-
-    // ✅ Aggiunge l'icona in alto
-
-    // Aggiunge le opzioni di qualità
-    currentVideo.qualities.forEach((quality) => {
-      const qualityOption = document.createElement("button");
-      qualityOption.className = "quality-option";
-      qualityOption.innerText = quality.label;
-
-      qualityOption.addEventListener("click", () => {
-        changeQlty(quality.label);
-        qualityMenu.remove();
-      });
-
-      qualityMenu.appendChild(qualityOption);
-    });
-
-    // Posizionamento
-    const qualityButton = document.querySelector(".vjs-quality-button");
-    if (qualityButton) {
-      const buttonRect = qualityButton.getBoundingClientRect();
-      Object.assign(qualityMenu.style, {
-        left: `${buttonRect.left + buttonRect.width / 2}px`,
-        top: `${buttonRect.top + window.scrollY - 105}px`,
-        transform: "translateX(-50%)",
-        position: "absolute",
-      });
-    }
-
-    document.body.appendChild(qualityMenu);
-
-    // Chiude il menu al click esterno
-    const closeMenu = (event) => {
-      if (!qualityMenu.contains(event.target)) {
-        qualityMenu.remove();
-        document.removeEventListener("click", closeMenu);
-      }
-    };
-
-    setTimeout(() => {
-      document.addEventListener("click", closeMenu);
-    }, 100);
-  };
-
   const changeQlty = (quality) => {
     // Usiamo il ref per prendere sempre l'indice aggiornato
     const latestVideoIndex = currentVideoIndexRef.current;
@@ -598,54 +658,52 @@ const PlayerVideoKunstomYoutube = ({
     // 3. Aggiungi il menu AL CONTAINER DEL PLAYER
     playerContainer.appendChild(settingsMenu);
 
-    ["Velocità", "Qualità", "Timer"].forEach((text) => {
+    // Sostituisci TUTTO il blocco ["Velocità", "Qualità", "Timer"].forEach(...) con:
+    const { speed, quality: qualityText, timer } = translations[language];
+
+    [qualityText, speed, timer].forEach((text) => {
       const option = document.createElement("div");
       option.className = "settings-option";
-      option.innerText = text;
+      option.innerText = text.split(" ")[0]; // Mostra solo la prima parola (es. "Velocità" o "Speed")
 
-      if (text === "Qualità") {
+      // Opzione QUALITÀ
+      if (text === translations[language].quality) {
         option.classList.add("vjs-quality-button");
-
         option.innerHTML = `
-         <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24"><path d="M15,17h6v1h-6V17z M11,17H3v1h8v2h1v-2v-1v-2h-1V17z M14,8h1V6V5V3h-1v2H3v1h11V8z            M18,5v1h3V5H18z M6,14h1v-2v-1V9H6v2H3v1 h3V14z M10,12h11v-1H10V12z"></path></svg>  Qualità
-        `;
+      <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M15,17h6v1h-6V17z M11,17H3v1h8v2h1v-2v-1v-2h-1V17z M14,8h1V6V5V3h-1v2H3v1h11V8z M18,5v1h3V5H18z M6,14h1v-2v-1V9H6v2H3v1 h3V14z M10,12h11v-1H10V12z"></path>
+      </svg> ${translations[language].quality} 
+    `;
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
           closeAllSubMenus();
-
           showQualities(option);
         });
       }
 
-      if (text === "Velocità") {
+      // Opzione VELOCITÀ
+      else if (text === translations[language].speed) {
         option.classList.add("vjs-speed-button");
-
         option.innerHTML = `
-          <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24">
-            <path d="M10,8v8l6-4L10,8L10,8z M6.3,5L5.7,4.2C7.2,3,9,2.2,11,2l0.1,1C9.3,3.2,7.7,3.9,6.3,5z  
-                     M5,6.3L4.2,5.7C3,7.2,2.2,9,2,11 l1,.1C3.2,9.3,3.9,7.7,5,6.3z  
-                     M5,17.7c-1.1-1.4-1.8-3.1-2-4.8L2,13c0.2,2,1,3.8,2.2,5.4L5,17.7z  
-                     M11.1,21c-1.8-0.2-3.4-0.9-4.8-2 l-0.6,.8C7.2,21,9,21.8,11,22L11.1,21z  
-                     M22,12c0-5.2-3.9-9.4-9-10l-0.1,1c4.6,.5,8.1,4.3,8.1,9s-3.5,8.5-8.1,9l0.1,1C18.2,21.5,22,17.2,22,12z" 
-              ></path>
-          </svg>Velocità
-        `;
+      <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M10,8v8l6-4L10,8L10,8z M6.3,5L5.7,4.2C7.2,3,9,2.2,11,2l0.1,1C9.3,3.2,7.7,3.9,6.3,5z  
+                 M5,6.3L4.2,5.7C3,7.2,2.2,9,2,11 l1,.1C3.2,9.3,3.9,7.7,5,6.3z  
+                 M5,17.7c-1.1-1.4-1.8-3.1-2-4.8L2,13c0.2,2,1,3.8,2.2,5.4L5,17.7z  
+                 M11.1,21c-1.8-0.2-3.4-0.9-4.8-2 l-0.6,.8C7.2,21,9,21.8,11,22L11.1,21z  
+                 M22,12c0-5.2-3.9-9.4-9-10l-0.1,1c4.6,.5,8.1,4.3,8.1,9s-3.5,8.5-8.1,9l0.1,1C18.2,21.5,22,17.2,22,12z"></path>
+      </svg> ${translations[language].speed}
+    `;
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
           closeAllSubMenus();
-
           const menuContent = settingsMenu.querySelector(".menu-content");
           menuContent.style.background = "none";
-
-          // Aggiungi menuContent al settingsMenu
           settingsMenu.appendChild(menuContent);
 
-          // Poi procedi con il posizionamento
           const buttonRect = event.target.getBoundingClientRect();
           const containerRect = playerContainer.getBoundingClientRect();
-
           Object.assign(settingsMenu.style, {
             left: `${
               buttonRect.left - containerRect.left + buttonRect.width / 2
@@ -657,71 +715,52 @@ const PlayerVideoKunstomYoutube = ({
             display: "flex",
           });
 
-          // Nascondi tutte le SVG dentro le opzioni principali
           const allSvgs = menuContent.querySelectorAll(".settings-option svg");
-          allSvgs.forEach((svg) => {
-            svg.style.display = "none";
-          });
+          allSvgs.forEach((svg) => (svg.style.display = "none"));
 
-          // Seleziona TUTTE le opzioni del menu
           const allOptions = menuContent.querySelectorAll(".settings-option");
-
-          // Applica lo stile a tutte le opzioni
           allOptions.forEach((opt) => {
             opt.style.color = "transparent";
-
-            opt.style.cursor = "default"; // Rimuove la "manina"
+            opt.style.cursor = "default";
           });
 
           showSpeedMenu(option);
         });
       }
 
-      if (text === "Timer") {
+      // Opzione TIMER
+      else if (text === translations[language].timer) {
         option.classList.add("vjs-timer-button");
-
         option.innerHTML = `
-        <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24"><path d="M16.67,4.31C19.3,5.92,21,8.83,21,12c0,4.96-4.04,9-9,9c-2.61,0-5.04-1.12-6.72-3.02C5.52,17.99,5.76,18,6,18 c6.07,0,11-4.93,11-11C17,6.08,16.89,5.18,16.67,4.31 M14.89,2.43C15.59,3.8,16,5.35,16,7c0,5.52-4.48,10-10,10 c-1,0-1.97-0.15-2.89-0.43C4.77,19.79,8.13,22,12,22c5.52,0,10-4.48,10-10C22,7.48,19,3.67,14.89,2.43L14.89,2.43z M12,6H6v1h4.5 L6,10.99v0.05V12h6v-1H7.5L12,7.01V6.98V6L12,6z"></path></svg>  Timer di sospensione
-      `;
+      <svg fill="${color}" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M16.67,4.31C19.3,5.92,21,8.83,21,12c0,4.96-4.04,9-9,9c-2.61,0-5.04-1.12-6.72-3.02C5.52,17.99,5.76,18,6,18 c6.07,0,11-4.93,11-11C17,6.08,16.89,5.18,16.67,4.31 M14.89,2.43C15.59,3.8,16,5.35,16,7c0,5.52-4.48,10-10,10 c-1,0-1.97-0.15-2.89-0.43C4.77,19.79,8.13,22,12,22c5.52,0,10-4.48,10-10C22,7.48,19,3.67,14.89,2.43L14.89,2.43z M12,6H6v1h4.5 L6,10.99v0.05V12h6v-1H7.5L12,7.01V6.98V6L12,6z"></path>
+      </svg> ${translations[language].timer}
+    `;
 
-        //chiusura stili menu settings
         option.addEventListener("click", (e) => {
           e.stopPropagation();
           closeAllSubMenus();
-
-          // Seleziona TUTTE le opzioni del menu
           const allOptions = menuContent.querySelectorAll(".settings-option");
-
-          // Applica lo stile a tutte le opzioni
           allOptions.forEach((opt) => {
             opt.style.color = "transparent";
-
-            opt.style.cursor = "default"; // Rimuove la "manina"
+            opt.style.cursor = "default";
           });
-
           showTimerMenu(option);
         });
 
         option.addEventListener("click", (e) => {
           e.stopPropagation();
           closeAllSubMenus();
-
           const menuContent = settingsMenu.querySelector(".menu-content");
           menuContent.style.background = "none";
-
-          // Nascondi tutte le SVG dentro le opzioni principali
           const allSvgs = menuContent.querySelectorAll(".settings-option svg");
-          allSvgs.forEach((svg) => {
-            svg.style.display = "none";
-          });
-
+          allSvgs.forEach((svg) => (svg.style.display = "none"));
           showTimerMenu(option);
         });
       }
 
       menuContent.appendChild(option);
     });
-
     settingsMenu.appendChild(menuContent);
     // 4. Posizionamento CORRETTO rispetto al container del player
     const buttonRect = event.target.getBoundingClientRect();
@@ -763,6 +802,78 @@ const PlayerVideoKunstomYoutube = ({
       document.addEventListener("click", clickHandler);
     }, 10);
   };
+  const showQualities = () => {
+    const latestVideoIndex = currentVideoIndexRef.current;
+
+    if (
+      !videoList.length ||
+      latestVideoIndex === undefined ||
+      latestVideoIndex < 0
+    ) {
+      alert(translations[language].noQualityAlert);
+      return;
+    }
+
+    const currentVideo = videoList[latestVideoIndex];
+
+    if (
+      !currentVideo ||
+      !currentVideo.qualities ||
+      currentVideo.qualities.length === 0
+    ) {
+      alert(translations[language].noQualityAlert);
+      return;
+    }
+
+    // Rimuove eventuali menu di qualità già aperti
+    document.querySelector(".quality-menu")?.remove();
+
+    // Creazione del menu qualità
+    const qualityMenu = document.createElement("div");
+    qualityMenu.className = "quality-menu sub-menu";
+
+    // ✅ Aggiunge l'icona in alto
+
+    // Aggiunge le opzioni di qualità
+    currentVideo.qualities.forEach((quality) => {
+      const qualityOption = document.createElement("button");
+      qualityOption.className = "quality-option";
+      qualityOption.innerText = quality.label;
+
+      qualityOption.addEventListener("click", () => {
+        changeQlty(quality.label);
+        qualityMenu.remove();
+      });
+
+      qualityMenu.appendChild(qualityOption);
+    });
+
+    // Posizionamento
+    const qualityButton = document.querySelector(".vjs-quality-button");
+    if (qualityButton) {
+      const buttonRect = qualityButton.getBoundingClientRect();
+      Object.assign(qualityMenu.style, {
+        left: `${buttonRect.left + buttonRect.width / 2}px`,
+        top: `${buttonRect.top + window.scrollY - 105}px`,
+        transform: "translateX(-50%)",
+        position: "absolute",
+      });
+    }
+
+    document.body.appendChild(qualityMenu);
+
+    // Chiude il menu al click esterno
+    const closeMenu = (event) => {
+      if (!qualityMenu.contains(event.target)) {
+        qualityMenu.remove();
+        document.removeEventListener("click", closeMenu);
+      }
+    };
+
+    setTimeout(() => {
+      document.addEventListener("click", closeMenu);
+    }, 100);
+  };
   const showTimerMenu = (parentOption) => {
     document.querySelector(".timer-menu")?.remove();
 
@@ -781,8 +892,8 @@ const PlayerVideoKunstomYoutube = ({
     iconContainer.className = "icon-backward";
 
     iconContainer.innerHTML = `
-        <svg fill="${color}" width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve"  stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#ffffff;" d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
-    Timer di sospensione`;
+        <svg fill="${color}" width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve"  stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path  d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
+     ${translations[language].timer}`;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
 
@@ -814,15 +925,11 @@ const PlayerVideoKunstomYoutube = ({
 
     timerMenu.appendChild(iconContainer);
 
-    const times = [
-      { label: "5 minuti", value: 5 },
-      { label: "15 minuti", value: 15 },
-      { label: "30 minuti", value: 30 },
-      { label: "60 minuti", value: 60 },
-      { label: "90 minuti", value: 90 },
-      { label: "120 minuti", value: 120 },
-    ];
-
+    // Modifica le etichette dei minuti
+    const times = [5, 15, 30, 60, 90, 120].map((value) => ({
+      label: translations[language].minutes(value),
+      value,
+    }));
     times.forEach((time) => {
       const timeOption = document.createElement("div");
       timeOption.className = "timer-option";
@@ -861,7 +968,7 @@ const PlayerVideoKunstomYoutube = ({
 
     iconContainer.innerHTML = `
         <svg fill="${color}" width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.14 309.14" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197 C224.933,0.79,223.025,0,221.036,0c-1.989,0-3.897,0.79-5.303,2.197L68.661,149.268c-2.929,2.929-2.929,7.678,0,10.606 l147.071,147.071c1.406,1.407,3.314,2.197,5.303,2.197c1.989,0,3.897-0.79,5.303-2.197l14.142-14.143 c2.929-2.929,2.929-7.678,0-10.606L112.855,154.571z"></path> </g></svg>
-    Velocita di riproduzione`;
+    ${translations[language].speed}`;
     iconContainer.style.textAlign = "center";
     iconContainer.style.marginBottom = "10px";
 
@@ -897,7 +1004,7 @@ const PlayerVideoKunstomYoutube = ({
       { label: "0.25", value: 0.25 },
       { label: "0.5", value: 0.5 },
       { label: "0.75", value: 0.75 },
-      { label: "Normale", value: 1 },
+      { label: translations[language].normal, value: 1 },
       { label: "1.25", value: 1.25 },
       { label: "1.5", value: 1.5 },
       { label: "1.75", value: 1.75 },
@@ -957,9 +1064,7 @@ const PlayerVideoKunstomYoutube = ({
     if (video) {
       timerTimeout = setTimeout(() => {
         video.pause(); // Pausa il video dopo il tempo selezionato
-        alert(`Il video è stato bloccato dopo ${minutes} minuti.
-
-        Premere OK per continuare.`);
+        alert(translations[language].timerAlert(minutes));
       }, minutes * 60 * 1000);
     }
   };
