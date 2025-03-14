@@ -437,89 +437,6 @@ input:checked + .slider .slider-icon {
   width: 100% !important;
 }
 
-/*------------MEDIA QUERIES-----------*/
-/* 📌 Per schermi più piccoli (Smartphone) */
-/* 📌 Nasconde i bottoni di skip su schermi più piccoli di un iPad (fino a 768px inclusi) */
-@media (max-width: 768px) {
-  .vjs-skip-forward-button,
-  .vjs-skip-rewind-button,
-  .vjs-title-video {
-    display: none !important;
-  }
-}
-
-/* 📌 Regole per i telefoni (≤ 600px) */
-@media (max-width: 600px) {
-  .vjs-control-bar {
-    font-size: 0.9em;
-  }
-
-  .vjs-title-video {
-    left: 80px;
-  }
-
-  .vjs-prev-button svg,
-  .vjs-next-button svg,
-  .vjs-setting-button svg {
-    width: 17px !important;
-  }
-
-  .switch {
-    bottom: 10px !important;
-  }
-
-  .slider::before {
-    width: 10px !important;
-    height: 10px !important;
-    bottom: 0.5px;
-    border: 1px solid rgb(107, 107, 107);
-  }
-  .slider-icon {
-    display: none;
-  }
-
-  .video-js .vjs-progress-control {
-    bottom: 15px !important;
-    background-color: rgba(0, 0, 0, 0) !important;
-    box-shadow: none !important;
-  }
-  .vjs-current-time {
-    margin-top: 10px !important;
-  }
-  .vjs-duration {
-    margin-top: 10px !important;
-  }
-}
-
-/* 📌 Per tablet (iPad incluso) */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .vjs-title-video {
-    font-size: 14px;
-  }
-}
-@media (min-width: 769px) and (max-width: 893px) {
-  .vjs-volume-bar,
-  .vjs-volume-horizontal {
-    width: 50px !important;
-  }
-  .vjs-title-video {
-    left: 50px;
-  }
-
-  .vjs-play-control:hover,
-  .vjs-volume-control:hover,
-  .vjs-next-button:hover,
-  .vjs-progress-control:hover,
-  .vjs-fullscreen-control:hover,
-  .vjs-setting-button:hover,
-  .vjs-mute-control:hover {
-    transform: unset;
-    background-color: unset !important;
-
-    box-shadow: unset;
-  }
-}
-
 /* Tooltip generale */
 .tooltip {
   position: absolute;
@@ -655,4 +572,184 @@ input:checked + .slider .slider-icon {
 .video-js.vjs-fullscreen .settings-menu {
   position: fixed;
   z-index: 9999;
+}
+
+/*------------MEDIA QUERIES-----------*/
+/* 📌 Per schermi più piccoli (Smartphone) */
+/* 📌 Nasconde i bottoni di skip su schermi più piccoli di un iPad (fino a 768px inclusi) */
+@media (max-width: 768px) {
+  .vjs-skip-forward-button,
+  .vjs-skip-rewind-button,
+  .vjs-title-video {
+    display: none !important;
+  }
+
+  .settings-menu,
+  .timer-menu,
+  .speed-menu,
+  .quality-menu {
+    min-width: 120px; /* Larghezza minima ridotta */
+    transform: translateX(-15%);
+  }
+
+  .timer-menu {
+    top: -125px !important;
+  }
+  .speed-menu {
+    top: -200px !important;
+  }
+
+  /* Elementi interni */
+  .settings-option,
+  .timer-option,
+  .speed-option,
+  .quality-option {
+    padding: 8px 12px;
+    font-size: 0.9em; /* Dimensione testo ridotta */
+    line-height: 1.3;
+  }
+
+  .icon-backward {
+    padding: 8px 12px !important;
+    font-size: 0.95em !important;
+  }
+}
+
+/* 📌 Regole per i telefoni (≤ 600px) */
+@media (max-width: 600px) {
+  .vjs-control-bar {
+    font-size: 0.9em;
+  }
+
+  .vjs-title-video {
+    left: 80px;
+  }
+
+  .vjs-prev-button svg,
+  .vjs-next-button svg,
+  .vjs-setting-button svg {
+    width: 17px !important;
+  }
+
+  .switch {
+    bottom: 10px !important;
+  }
+
+  .slider::before {
+    width: 10px !important;
+    height: 10px !important;
+    bottom: 0.5px;
+    border: 1px solid rgb(107, 107, 107);
+  }
+  .slider-icon {
+    display: none;
+  }
+
+  .video-js .vjs-progress-control {
+    bottom: 15px !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    box-shadow: none !important;
+  }
+  .vjs-current-time {
+    margin-top: 10px !important;
+  }
+  .vjs-duration {
+    margin-top: 10px !important;
+  }
+
+  .settings-menu,
+  .timer-menu,
+  .speed-menu,
+  .quality-menu {
+    min-width: 110px; /* Larghezza ulteriormente ridotta */
+    border-radius: 6px;
+  }
+
+  .settings-option,
+  .timer-option,
+  .speed-option,
+  .quality-option {
+    padding: 6px 10px;
+    font-size: 0.85em; /* Testo leggermente più piccolo */
+  }
+
+  .timer-menu {
+    left: -25px !important;
+  }
+  .speed-menu {
+    left: -25px !important;
+  }
+
+  .vjs-current-time,
+  .vjs-duration {
+    position: relative;
+    bottom: 10px;
+  }
+}
+
+/* 📌 Per tablet (iPad incluso) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .vjs-title-video {
+    font-size: 14px;
+  }
+
+  .settings-menu,
+  .timer-menu,
+  .speed-menu,
+  .quality-menu {
+    min-width: 140px; /* Larghezza intermedia per tablet */
+  }
+
+  .settings-option,
+  .timer-option,
+  .speed-option,
+  .quality-option {
+    padding: 10px 15px;
+    font-size: 0.95em; /* Leggermente più grande che su mobile */
+  }
+}
+
+/* Regole proporzionali comuni */
+.settings-option svg,
+.timer-option svg,
+.speed-option svg {
+  width: 18px !important; /* Dimensione icone proporzionale */
+  height: 18px !important;
+  margin-right: 8px;
+}
+
+.quality-option {
+  justify-content: flex-start; /* Allineamento testo coerente */
+  padding-left: 28px !important;
+}
+
+.icon-backward svg {
+  margin-right: 12px;
+  transform: scale(0.9); /* Icona freccia proporzionata */
+}
+@media (min-width: 769px) and (max-width: 893px) {
+  .vjs-volume-bar,
+  .vjs-volume-horizontal {
+    width: 50px !important;
+  }
+  .vjs-title-video {
+    left: 50px;
+  }
+
+  .vjs-play-control:hover,
+  .vjs-volume-control:hover,
+  .vjs-next-button:hover,
+  .vjs-progress-control:hover,
+  .vjs-fullscreen-control:hover,
+  .vjs-setting-button:hover,
+  .vjs-mute-control:hover {
+    transform: unset;
+    background-color: unset !important;
+
+    box-shadow: unset;
+  }
+
+  .icon-backward {
+    font-size: 1.2em !important;
+  }
 }

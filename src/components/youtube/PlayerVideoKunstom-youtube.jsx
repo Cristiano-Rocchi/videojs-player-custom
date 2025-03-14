@@ -19,7 +19,6 @@ const PlayerVideoKunstomYoutube = ({
   color = "white",
   language = "eng",
 
-  quality = true,
   tooltips = true,
 }) => {
   const videoRef = useRef(null);
@@ -36,7 +35,6 @@ const PlayerVideoKunstomYoutube = ({
 
   const sizeClass = width ? "" : size ? `size-${size}` : "size-100";
 
-  const [showQuality, setShowQuality] = useState(quality);
   const [showTooltips, setShowTooltips] = useState(tooltips);
 
   //traduttore
@@ -251,10 +249,6 @@ const PlayerVideoKunstomYoutube = ({
   }, [color]);
 
   //quality
-  useEffect(() => {
-    setShowQuality(quality);
-    updateQualityVisibility(quality);
-  }, [quality]);
 
   //tooltips
   useEffect(() => {
